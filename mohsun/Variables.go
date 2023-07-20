@@ -19,9 +19,11 @@ import "fmt"
 // printing variable and variable data type
 func main() {
 
-	var y int
-	var x bool
-	var z float64
+	var (
+		y int
+		x bool
+		z float64
+	)
 	const placeOfInterest = `⌘` //Unicode character
 	const version int = 5
 	z = 25
