@@ -104,7 +104,6 @@ func main() {
 
 	shiftNum, shiftingNum := 212, 2
 
-	// right shift 212 by bits from 0 to 3
 	fmt.Printf("Right Shift by %d: %d\n", shiftingNum, shiftNum>>shiftingNum)
 
 }
