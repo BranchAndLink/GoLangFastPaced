@@ -49,12 +49,14 @@ func main() {
 	strVar = "66"
 	converedVar := int(z)
 	new_var := 100
+	_, bb, cc := 33, 66, 77
 	fmt.Println("value of z", z)
 	fmt.Println("value of y", y)
 	fmt.Println("value of x", x)
 	fmt.Println("value of new_var", new_var)
 	fmt.Println("value of strVar", strVar)
 	fmt.Println("value of converedVar", converedVar)
+	fmt.Println(bb, cc)
 
 	fmt.Printf("plain string: ")
 	fmt.Printf("%s", placeOfInterest)
@@ -66,6 +68,10 @@ func main() {
 	fmt.Printf("x is of type %T\n", x)
 	fmt.Printf("version is of type %T\n", version)
 	fmt.Printf("str_var is of type %T\n", strVar)
+
+	var _, b, c complex64 = 2, 3, 4 + 5i
+	compResult := c * b
+	fmt.Println("Complex number operation result: ", compResult)
 }
 
 // as we see the result of a boolean value is false by default after decleration
