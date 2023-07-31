@@ -1,0 +1,19 @@
+baseURL = 'https://branchandlink.github.io/GoLangFastPaced'
+languageCode = 'en-us'
+author = "BranchAndLink"
+title = 'GoFastPaced'
+theme = 'hugo-paper'
+[params]
+	github = 'BranchAndLink/GoLangFastPaced'
+        avatar = 'https://avatars.githubusercontent.com/u/139630497?s=400&u=a63a5fad499fb3fbfe7802cb3c908ca172aedd40&v=4'
+	name = 'BranchAndLink'
+	bio = ' GoLang Fast Paced'
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+[taxonomies]
+	category = "categories"
+	tag = "tags"
+	series = "series"
+
