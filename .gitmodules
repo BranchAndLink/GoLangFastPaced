@@ -1,0 +1,3 @@
+[submodule "website/GoFastPaced/themes/hugo-paper"]
+	path = website/GoFastPaced/themes/hugo-paper
+	url = https://github.com/nanxiaobei/hugo-paper
