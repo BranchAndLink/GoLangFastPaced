@@ -6,6 +6,6 @@ Golang fast-paced course aims to help developers to migrate and understand Go la
 
 
 
-lectures/ - lectures written with Jupyter notebook using GONB   
-examples/ - GO examples based for each topic  
+lectures/ - lectures written with Jupyter Notebook and GONB   
+examples/ - GO examples for each topic  
 
