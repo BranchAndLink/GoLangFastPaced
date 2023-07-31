@@ -1,6 +1,6 @@
 ---
-title: Variables_DataTypes
-author:abdelrauf
+title: " Variables Data Types "
+author: "abdelrauf"
 date: 2023-07-31
 tags: ["Variables", "Data", "Types", "Go" ]
 ---
