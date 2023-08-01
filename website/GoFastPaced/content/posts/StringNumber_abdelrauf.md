@@ -1,6 +1,6 @@
 ---
-title: " String Number "
-author: "abdelrauf"
+title: StringNumber
+author:abdelrauf
 date: 2023-07-31
 tags: ["String", "Number", "Go" ]
 ---

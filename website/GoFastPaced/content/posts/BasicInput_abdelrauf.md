@@ -1,6 +1,6 @@
 ---
-title: " Basic Input "
-author: "abdelrauf"
+title: BasicInput
+author:abdelrauf
 date: 2023-07-31
 tags: ["Basic", "Input", "Go" ]
 ---

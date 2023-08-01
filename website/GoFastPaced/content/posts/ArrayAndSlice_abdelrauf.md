@@ -1,6 +1,6 @@
 ---
-title: " Array And Slice "
-author: "abdelrauf"
+title: ArrayAndSlice
+author:abdelrauf
 date: 2023-07-31
 tags: ["Array", "Slice", "Go" ]
 ---

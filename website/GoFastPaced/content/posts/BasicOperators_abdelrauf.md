@@ -1,6 +1,6 @@
 ---
-title: " Basic Operators "
-author: "abdelrauf"
+title: BasicOperators
+author:abdelrauf
 date: 2023-07-31
 tags: ["Basic", "Operators", "Go" ]
 ---

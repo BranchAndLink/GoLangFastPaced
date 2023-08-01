@@ -1,6 +1,6 @@
 ---
-title: " Modules Packages Build "
-author: "abdelrauf"
+title: ModulesPackagesBuild
+author:abdelrauf
 date: 2023-07-31
 tags: ["Modules", "Packages", "Build", "Go" ]
 ---

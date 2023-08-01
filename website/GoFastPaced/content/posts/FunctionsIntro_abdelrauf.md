@@ -1,6 +1,6 @@
 ---
-title: " Functions Intro "
-author: "abdelrauf"
+title: FunctionsIntro
+author:abdelrauf
 date: 2023-07-31
 tags: ["Functions", "Intro", "Go" ]
 ---

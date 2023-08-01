@@ -1,6 +1,6 @@
 ---
-title: " Flow Controls "
-author: "abdelrauf"
+title: FlowControls
+author:abdelrauf
 date: 2023-07-31
 tags: ["Flow", "Controls", "Go" ]
 ---

@@ -1,6 +1,6 @@
 ---
-title: " Variables Data Types Comments "
-author: "farid"
+title: Variables_DataTypes_Comments
+author:farid
 date: 2023-07-31
 tags: ["Variables", "Data", "Types", "Comments", "Go" ]
 ---
