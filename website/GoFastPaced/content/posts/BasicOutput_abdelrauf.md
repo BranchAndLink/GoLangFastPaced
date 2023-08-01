@@ -1,6 +1,6 @@
 ---
-title: BasicOutput
-author:abdelrauf
+title: " Basic Output"
+author: "abdelrauf"
 date: 2023-07-31
 tags: ["Basic", "Output", "Go" ]
 ---

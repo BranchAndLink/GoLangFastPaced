@@ -14,22 +14,24 @@ do
 #convert to markdown
 base_name=$(basename ${x})
 filename="${base_name%.*}"
-#jupyter nbconvert --to markdown $x  --output "${filename}${author}"  --output-dir ${PWD}  
+#jupyter nbconvert --to markdown $x  --output "${filename}${author}"  --output-dir ${PWD}
 tags="tags: ["
+title=""
 res=$(grep -oE '[A-Z][a-z]+' <<< "$filename"  )
 echo $res
 for word in $res
 do
- 
+
   #ignore And
   if [[ $word != "And" && $word != "_" ]]
   then
     tags="$tags\"$word\", "
     echo $tags
   fi
+title="$title $word"
 done
 git_last_date=$(git log -1  --date=short --pretty=format:'date: %cd' $x)
-prepend="---\ntitle: $filename\nauthor:${author}\n${git_last_date}\n$tags \"Go\" ]\n---\n"
+prepend="---\ntitle: \"$title\"\nauthor: \"${author}\"\n${git_last_date}\n$tags \"Go\" ]\n---\n"
 
 
 (echo -e $prepend; jupyter nbconvert --to markdown $x --stdout) > GoFastPaced/content/posts/${filename}_${author}.md

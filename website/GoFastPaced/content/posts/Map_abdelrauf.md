@@ -1,6 +1,6 @@
 ---
-title: Map
-author:abdelrauf
+title: " Map"
+author: "abdelrauf"
 date: 2023-07-31
 tags: ["Map", "Go" ]
 ---
