@@ -1,7 +1,7 @@
 ---
 title: " Type Definitons Aliases Structs"
 author: "abdelrauf"
-
+date: 2023-08-01
 tags: ["Type", "Definitons", "Aliases", "Structs", "Go" ]
 ---
 
