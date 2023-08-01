@@ -1,5 +1,6 @@
 #!/bin/bash
 dir="${1:-}"
+regenerate="${2:-1}"
 
 for author_dir in  $dir/*
 do
@@ -32,10 +33,13 @@ title="$title $word"
 done
 git_last_date=$(git log -1  --date=short --pretty=format:'date: %cd' $x)
 prepend="---\ntitle: \"$title\"\nauthor: \"${author}\"\n${git_last_date}\n$tags \"Go\" ]\n---\n"
-
-
-(echo -e $prepend; jupyter nbconvert --to markdown $x --stdout) > GoFastPaced/content/posts/${filename}_${author}.md
-
+Output_File="GoFastPaced/content/posts/${filename}_${author}.md"
+if [[ $regenerate -eq 1 ]] || [[ ! -f "$Output_File" ]]
+then
+(echo -e $prepend; jupyter nbconvert --to markdown $x --stdout) > ${Output_File}
+else
+echo "skip ${Output_File}"
+fi
 done
 
 fi
