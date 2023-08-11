@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 //we use the func keyword to create a function.
 
@@ -47,6 +50,15 @@ func myFunction(number *int) int {
 	return *number
 }
 
+//named return values.
+//Go's return values may be named. If so, they are treated as variables defined at the top of the function.
+
+func getCoordinates(locationValue float64) (x float64, y float64) {
+	x = math.Sin(locationValue)
+	y = math.Cos(locationValue)
+	return
+}
+
 func main() {
 	greet()
 	fmt.Println(product(1, 2, 3))
@@ -67,6 +79,8 @@ func main() {
 	fmt.Println(a)
 	fmt.Println(myFunction(&a))
 	fmt.Println(a)
+	x_axis, y_axis := getCoordinates(0.5)
+	fmt.Println("Coordinates:", x_axis, y_axis)
 
 }
 
