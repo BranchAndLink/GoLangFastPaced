@@ -227,7 +227,7 @@ fmt.Println(iii)
     
     goroutine 1 [running]:
     main.main()
-    	/tmp/gonb_78362d7f/main.go:68 +0x6f
+    	 [7m[[ Cell [18] Line 5 ]][0m /tmp/gonb_0e480a67/main.go:68 +0x6f
     exit status 2
 
 
@@ -309,11 +309,11 @@ if  ok {
 <div class="lm-Widget p-Widget jp-RenderedText jp-mod-trusted jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" style="font-family: monospace;">
 
 
-<span style="white-space: pre;"> # gonb_78362d7f</span>
+<span style="white-space: pre;"> # gonb_0e480a67</span>
 
 <br/>
 
-<span class="gonb-cell-line-info">Cell[10]: Line 4</span>
+<span class="gonb-cell-line-info">Cell[20]: Line 4</span>
 <span class="gonb-error-location">./main.go:67:11: </span> impossible type assertion: x.(HerHansiTip)
 <div class="gonb-error-context">
 func main() {
@@ -342,7 +342,7 @@ func main() {
 
 
 
-    failed to run "/usr/local/go/bin/go build -o /tmp/gonb_78362d7f/gonb_78362d7f": exit status 1
+    failed to run "/usr/local/go/bin/go build -o /tmp/gonb_0e480a67/gonb_0e480a67": exit status 1
 
 
 
@@ -440,7 +440,7 @@ gosterUmumi(nil)
 
 #### Embeded Interface  
 
-Strukt-da olduğu kimi interfeysə də bir T interfeysin daxilində digər bir neçə interfeysi embed etmək olur.   
+Strukt-da olduğu kimi hər hansı bir T interfeysin daxilində digər bir neçə interfeysi embed etmək olur.   
 T interfeysi həm öz metodlarının həm də embed etdiyi interfeys metodlarını bəyan edən tiplər çoxluğuna malik olur.   
 Bu zaman fikir vermək lazımdır ki embed olan interfeyslərdə olan metodlarda oxşar funksiyalar eyni quruluşda olsunlar.  
 Əks halda bu **kompilyasiya** xətasına səbəb olacaq. 
@@ -523,12 +523,12 @@ type ReadCloser interface {
 <div class="lm-Widget p-Widget jp-RenderedText jp-mod-trusted jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" style="font-family: monospace;">
 
 
-<span style="white-space: pre;"> # gonb_be9688dd</span>
+<span style="white-space: pre;"> # gonb_0e480a67</span>
 
 <br/>
 
-<span class="gonb-cell-line-info">Cell[43]: Line 2</span>
-<span class="gonb-error-location">./main.go:23:2: </span> duplicate method Close
+<span class="gonb-cell-line-info">Cell[21]: Line 2</span>
+<span class="gonb-error-location">./main.go:23:2: </span> undefined: Reader
 <div class="gonb-error-context">
     teref float32
 }
@@ -536,20 +536,6 @@ type ReadCloser interface {
 <div class="gonb-error-line">	Reader   // Reader-in metodları
 </div>	Close()  //  Reader.Close və Close eyniadlıdır, lakin quruluş fərqi var deyə yol verilməzdir
 }
-
-</div>
-
-<br/>
-
-<span class="gonb-cell-line-info">Cell[43]: Line 3</span>
-<span class="gonb-error-location">	./main.go:24:2: </span> other declaration of Close
-<div class="gonb-error-context">
-}
-type ReadCloser interface {
-	Reader   // Reader-in metodları
-<div class="gonb-error-line">	Close()  //  Reader.Close və Close eyniadlıdır, lakin quruluş fərqi var deyə yol verilməzdir
-</div>}
-type ReadWriter interface {
 
 </div>
 
@@ -565,8 +551,8 @@ type ReadWriter interface {
 
 
 
-    failed to run "/usr/local/go/bin/go build -o /tmp/gonb_be9688dd/gonb_be9688dd": exit status 1
+    failed to run "/usr/local/go/bin/go build -o /tmp/gonb_0e480a67/gonb_0e480a67": exit status 1
 
 
-<span style="color:red">Qeyd edək ki,</span> interfeysi həmçinin biz məhdudiyyət vermək üçün də istifadə edə bilirik.  
+<span style="color:red">Qeyd edək ki,</span> interfeys tiplər üçün məhdudiyyət vermək üçün də istifadə edilir.  
 Lakin bu sadə interfeysdən fərqlənir və Generics mövzusuna aid oluğundan onu o mövzuda öyrənəcəyik. 
