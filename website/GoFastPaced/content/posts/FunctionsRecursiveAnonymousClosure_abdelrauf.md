@@ -156,9 +156,13 @@ func(name string) {
     Hello GoLang
 
 
+Funksiya əgər digər funksiyaları arqument kimi götürüb və ya nəticə kimi qaytarırsa   
+ona **High Order functions** deyirik.
+
 ##### Closure  (klojr)
 Closure dedikdə funksiya xaricində olan dəyişənləri funksiya daxilində (arqument kimi verilmədən) işlətmək imkanı nəzərdə tutulur.  
-Bu özəllik bizə bir çox məsələləri daha sadə həll etməyə imkan  verəcək.  
+Bu özəllik bizə bir çox məsələləri daha sadə həll etməyə imkan  verəcək.   
+
 
 
 
@@ -173,10 +177,35 @@ func() {
     Hello Golang
 
 
-Funksiya əgər digər funksiyaları arqument kimi götürüb və ya nəticə kimi qaytarırsa   
-ona **High Order functions** deyirik.
+Aşağıdakı misalda toplayan() funksiyası cem dəyişənini özündə saxlayan closure qaytaracaq.   
+Nəticə etibarilə hər dəfə closure-i çağırdıqda cem dəyişəcək
+
+
+```go
+
+func toplayan() func(int) int {
+	cem := 0
+	return func(x int) int {
+		cem += x
+		return cem
+	}
+}
+
+%%
+s:=toplayan()
+fmt.Println(s(5))
+fmt.Println(s(5))
+fmt.Println(s(5))
+```
+
+    5
+    10
+    15
+
 
 Yuxarıda öyrəndiklərimizi tətbiq etməklə bəzi maraqlı funksiyalar yığaq
+
+Funksiyaların kompozisiyası. Mürəkkən funksiya
 
 
 ```go
@@ -200,6 +229,8 @@ fmt.Println(mmm(456))
 
     ~~228~~
 
+
+Filter funksiyası arqument kimi
 
 
 ```go
@@ -243,6 +274,69 @@ fmt.Println(vals[:lenx], filtered, filtered2)
 ```
 
     [-2 -8 8 5 0 1 9 7 55 66 7 -3 -5 6] [8 5 1 9 7 55 66 7 6] [55 66]
+
+
+Currying. 
+Currying dedikdə Funksiyanın arqumentlərini ardıcıl vermə bacarığı nəzrədə tutulur.    
+Haskell kimi dillərdə adi funksiya bu özəlliyə sahibdir.  
+Go dilində biz bu özəlliyi bildiklərimizlə əldə edə bilərik. 
+Arqumentləri sıra ilə tətbiq etmək.  
+Qeyd: Bundan daha yaxşı istifadə üçün **curry aid paketlərdən** istifadə etmək lazımdır.
+
+
+```go
+type CR1 func (int) int
+type CR2 func (int, int) int
+type CR3 func (int, int, int) int
+type CR4 func (int, int, int, int) int
+
+func (f CR1) Curry( arg int )  func() int {
+	return func () int {
+	   return  f(arg)
+	}
+}
+
+func (f CR2) Curry( arg int )  CR1 {
+     return func (h int) int {
+		return  f(arg, h)
+	 }
+}
+
+func (f CR3) Curry( arg int )  CR2 {
+	return func ( x, y int) int  {
+	   return  f(arg, x, y)
+	}
+}
+
+func (f CR4) Curry( arg int ) CR3 {
+	return func ( x, y, z int) int {
+	   return  f(arg, x, y, z)
+	}
+}
+
+%%
+var fn CR4  = func(x,y,z, d int) int {
+	return (x+y +z )*d
+}
+fn4 := fn.Curry(4)
+fn4_5 := fn4.Curry(5)
+fn4_5_6 := fn4_5.Curry(6)
+fn4_5_6_2 := fn4_5_6.Curry(2)
+fmt.Printf("%T %v\n",fn,  fn(4,5,6,2))
+fmt.Printf("%T %v\n",fn4,  fn4(5,6,2))
+fmt.Printf("%T %v\n",fn4_5,  fn4_5(6,2)) 
+fmt.Printf("%T %v\n",fn4_5_6,  fn4_5_6(2))
+fmt.Printf("%T %v\n",fn4_5_6_2,  fn4_5_6_2())
+fn882 := fn.Curry(8).Curry(8).Curry(2)
+fmt.Printf("(8+8+2) * 55 = %v\n",fn882(55))
+```
+
+    main.CR4 30
+    main.CR3 30
+    main.CR2 30
+    main.CR1 30
+    func() int 30
+    (8+8+2) * 55 = 990
 
 
 #### Rekursion (Rekursiya) 
