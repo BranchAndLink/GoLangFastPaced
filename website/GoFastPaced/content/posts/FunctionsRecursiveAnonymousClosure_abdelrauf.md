@@ -95,7 +95,7 @@ fmt.Println( "Vurma",  DoCalc(Funksiya("*"), 1, ededler[:]...))
 ##### Anonymous Function (Anonim funksiya) 
 
 Bəzən müvəqqəti adsız funksiya düzəltmək istəyirik. Bu zaman anonim funksiyadan (və ya lambda-dan) istifadə edə bilərik.   
-Bu funksiyanı istənilən yerdə elan edə bilməmimiz işimizi asanlaşdırır
+Bu funksiyanı istənilən yerdə elan edə bilməyimiz işimizi asanlaşdırır.
 
 
 
@@ -178,7 +178,7 @@ func() {
 
 
 Aşağıdakı misalda toplayan() funksiyası cem dəyişənini özündə saxlayan closure qaytaracaq.   
-Nəticə etibarilə hər dəfə closure-i çağırdıqda cem dəyişəcək
+Nəticə etibarilə hər dəfə closure-i çağırdıqda cem dəyişəcək.
 
 
 ```go
@@ -205,7 +205,7 @@ fmt.Println(s(5))
 
 Yuxarıda öyrəndiklərimizi tətbiq etməklə bəzi maraqlı funksiyalar yığaq
 
-Funksiyaların kompozisiyası. Mürəkkən funksiya
+Funksiyaların kompozisiyası. Mürəkkəb funksiya
 
 
 ```go
@@ -277,7 +277,7 @@ fmt.Println(vals[:lenx], filtered, filtered2)
 
 
 Currying. 
-Currying dedikdə Funksiyanın arqumentlərini ardıcıl vermə bacarığı nəzrədə tutulur.    
+Currying dedikdə, Funksiyanın arqumentlərini ardıcıl vermə bacarığı nəzərdə tutulur.    
 Haskell kimi dillərdə adi funksiya bu özəlliyə sahibdir.  
 Go dilində biz bu özəlliyi bildiklərimizlə əldə edə bilərik. 
 Arqumentləri sıra ilə tətbiq etmək.  
@@ -340,10 +340,10 @@ fmt.Printf("(8+8+2) * 55 = %v\n",fn882(55))
 
 
 #### Rekursion (Rekursiya) 
-Funksiya əgər daxildə öz funksiyasını çağırırsa buna rekursiya deyilir. Həmçinin Əgər funksiya çağırdığı funksiyalardan biri də təzədən onu çağırırsa  
-rekursiya baş verir. Rekursiv funksiyalarla biz bəzi alqoritmik məsələləri həll edə bilirik.   
+Funksiya əgər daxildə öz funksiyasını çağırırsa buna rekursiya deyilir. Həmçinin Əgər funksiya çağırdığı funksiyalardan biri də yenidən onu çağırırsa  
+rekursiya baş verir. Rekursiv funksiyalarla biz bəzi alqoritmik məsələləri həll edə bilərik.   
 Lakin nəzərə almaq lazımdır ki rekursiya (call stack) stek yaddaşın dolmasına səbəb olur.   
-(<span style="color:red">Qeyd GO-da hələki rekursiv funksiyalar (tail recursion optimization) <b>optimallaş-ma-dığından</b> alqoritmik həlləri for iterasiyası ilə yığmaq məsləhətdir</span>)
+(<span style="color:red">Qeyd GO-da hələki rekursiv funksiyalar (tail recursion optimization) <b>optimallaş-ma-dığından</b> alqoritmik həlləri for iterasiyası ilə yığmaq məsləhətdir.</span>)
 
 
 ```go
@@ -393,7 +393,7 @@ print(fibonacci(15))
 
     610
 
-Fibonnaci misalında təkrar hesablamalar üçün memoization(yaddaş) texnikasını əlavə edə bilərik
+Fibonnaci misalında təkrar hesablamalar üçün memoization(yaddaş, keş) texnikasını əlavə edə bilərik
 
 
 ```go
