@@ -18,7 +18,7 @@ filename="${base_name%.*}"
 #jupyter nbconvert --to markdown $x  --output "${filename}${author}"  --output-dir ${PWD}
 tags="tags: ["
 title=""
-res=$(grep -oE '[A-Z][a-z]+' <<< "$filename"  )
+res=$(grep -oE '[A-Za-z][a-z]+' <<< "$filename"  )
 echo $res
 for word in $res
 do
