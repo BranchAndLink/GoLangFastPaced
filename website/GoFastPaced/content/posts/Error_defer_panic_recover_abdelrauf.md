@@ -2,7 +2,7 @@
 title: " Error"
 author: "abdelrauf"
 date: 2023-08-21
-tags: ["Error", "defer", "recover", "panic", "Go" ]
+tags: ["Error", "defer", "panic", "recover", "Go" ]
 ---
 
 ### Error (Xəta) 
