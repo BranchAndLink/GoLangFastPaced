@@ -1,7 +1,7 @@
 ---
 title: " Error"
 author: "abdelrauf"
-
+date: 2023-08-21
 tags: ["Error", "Go" ]
 ---
 
