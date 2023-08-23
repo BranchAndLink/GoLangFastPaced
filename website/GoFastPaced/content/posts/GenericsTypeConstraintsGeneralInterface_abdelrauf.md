@@ -104,7 +104,7 @@ Bu dəstəklənən əməliyyatlara nəzarət edən interfeysdir.
 
 Tərifdən də aydın olur ki biz niyə any istifadə etmişik. Çünki any boş interfeysdir.  
 
-Aşağıdakı tip məhdudiyyətlər elanına fikir verək  
+Aşağıdakı tip məhdudiyyətlərinin elanına fikir verək  
 <pre>
 [T any]  //[T interface{}]
 [T interface{[]P}]
@@ -214,7 +214,7 @@ Məsələn:
 
 Amma  nəzərə almaq lazımdır ki bu sadələşdirmə 
 qarışıqlığa səbəb olsa onda onu xüsusi üsulla qeyd etmək lazımdır.  
-Məsələn aşağıdakı C məhdudiyyəti üçün qarşılıq yarana bilər.  
+Məsələn aşağıdakı C məhdudiyyəti üçün qarışıqlıq yarana bilər.  
 
 <pre>
 type X1[P *C] ..
@@ -366,8 +366,9 @@ type Lx [ T *int,] struct {
 
 ##### comparable
 Go dilində any interfeysi ilə yanaşı comparable interfeys məhdudiyyəti var.  
-comparable məhdudiyyəti müqayisə əməliyyatlarından(==, !=) yerinə yetirən tipləri əhatə edir.  
-(Go 1.20-dən any də comparable tipin interfeys çoxlundadır)  
+comparable məhdudiyyətinin əhatə etdiyi tiplər üzərində  müqayisə əməliyyatlarını ( ==, != ) həyata keçirmək mümkündür.  
+Əks halda həmin tip comparable interfeys çoxluğuna daxil olmur. 
+(Go 1.20-dən any də comparable tipin interfeys çoxluğundadır)  
 
 
 ```go
@@ -483,9 +484,9 @@ fmt.Println(beraber(a,b))
     failed to run "/usr/local/go/bin/go build -o /tmp/gonb_93df4279/gonb_93df4279": exit status 1
 
 
-Təəssüf ki Go dilində öz tipimizi comparable çoxluğuna əlavə etmək üçün elan  
-etdiyimiz tipə xüsusi == != metodlarını təyin edə bilmirik.  Bu xüsusi qaydalara əsasən təyin edilir.  
-Məsələn struct tipimizin bütün eleməntləri müqayisə edilən olduqda bizim struct da comparable olur.  
+Təəssüf ki, Go dilində öz tipimizi comparable çoxluğuna əlavə etmək üçün elan  
+etdiyimiz tip üçün xüsusi == != metodlarını əlavə edə bilmirik.  Bu xüsusi qaydalara əsasən təyin edilir.  
+Məsələn struct tipimizin bütün eleməntləri müqayisə edilən olduqda bizim struct da comparable interfeys çoxluğuna daxil olur.  
 Tam qaydaları   
 https://go.dev/ref/spec#Comparison_operators bölməsində tapmaq olar
 
