@@ -165,7 +165,7 @@ Bezi Formatlara baxaq:
 |	%#v | Go sintaksis formatına uygun|
 |%T | arqumentin Tipi|
 |%c | simvol |
-|%q|  simvol və ya simvol ardıcıllığı dırnaq daxilində, bəzi görülməyən simvolları \ ilə əks etdirir|
+|%q|  simvol və ya simvol ardıcıllığı dırnaq daxilində|
 |%+q|  simvol və ya simvol ardıcıllığı dırnaq daxilində, ASCII-dən fərqli simvolları \ ilə əks etdirir|
 |%U| unikod|
 |%#U| unikod + simvol |
@@ -186,12 +186,14 @@ fmt.Printf("Formatlı əks %d, %g, %e, %s, %v, %v , %#v, %T, %q, %+q, %q, %U, %#
 
 
 
-Bndan elave asagidaki deyishme usullarini da formatlara tetbiq etmek olar. 
+Bundan əlavə aşağıdakı format dəyişimlərindən də istifadə etmək olar. 
 
-|  Görüntü | Format  | izah   |
+|  Görüntü | Format dəyişimi  | izah   |
 |---|---|---|
+|  |'#'	| alternativ format yaradır:  Məsələn: 0b (%#b) ikilik, 0x 16-lıq %#x  və s
 | ' 24' | % d|
 | '+24'  |  %+d |  isareli eded ,yalniz edede aiddir |
+| '\U0001f44dM\u0259tn'  |  %+q |  %q ilə işlənib ASCII simvol  |
 | '  20'  | %{n}d , %4d | 4 sayda olub sağa sıxılmış yazı   |
 | '15  '  |  %-{n}d |  n sayda sola sıxılmış yazı  |
 |  '0025' | %0{n}d  | n sayda 0 əlavə |
@@ -203,11 +205,18 @@ Bndan elave asagidaki deyishme usullarini da formatlara tetbiq etmek olar.
 
 ```go
 %%
+mətn := "👍Mətn"
+fmt.Printf("%X və ya %#X \n", "alma", "alma")
+fmt.Printf("%U və ya %#U \n", '👍', '👍')
+fmt.Printf("%q və ya %+q \n", mətn, mətn)
 fmt.Printf("%5s | %5s | %7.5f | A% d \n","Al", "sat", 3.45, 44)
 fmt.Printf("%X \n","Almalı")  
 fmt.Printf("% X \n","Almalı") 
 ```
 
+    616C6D61 və ya 0X616C6D61 
+    U+1F44D və ya U+1F44D '👍' 
+    "👍Mətn" və ya "\U0001f44dM\u0259tn" 
        Al |   sat | 3.45000 | A 44 
     416C6D616CC4B1 
     41 6C 6D 61 6C C4 B1 
@@ -242,6 +251,35 @@ fmt.Printf("%-[2]*[1]s |\n", "Al", 10) //[1]s AL, [2]* isə 10
     Al         |
     Al         |
 
+
+%v Vasitəsilə Go dili tipə uyğun formatı təyin edir. 
+Həmçinin bununla mürəkkəb tipləri də çıxara bilirik.   
+%#v isə Go sintaksisinə uyğun əks etdirir.
+
+
+
+```go
+%%
+fmt.Printf("%v, %v, %v, %v\n", 55, 55.789, 5 + 4i, [...]int{4, 5, 6})
+fmt.Printf("%#v, %#v, %#v, %#v\n", 55, 55.789, 5 + 4i, [...]int{4, 5, 6})
+```
+
+    55, 55.789, (5+4i), [4 5 6]
+    55, 55.789, (5+4i), [3]int{4, 5, 6}
+
+
+Əgər format-ı səhv versək format xəta baş verir.  
+Nüumunə şəklində qeyd edək. Məsələn: ədəd formatına string versək 
+
+
+```go
+%%
+fmt.Printf("%d", "hi")
+```
+
+    %!d(string=hi)
+
+Burada %! xəta olduğunu yazıda göstərir.
 
 ##### stdout, stderr-i özümüz yönləndirək  
 (Qeyd: bununla həmçinin digər açdığımız fayla da yönləndirə bilərik)   

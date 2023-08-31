@@ -1,7 +1,7 @@
 ---
 title: " Variables Data Types Constants"
 author: "abdelrauf"
-date: 2023-07-28
+date: 2023-07-29
 tags: ["Variables", "Data", "Types", "Constants", "Go" ]
 ---
 
@@ -13,13 +13,13 @@ tags: ["Variables", "Data", "Types", "Constants", "Go" ]
 | --- | --- | --- |
 | int | tam ədədlər | 2, 0, -999|
 |float32 | kəsr ədədlər | 3.5545, -9.5|
-|float64 | kəsr ədədlər daha dəqiq hesablamalar üçün 8-baytlıq  | 16000001.5, -9.5|
+|float64 | kəsr ədədlər, daha dəqiq hesablamalar üçün 8-baytlıq  | 16000001.5, -9.5|
 |complex64| kompleks ədədlər | 5+4i, 5, i|
 |complex128| kompleks ədədlər | 5+4i, 5, i|
 |string| dırnaq işarəsi " və ya \` daxilində simvol ardıcıllığı| "salam", "-sds-", \`bir neçə sətir\`|
 |bool | doğru və ya yanlış, bul məntiqi| true, false |
 | byte (uint8 alias))| müsbət 8-bitlik , 1-baytlıq ədəd| 2, 5, [0,255] arası ədəd|
-|rune (int32 alias)| istənilən simvollar , unikod smilecs və s| 'a','z', '👍' |
+|rune (int32 alias)| istənilən simvollar, unikod və s| 'a','z', '👍' |
 |int8| tam ədəd 1-baytlıq 8-bitlik| -128 127 [-128,127]|
 |uint8| 8-bitlik müsbət ədəd | 0 255 [0,255] aralığında|
 |int16, int32, int64| 16,32,64 bitlik tam ədəd||
