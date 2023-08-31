@@ -1,13 +1,14 @@
 ---
 title: " Basic Output"
 author: "abdelrauf"
-date: 2023-07-31
+date: 2023-07-29
 tags: ["Basic", "Output", "Go" ]
 ---
 
 ### BASIC INPUT OUTPUT
 
-Sadə konsola giriş və çıxış əmrlərini öyərənək.   
+Sadə proqramlarda giriş və əks etdirmə üsullarına baxaq.  
+  
 Ümumən, ilk öncə stdin stderr stdout anlamlarını qısa şərh edək.
 
 - stdin - Standart giriş (Standard Input) proqramın daxil olan məlumatı oxuduğu kommunikasiya kanalıdır.  
@@ -15,7 +16,7 @@ Sadə konsola giriş və çıxış əmrlərini öyərənək.
 - stderr - Standart xəta (Standard Error) proqramın xaric olan xəta məlumatlarını yazdığı kommunikasiya kanalıdır.  
 
 
-Bunları həmçinin axın (stream) də adlandıra bilərik.  
+Bunları həmçinin axın (stream) adlandıra bilərik.  
 Linux-da ümumən isə fayl sözünü də işlədə bilərik.  
 Bu zaman stdin, stdout, stderr -in fayl deskriptorları da olacaq. Fayl deskriptoru deyəndə açılan fayla xas ədəd nəzərdə tutulur.  
 
@@ -86,7 +87,7 @@ import "fmt"
 fmt.Println 
 ```
 Qeyd edək ki, o dəyişənlərin qiymətlərini stdout-a yazanda arasına " " boşluq əlavə edəcək.   
-Sonuna isə yeni sətir əlavə edəcək.  
+Sonuna isə yeni sətir əlavə olunur.  
 
 
 ```go
@@ -104,7 +105,7 @@ fmt.Println(44, 2023, 5.789)
 ```Go 
 fmt.Print 
 ``` 
-Bu da eyni işi görür. Ancaq string dəyişənlərin sonuna boşluq, həmçinin ümumi sonuna yeni sətir əlavə etmir. 
+Bu da eyni işi görür. Ancaq string qiymətlərinin sonuna boşluq, və ümumi sonluğa yeni sətir əlavə etmir. 
 
 
 ```go
@@ -119,16 +120,16 @@ fmt.Print(44, 2023, 5.789)
 Yeni sətir və boşluqları özümüz əlavə etmək istədikdə:
 <pre> 
 ' ' - boşluq 
-\n  - yeni sətir 
-\\  - geri sləş \ 
-\t  - tab 
-\n\r  - yeni sətir (windows üçün)
-\" - dırnaq
+&#92;n  - yeni sətir 
+&#92;&#92;  - geri sləş &#92; 
+&#92;t  - tab 
+&#92;n&#92;r  - yeni sətir (windows üçün)
+&#92;" - dırnaq
 </pre>
 
-Burada \ geri sləş vasitəsilə həmin yazıla bilinməyən simvolları veririk.  
-Həmçinin geri sləş-in özünü vermək üçün iki dəfə istifadə etmişik.  
-Həmçinin string tipimizin qiyməti " içərisində olduğundan onu da \-lə veririk. 
+Burada &#92; geri sləş vasitəsilə həmin yazıla bilinməyən simvolları veririk.  
+Həmçinin geri sləş-in özünü vermək üçün iki dəfə &#92;&#92; istifadə etmişik.  
+Həmçinin string tipimizin qiyməti " içərisində olduğundan onu da &#92;-lə veririk. 
 
 
 ```go
@@ -147,7 +148,7 @@ fmt.Print(44, 2023, 5.789)
 fmt.Printf
 ```
 
-Bezi Formatlara baxaq:
+Bəzi Formatlara baxaq:
 
 |  format |  əks etdirmə şəkli |
 |---|---|
@@ -179,10 +180,12 @@ h := 3.85
 mətn := "👍Mətn"
 simvol := '👍'
 
-fmt.Printf("Formatlı əks %d, %g, %e, %s, %v, %v , %#v, %T, %q, %+q, %q, %U, %#U\n", int(h), h, h, mətn, h, mətn, h, h, mətn, mətn, simvol, simvol, simvol)
+fmt.Printf("Formatlı əks %d, %g, %e, %s, %v, %v\n", int(h), h, h, mətn, h, mətn)
+fmt.Printf("Formatlı əks %#v, %T, %q, %+q, %q, %U, %#U\n", h, h, mətn, mətn, simvol, simvol, simvol)
 ```
 
-    Formatlı əks 3, 3.85, 3.850000e+00, 👍Mətn, 3.85, 👍Mətn , 3.85, float64, "👍Mətn", "\U0001f44dM\u0259tn", '👍', U+1F44D, U+1F44D '👍'
+    Formatlı əks 3, 3.85, 3.850000e+00, 👍Mətn, 3.85, 👍Mətn
+    Formatlı əks 3.85, float64, "👍Mətn", "\U0001f44dM\u0259tn", '👍', U+1F44D, U+1F44D '👍'
 
 
 
@@ -191,15 +194,15 @@ Bundan əlavə aşağıdakı format dəyişimlərindən də istifadə etmək ola
 |  Görüntü | Format dəyişimi  | izah   |
 |---|---|---|
 |  |'#'	| alternativ format yaradır:  Məsələn: 0b (%#b) ikilik, 0x 16-lıq %#x  və s
-| ' 24' | % d|
-| '+24'  |  %+d |  isareli eded ,yalniz edede aiddir |
-| '\U0001f44dM\u0259tn'  |  %+q |  %q ilə işlənib ASCII simvol  |
-| '  20'  | %{n}d , %4d | 4 sayda olub sağa sıxılmış yazı   |
-| '15  '  |  %-{n}d |  n sayda sola sıxılmış yazı  |
-|  '0025' | %0{n}d  | n sayda 0 əlavə |
-|'122.15'   | %.{n}f ,%.2f  |  n sayda onluqdan sonrakı kəsr ədəd |
-| '  122.46'  |   %{n}.{m}f| n sayda ümumi uzunluq sayı, m sayda kesir hissə sayı|
-| '41 6C 6D 61 6C C4 B1'  |   % X | 16-lıq sayda bir bayt iki simvolla və aralarında boşluqla |
+| '&nbsp;24' | '%&nbsp;', '%&nbsp;d'| boşluq əlavə edir. formatlar: '% d', '% x', '% X'
+| '41 6C 6D 61 6C C4 B1'  |   '%&nbsp;', '%&nbsp;X' | 16-lıq sayda bir bayt iki simvolla və aralarında boşluqla |
+| '+24'  | '%+', '%+d' |  işarəli ədəd ,yalnız (%q və %d ilə işlənir) |
+| '\U0001f44dM\u0259tn'  | '%+', '%+q' |  %q ilə işlənib ASCII simvol  |
+| '&nbsp;&nbsp;&nbsp;&nbsp;20'  | '%{n}d' , '%4d' | n sayda olub sağa sıxılmış yazı (nümunədə 4 sayda)   |
+| '15&nbsp;&nbsp;&nbsp;&nbsp;'  |  '%-{n}d', '%-4d' |  n sayda sola sıxılmış yazı (nümunədə 4 sayda)|
+|  '0025' | '%0{n}d', '%02d' | n sayda 0 əlavə (nümunədə 2 sayda)|
+|'122.15'   | '%.{m}f', '%.2f'  |  m sayda onluqdan sonrakı kəsr hissə sayı |
+| '  122.46'  |   '%{n}.{m}f'| n sayda ümumi uzunluq sayı, m sayda kəsr hissə sayı|
 
 
 
@@ -268,8 +271,8 @@ fmt.Printf("%#v, %#v, %#v, %#v\n", 55, 55.789, 5 + 4i, [...]int{4, 5, 6})
     55, 55.789, (5+4i), [3]int{4, 5, 6}
 
 
-Əgər format-ı səhv versək format xəta baş verir.  
-Nüumunə şəklində qeyd edək. Məsələn: ədəd formatına string versək 
+Əgər format-ı səhv versək xəta baş verir və o yazıda da ( %! işarəsi ilə) görsənir.  
+Məsələn: ədəd formatına string versək 
 
 
 ```go
@@ -279,10 +282,8 @@ fmt.Printf("%d", "hi")
 
     %!d(string=hi)
 
-Burada %! xəta olduğunu yazıda göstərir.
-
 ##### stdout, stderr-i özümüz yönləndirək  
-(Qeyd: bununla həmçinin digər açdığımız fayla da yönləndirə bilərik)   
+(Qeyd: digər açdığımız fayla da yönləndirə bilərik)   
 Bunun üçün Fprintf -dən istifadə edirik.  
 Əslən Printf elə Fprintf stdout-dur.   
 
@@ -305,9 +306,7 @@ fmt.Fprintln(os.Stderr, "Hello stderr")
     Hello stdout
 
 
-Qeyd: 
-Go-da print funksiyaları özündə builtin funksiya kimi də var.     
-print, println  builtin funksiyalar
+Go-da fmt paketi yerinə **print, println** builtin funksiyalarını da istifadə etmək olar.
 
 
 ```go
