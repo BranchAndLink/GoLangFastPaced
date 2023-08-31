@@ -1,11 +1,11 @@
 package main
 
-// import the custom package calculator
 import (
 	"fmt"
 	"mymodule/package1"
 )
 
+// create add function
 func main() {
 
 	number1 := 9
@@ -16,5 +16,4 @@ func main() {
 
 	// use the subtract function of calculator package
 	fmt.Println(package1.Subtract(number1, number2))
-
 }
