@@ -1,7 +1,7 @@
 ---
 title: " Build Install Test"
 author: "abdelrauf"
-date: 2023-07-31
+date: 2023-07-29
 tags: ["Build", "Install", "Test", "Go" ]
 ---
 
