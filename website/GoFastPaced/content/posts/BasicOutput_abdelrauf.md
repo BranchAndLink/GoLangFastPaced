@@ -7,12 +7,25 @@ tags: ["Basic", "Output", "Go" ]
 
 ### BASIC INPUT OUTPUT
 
-Sade konsola giris çıxış əmirlərini öyərənək. Ümumən isə stdin stderr stdout söhbəti qısa şərh edək
+Sadə konsola giriş və çıxış əmrlərini öyərənək.   
+Ümumən, ilk öncə stdin stderr stdout anlamlarını qısa şərh edək.
 
-Proses yarananda 3 standard fayl stream-i ona bağlanir
-- 0 - stdin  
-- 1 - stdout   
-- 2 - stderr   
+- stdin - Standart giriş (Standard Input) proqramın daxil olan məlumatı oxuduğu kommunikasiya kanalıdır.  
+- stdout - Standart çıxış (Standard Output) proqramın xaric olan məlumatı yazdığı kommunikasiya kanalıdır.  
+- stderr - Standart xəta (Standard Error) proqramın xaric olan xəta məlumatlarını yazdığı kommunikasiya kanalıdır.  
+
+
+Bunları həmçinin axın (stream) də adlandıra bilərik.  
+Linux-da ümumən isə fayl sözünü də işlədə bilərik.  
+Bu zaman stdin, stdout, stderr -in fayl deskriptorları da olacaq. Fayl deskriptoru deyəndə açılan fayla xas ədəd nəzərdə tutulur.  
+
+Proses yarananda 3 standard fayl axını yaranır.  
+
+|Fayl desktiptoru| Standard fayl axını|
+|:---:|:---:|
+| 0 | stdin   |
+| 1 | stdout   |
+| 2 | stderr |  
 
 
 
@@ -23,14 +36,16 @@ stdin  --->  | proqram |
 
 </pre>
 
-Sadə halda 
+Adi halda axınlar belə bağlanır. 
 
-stdin adi halda keyboarda    
-stdout - konsol ekranına   
-stderr - konsol ekranına  bağlanır
+- stdin  - klaviaturaya (keyboard)  
+- stdout - konsol ekranına   
+- stderr - konsol ekranına  
 
 
-Shell-de program run edildikde Bunu ferqli yerlere de baglamaq olur.
+
+
+Shell-də program icra etdikdə fərqli yerlərə də bağlamaq olar.
 
 Meselen:   
 ```bash
@@ -40,12 +55,12 @@ Burada
 
 stdin - input_fayl.txt   
 stdout - output.txt  
-stderr - error.txt faylina bağlanır
+stderr - error.txt faylına bağlanır.
 
 
 #### Golang -de output
 
-Bunun üçün "fmt" standard kitabxanadan istifade edirik
+Bunun üçün "fmt" standard kitabxanasından istifade edirik.
 
 ```Go
 func Print(a ...any) (n int, err error)
@@ -53,8 +68,8 @@ func Println(a ...any) (n int, err error)
 func Printf(format string, a ...any) (n int, err error)
 
 Burada Arqumentlər:
-    a istenilen tip və sayda dəyişən
-    format - format mətni
+  a istənilen tip və sayda dəyişən
+  format - format mətni
 Funksiya qaytarır:
   n - yazılmış bayt sayı
   err - xəta. Baş vermədikdə nil olur
@@ -66,118 +81,141 @@ Funksiya qaytarır:
 import "fmt"
 ```
 
-Indi ise ekrana nese verek
-fmt.Println - ekrana deyisenleri eks etdirir. Qeyd edek ki o deyishenlerin arasina " " boshluq elave edecek. Ve hemchinin ln -de yeni setir elave edir
+İndi ise ekrana yazı verək. 
+```Go 
+fmt.Println 
+```
+Qeyd edək ki, o dəyişənlərin qiymətlərini stdout-a yazanda arasına " " boşluq əlavə edəcək.   
+Sonuna isə yeni sətir əlavə edəcək.  
 
 
 ```go
 %%
-fmt.Println("Hello","WORLD", "Pi", 3.14)
-fmt.Println("Hello","WORLD", "Pi", 3.14)
+fmt.Println("Salam","Dünya")
+fmt.Println("Salam","Azərbaycan")
+fmt.Println(44, 2023, 5.789)
 ```
 
-    Hello WORLD Pi 3.14
-    Hello WORLD Pi 3.14
+    Salam Dünya
+    Salam Azərbaycan
+    44 2023 5.789
 
 
-Print - de eyni ishi gorur amma sona yeni setir ve bosluqlari elave etmir elave etmir
+```Go 
+fmt.Print 
+``` 
+Bu da eyni işi görür. Ancaq string dəyişənlərin sonuna boşluq, həmçinin ümumi sonuna yeni sətir əlavə etmir. 
 
 
 ```go
 %%
-fmt.Print("Hello","WORLD", "Pi", 3.14)
-fmt.Print("Hello","WORLD", "Pi", 3.14)
+fmt.Print("Salam","Dünya")
+fmt.Print("Salam","Azərbaycan")
+fmt.Print(44, 2023, 5.789)
 ```
 
-    HelloWORLDPi3.14HelloWORLDPi3.14
+    SalamDünyaSalamAzərbaycan44 2023 5.789
 
-Eyni sheyi etmek uchun ozumuz etmeliyik. "\n" - yeni setirdir " " - boshluqdur
-bundan elave:  
-- \\  - arxsa \ slash, \ isharesi xususi rol oynadigindan
-- \t  - tab 
-- \n  - yeni setir
-- \n\r  -yeni setir windows uchun
+Yeni sətir və boşluqları özümüz əlavə etmək istədikdə:
+<pre> 
+' ' - boşluq 
+\n  - yeni sətir 
+\\  - geri sləş \ 
+\t  - tab 
+\n\r  - yeni sətir (windows üçün)
+\" - dırnaq
+</pre>
 
-Strings bolmesinde bu movzuya baxacagiq
+Burada \ geri sləş vasitəsilə həmin yazıla bilinməyən simvolları veririk.  
+Həmçinin geri sləş-in özünü vermək üçün iki dəfə istifadə etmişik.  
+Həmçinin string tipimizin qiyməti " içərisində olduğundan onu da \-lə veririk. 
 
 
 ```go
 %%
-fmt.Print("Hello ","WORLD ", "Pi ", 3.14, "\n")
-fmt.Print("Hello ","WORLD ", "Pi ", 3.14, "\n")
+fmt.Print("Salam ","Dünya\n")
+fmt.Print("Salam ","\"Azərbaycan\"\n")
+fmt.Print(44, 2023, 5.789)
 ```
 
-    Hello WORLD Pi 3.14
-    Hello WORLD Pi 3.14
+    Salam Dünya
+    Salam "Azərbaycan"
+    44 2023 5.789
 
-
-##### Formatli print uchun fmt.Printf
+##### Formatlı print 
+```Go
+fmt.Printf
+```
 
 Bezi Formatlara baxaq:
 
-|  format |  menasi |
+|  format |  əks etdirmə şəkli |
 |---|---|
-| %b  |  ikili sayda eks etdirmek |
-| %o  |  8-lik say sisteminde |
-|  %O | 8-lik say sistemi o prefixi ile  |
-| %d  |  10-lu sayda  |
-|  %x |  16-liq sayda eks etdirir 0-9A-F|
-| %X  | 16-liq say  |
-|  %g |  onluq kesr ededleri kimi eks etdirmek |
-|  %s |  metn ve simvollar ardicilligi |
-|  %t |  bul üçün true false eks etdirir |
+| %b  |  ikili sayda |
+| %o  |  8-lik say sistemində |
+|  %O | 8-lik say sistemi o prefiksi ilə  |
+| %d  |  10-luq sayda  |
+|  %x |  16-lıq sayda 1 baytı iki simvolla  [0-9a-f]|
+| %X  | 16-lıq say  1 baytı iki simvolla, lakin  böyük hərflə [0-9A-F]|
+|  %g |  onluq kəsr ədədləri kimi |
+|  %s |  mətn ve simvollar ardıcıllığı |
+|  %t |  bul üçün true false kimi|
 |%e| elmi riyazi formatda|
-|%v | default tipin formatina uygun|
-|	%#v | Go sintaksis formatina uygun eks|
+|%v | təyin edilən tipin formatına uyğun|
+|	%#v | Go sintaksis formatına uygun|
 |%T | arqumentin Tipi|
 |%c | simvol |
-|%q|  dirnaqda simvol|
-|%u| unikod|
-|%p| pointer eks etdirir|
-
-
+|%q|  simvol və ya simvol ardıcıllığı dırnaq daxilində, bəzi görülməyən simvolları \ ilə əks etdirir|
+|%+q|  simvol və ya simvol ardıcıllığı dırnaq daxilində, ASCII-dən fərqli simvolları \ ilə əks etdirir|
+|%U| unikod|
+|%#U| unikod + simvol |
+|%p| pointer|
 
 
 
 ```go
 %%
-h:=3.85
-metn:="Metn"
+h := 3.85
+mətn := "👍Mətn"
+simvol := '👍'
 
-fmt.Printf("Format li eks %d, %g, %e, %s, %v, %v , %#v, %T,\n", int(h), h, h, metn, h, metn, h, h)
+fmt.Printf("Formatlı əks %d, %g, %e, %s, %v, %v , %#v, %T, %q, %+q, %q, %U, %#U\n", int(h), h, h, mətn, h, mətn, h, h, mətn, mətn, simvol, simvol, simvol)
 ```
 
-    Format li eks 3, 3.85, 3.850000e+00, Metn, 3.85, Metn , 3.85, float64,
+    Formatlı əks 3, 3.85, 3.850000e+00, 👍Mətn, 3.85, 👍Mətn , 3.85, float64, "👍Mətn", "\U0001f44dM\u0259tn", '👍', U+1F44D, U+1F44D '👍'
 
 
-Formatda da ededler uchun %+d qoysaq isareni de gosterecek
-BUndan elave asagidaki deyishme usullarini da formatlara tetbiq etmek olar. Qeyd (_ isahresi boshlugu ve sixmani gostermek uchundur)
 
-|  Goruntu | FormatNumune  | Izah   |
+Bndan elave asagidaki deyishme usullarini da formatlara tetbiq etmek olar. 
+
+|  Görüntü | Format  | izah   |
 |---|---|---|
-| +24  |  %+d |  isareli eded ,yalniz edede aiddir |
-| __20  | %{n}d , %4d | 4 sayda olub saga sixir yazini   |
-| 15__  |  %-{n}d |  n sayda sola sixir ()  |
-|  0025 | %0{n}d  | n sayda 0 elave edir (eded formatina aiddir) |
-|122.15   | %.{n}f ,%.2f  |  n sayda onluqdan sonraki kesir hisse sayi, (kesir edede aiddir) |
-| __122.46  |   %{n}.{m}f| n sayda umumi uzunluq sayi, m sayda   kesir hisse sayi (kesir edede aiddir) |
+| ' 24' | % d|
+| '+24'  |  %+d |  isareli eded ,yalniz edede aiddir |
+| '  20'  | %{n}d , %4d | 4 sayda olub sağa sıxılmış yazı   |
+| '15  '  |  %-{n}d |  n sayda sola sıxılmış yazı  |
+|  '0025' | %0{n}d  | n sayda 0 əlavə |
+|'122.15'   | %.{n}f ,%.2f  |  n sayda onluqdan sonrakı kəsr ədəd |
+| '  122.46'  |   %{n}.{m}f| n sayda ümumi uzunluq sayı, m sayda kesir hissə sayı|
+| '41 6C 6D 61 6C C4 B1'  |   % X | 16-lıq sayda bir bayt iki simvolla və aralarında boşluqla |
 
 
 
 ```go
 %%
-fmt.Printf("%5s | %5s | %7.5f \n","Al", "sat", 3.45)
-fmt.Printf("%5s | %5s | %7.5f \n","Vur", "yix", 3.45)
+fmt.Printf("%5s | %5s | %7.5f | A% d \n","Al", "sat", 3.45, 44)
+fmt.Printf("%X \n","Almalı")  
+fmt.Printf("% X \n","Almalı") 
 ```
 
-       Al |   sat | 3.45000 
-      Vur |   yix | 3.45000 
+       Al |   sat | 3.45000 | A 44 
+    416C6D616CC4B1 
+    41 6C 6D 61 6C C4 B1 
 
 
 
 ```go
 %%
-//sola sixilmis, saga bosluq elave etmekle
 fmt.Printf("%-5s | %-5s | %7.5f \n","Al", "sat", 3.45)
 fmt.Printf("%-5s | %-5s | %7.5f \n","Vur", "yix", 3.45)
 ```
@@ -186,13 +224,33 @@ fmt.Printf("%-5s | %-5s | %7.5f \n","Vur", "yix", 3.45)
     Vur   | yix   | 3.45000 
 
 
-##### Bes nece edek ki stdout, stderr-i ozumuz sechek (Qeyd bu hemçinin öz açdığın fayla da aiddir)
-Bunun üçün Fprintf -dən istifadə edirik. Ve stdout stdin i vermek üçün    
-os paketini import edek
-Əslən Printf ele Fprintf stdout -dur
+Bundan başqa həmin format dəyişimlərində olan ədədləri də dəyişən kimi verə bilərik.  
+Buna dəyişim ədədlərini [arqumentin_indeksi + 1]*, formatı isə [arqumentin_indeksi + 1]format verməklə nail ola bilərik.  
 
 
 ```go
+%%
+fmt.Printf("%6.4f\n", 12.0)
+fmt.Printf("%[3]*.[2]*[1]f\n", 12.0, 4, 6) //[1]f 12.0, [2]* 4, [3]* isə 6
+
+fmt.Printf("%-10s |\n", "Al")
+fmt.Printf("%-[2]*[1]s |\n", "Al", 10) //[1]s AL, [2]* isə 10 
+```
+
+    12.0000
+    12.0000
+    Al         |
+    Al         |
+
+
+##### stdout, stderr-i özümüz yönləndirək  
+(Qeyd: bununla həmçinin digər açdığımız fayla da yönləndirə bilərik)   
+Bunun üçün Fprintf -dən istifadə edirik.  
+Əslən Printf elə Fprintf stdout-dur.   
+
+
+```go
+// os paketini import edək.  
 import "os"
 ```
 
@@ -209,11 +267,8 @@ fmt.Fprintln(os.Stderr, "Hello stderr")
     Hello stdout
 
 
-Eger komandamizi icra etsek 1> ile stdout-a yazilana basqa fayla 2> ile ise stderr-i basqa fayla yaz bileceyik.
-
-Qeyd linux, windows komanda cagirmalari, redirection bolmesini oxuyun
-
-Qeyd: GO-da print funksiyaları özündə də var.     
+Qeyd: 
+Go-da print funksiyaları özündə builtin funksiya kimi də var.     
 print, println  builtin funksiyalar
 
 

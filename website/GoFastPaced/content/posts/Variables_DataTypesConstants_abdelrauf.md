@@ -1,7 +1,7 @@
 ---
 title: " Variables Data Types Constants"
 author: "abdelrauf"
-date: 2023-07-22
+date: 2023-07-28
 tags: ["Variables", "Data", "Types", "Constants", "Go" ]
 ---
 
@@ -13,25 +13,25 @@ tags: ["Variables", "Data", "Types", "Constants", "Go" ]
 | --- | --- | --- |
 | int | tam ədədlər | 2, 0, -999|
 |float32 | kəsr ədədlər | 3.5545, -9.5|
-|float64 | kəsr ədədlər daha dəqiq hesablamalar üçün 8 baytliq  | 16000001.5, -9.5|
+|float64 | kəsr ədədlər daha dəqiq hesablamalar üçün 8-baytlıq  | 16000001.5, -9.5|
 |complex64| kompleks ədədlər | 5+4i, 5, i|
 |complex128| kompleks ədədlər | 5+4i, 5, i|
 |string| dırnaq işarəsi " və ya \` daxilində simvol ardıcıllığı| "salam", "-sds-", \`bir neçə sətir\`|
-|bool | dogru ve ya yanlis, bul mentiqi| true, false |
-| byte (uint8 alias))| müsbət 8bit lik , 1baytliq ədəd| 2, 5, [0,255] arası ədəd|
-|rune (int32 alias)| istenilen simvollar , unikod smilecs ve s| 'a','z', '👍' |
-|int8| tam ədəd 1 baytliq 8 bitlik| -128 127 [-128,127]|
-|uint8| 8bit lik müsbət ədəd | 0 255 [0,255] aralığında|
-|int16, int32, int64| 16,32,64 bitlik||
-|uint16,uint32,uint64| 16,32,64 bitlik müsbət| 0-dan 2^bit_sayi-1 aralığında ədədlər|
+|bool | doğru və ya yanlış, bul məntiqi| true, false |
+| byte (uint8 alias))| müsbət 8-bitlik , 1-baytlıq ədəd| 2, 5, [0,255] arası ədəd|
+|rune (int32 alias)| istənilən simvollar , unikod smilecs və s| 'a','z', '👍' |
+|int8| tam ədəd 1-baytlıq 8-bitlik| -128 127 [-128,127]|
+|uint8| 8-bitlik müsbət ədəd | 0 255 [0,255] aralığında|
+|int16, int32, int64| 16,32,64 bitlik tam ədəd||
+|uint16,uint32,uint64| 16,32,64 bitlik müsbət| 0-dan 2^bit_sayı-1 aralığında ədədlər|
 
 ## Dəyişənlər  (Variable)
 
 #### **Dəyişən adları üçün qayda**
-- Dəyişən adı a-z A-Z 0-9 ve _  və hərf olan unikod simvolları ola bilər. Yəni digərləri boşluq və s simvollar ola bilməz.  
+- Dəyişən adı a-z A-Z 0-9 ve _  və hərf olan unikod simvolları ola bilər. Yəni, digərləri, boşluq və s simvollar ola bilməz.  
   Unikod hərflərə icazə olduğundan **dəyişənləri azərbaycanca da** yazmaq olar
 - Dəyişən adı hərflə və ya _ altdan-xəttlə başlaya bilər. ədədlə yox
-- Dəyişən adlarında böyük kiçik hərfləri fərqlilik yaradır. Yəni ( uzunluq Uzunluq uZunluq ) dəyişənləri fərqlidir
+- Dəyişən adlarında böyük kiçik hərflər fərqlilik yaradır. Yəni, ( uzunluq Uzunluq uZunluq ) dəyişənləri fərqlidir
 - Dəyişən adlarında Golang dilinin özəl sözlərini istifadə etmək olmaz. Məsələn: for
 
 ##### Ad yazılımında standardlar
@@ -45,7 +45,7 @@ tags: ["Variables", "Data", "Types", "Constants", "Go" ]
     Qeyd: [ ] işarəsi daxilində olanlar buraxıla bilinər.
     Qeyd: Tip buraxılan elanlarda Go ən uyğun tipi özü müəyyən edir ( type inference)
 
-    var ad [tip]   
+    var ad tip   
     var ad [tip] = qiymet    
     var ad = qiymet  
     ad := qiymet
@@ -74,8 +74,8 @@ import "fmt"
 func main(){
   var uzunluq float32 = 3.5
   var adamların_sayı = 40
-  metn := "Sadə yazı"
-  fmt.Println(metn, uzunluq, adamların_sayı)
+  mətn := "Sadə yazı"
+  fmt.Println(mətn, uzunluq, adamların_sayı)
 
 }
 ```
@@ -86,7 +86,7 @@ func main(){
 
 ```go
 %%
-  var uzunluq,adamların_sayı,mətn   = 3.5, 40, "Sadə yazı"
+  var uzunluq, adamların_sayı, mətn = 3.5, 40, "Sadə yazı"
   fmt.Println(mətn, uzunluq, adamların_sayı)
 ```
 
@@ -96,11 +96,11 @@ func main(){
 
 ```go
 %%
-  uzunluq,adamların_sayı,mətn   := 3.5, 40, "Sadə yazı"
-  fmt.Println(uzunluq,adamların_sayı,mətn)
+  uzunluq, adamların_sayı, mətn := 3.5, 40, "Sadə yazı"
+  fmt.Println(mətn, uzunluq, adamların_sayı)
 ```
 
-    3.5 40 Sadə yazı
+    Sadə yazı 3.5 40
 
 
 
@@ -121,15 +121,15 @@ fmt.Println(mətn, uzunluq, adamların_sayı)
 | var | := |
 | --- |---|
 | funksiya daxilində və xaricində istifadə etmək olur | Yalnız funksiya daxilində istifadə etmək olur|
-|dəyişən elanı və ilkin qiymət ayrı ayrı qeyd etmək olur| elan və ilkin qiymət eyni sətirdə olur|
+|dəyişən elanı və ilkin qiymət verməni ayrı-ayrı qeyd etmək olur| elan və ilkin qiymət eyni sətirdə olur|
 
 ###  '=' Mənimsətmə əməliyyatı ilə dəyişənin qiymətini sonradan da dəyişə bilirik  
-(*Proqramçı Qeydi: = riyazi bərabərliklə eyni anlam daşıması üçün dəyişən immutable (dəyişilməsi icazə verilməyən) olmalıdır, əks halda bu əməliyyata bərabərdir demək yanlışdır*)
+(*Proqramçı Qeydi: = riyazi bərabərliklə eyni anlam daşıması üçün dəyişən const və ya readonly immutable (dəyişilməsi icazə verilməyən) olmalıdır, əks halda bu əməliyyata bərabərdir demək yanlışdır*)
 
 
 ```go
 %%
-   uzunluq,adamların_sayı,mətn   := 3.5, 40, "Sadə yazı"
+  uzunluq, adamların_sayı, mətn := 3.5, 40, "Sadə yazı"
   uzunluq = 99.5
   fmt.Println(mətn, uzunluq, adamların_sayı)
 ```
@@ -137,7 +137,7 @@ fmt.Println(mətn, uzunluq, adamların_sayı)
     Sadə yazı 99.5 40
 
 
-Go dilində əgər dəyişən elan edilibsə mütləq istifadə edilməlidir
+Go dilində əgər dəyişən elan edilibsə mütləq istifadə edilməlidir.
 
 
 ```go
@@ -225,18 +225,20 @@ func main() {
     failed to run "/usr/local/go/bin/go build -o /tmp/gonb_a54331cb/gonb_a54331cb": exit status 1
 
 
-Əgər dəyişəni istifadə etməyəcəyiksə _ adı verə bilərik. Qeyd: bu zaman iqnor etdiyimizdən əlavə dəyişən olmalıdır
+Əgər dəyişəni istifadə etməyəcəyiksə _ adı verə bilərik. Qeyd: bu zaman istifadə olunmayan dəyişəndən əlavə dəyişən də olmalıdır.
 
 
 ```go
 %%
-a,_ := 77, 5
+a, _ := 77, 5
 fmt.Print(a)
 ```
 
     77
 
-#### Konstant Sabit , Proqramda sabit deyishilmeyen qiymetler uchun istifade edirik
+#### Konstant və ya Sabit
+Proqramda icra zamanı sabit dəyişilməyən qiymətlərin istifadəsi üçün işlədirik.  
+
 
 <pre>
     const ad = qiymət  
@@ -244,7 +246,7 @@ fmt.Print(a)
 
     const(
         ad = qiymət1
-        ad1   // blok içində dəyəsiz vermək olur. ya əvvəlkinin qiymətini alacaq ya da iota varsa sıra dəyəri alacaq
+        ad1   // blok içində dəyərsiz vermək olur. ya əvvəlkinin qiymətini alacaq, ya da iota varsa sıra dəyəri alacaq.
         ad2 = qiymət2
     )
 </pre>
@@ -254,21 +256,21 @@ fmt.Print(a)
 
 ```go
 %%
-const pi = 3.14
+const pi = 3.14159265359
 const (
 	paytaxt = "Bakı"
 	ölkə = "Azərbaycan"
 )
-fmt.Println("Pi ededi ", pi, paytaxt, ölkə)
+fmt.Println("Pi ədədi", pi, paytaxt, ölkə)
 ```
 
-    Pi ededi  3.14 Bakı Azərbaycan
+    Pi ədədi 3.14159265359 Bakı Azərbaycan
 
 
 **iota** konstant generatoru. Bəzən biz ardıcıl əlaqəli konstant elan etmək istəyirik.   
-Bunun üçün biz tam ədəd olan iota identifikatorundan istifadə edə bilərik.   
-iota konstant bloku daxilində 0 dəyəri alır və ondan ardıcıllıq vermək üçün istifadə edə bilərik.   
-İstifadə nümunələrinə baxaq
+Bunun üçün biz indeks ədəd (>=0 müsbət tam) verən iota identifikatorundan istifadə edə bilərik.   
+iota konstant bloku daxilində 0 dəyəri alır və ondan ardıcıllıq vermək üçün istifadə edirik.   
+İstifadə nümunələrinə baxaq:
 
 
 
@@ -291,7 +293,7 @@ fmt.Println(Bazar, BazarErtəsi, ÇərşənbəAxşamı, Şənbə)
     0 1 2 6
 
 
-blok daxilində bir neçə iota verdiyimizdə olan davranışa baxsaq görərik ki, ardıcıllıq sıraya əsasən təyin edilir.
+blok daxilində bir neçə iota verdiyimizdə olan davranışa baxsaq görərik ki, ardıcıllıq **sıraya** əsasən təyin edilir.
 
 
 ```go
@@ -347,12 +349,14 @@ fmt.Println(w, x, y, z)
 
 ### Bir tipdən digər (çevrilə bilən) tipə aşkar keçirmək üsulu
 
-**tip( dəyişənin_adı)**
+<pre>
+tip( dəyişənin_adı)
+</pre>
 
 
 ```go
 %%
-uzunluq:=3.5
+uzunluq := 3.5
 var tam_uzunluq int = int(uzunluq)
 fmt.Println(tam_uzunluq)
 ```
@@ -360,24 +364,14 @@ fmt.Println(tam_uzunluq)
     3
 
 
-<h4 style="color:red"><b>var  dəyişən elanında ilkin qiymətlənmə ardıcıllığı.</b></h4>
-ilkin qiymətləndirmədə  əgər bir dəyişən digər dəyişəndən asılı olduqda ardıcıllıq dəyişən elanına görə yox <b>asılıllığa görə olur</b>
+<h4 style="color:red"><b>Package blokunda (package-level) var dəyişən elanında ilkin qiymətlənmə ardıcıllığı.</b></h4>
+<p>ilkin qiymətləndirmədə  əgər bir dəyişən digər dəyişəndən asılı olduqda </p> 
+<p>ardıcıllıq dəyişən elanına görə yox <b>asılıllığa görə olur</b>.</p>   
+<p>Burada söhbət <b>fayl içində, funksiya xaricində</b> verilən var elanından gedir.</p>
 
 
 ```go
-%%
-var a int = c
-var c int = 9
-fmt.Println(a,c)
 
-```
-
-    5 9
-
-
-
-```go
-%%
 var (
 	a int = c
 	b int = d
@@ -385,7 +379,11 @@ var (
 	c int = 9
 )
 
-fmt.Println(a,b,c,d)
+func main() {
+  fmt.Println(a, b, c, d)
+}
+
+
 ```
 
     9 6 9 6
@@ -393,7 +391,6 @@ fmt.Println(a,b,c,d)
 
 
 ```go
-
 var (
 	a = c + b  // == 9
 	b = f()    // == 4
@@ -406,10 +403,11 @@ func f() int {
 	return d
 }
 
-%%
-fmt.Println(a,b,c,d )
+func main() {
+	fmt.Println(a, b, c, d)
+}
 
 ```
 
-    9 4 5 5 kjkjk
+    9 4 5 5
 
