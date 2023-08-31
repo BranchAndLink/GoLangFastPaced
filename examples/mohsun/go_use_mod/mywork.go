@@ -6,6 +6,7 @@ import (
 	"github.com/mohsun/mymodule/package1"
 )
 
+// /package2 i de sitifade ele
 // create add function
 func main() {
 
@@ -17,4 +18,6 @@ func main() {
 
 	// use the subtract function of calculator package
 	fmt.Println(package1.Subtract(number1, number2))
+
+	package1.Salam2("Mohsun")
 }
