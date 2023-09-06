@@ -35,6 +35,7 @@ type Employee struct {
 	MonthlySalary              []Salary
 }
 
+// Field tags
 type newEmployee struct {
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
@@ -202,21 +203,24 @@ func main() {
 
 	//find type of struct
 
-	fmt.Println(reflect.TypeOf(cir1))         // main.circle
+	fmt.Printf("type of cir1: %T \n", cir1)   // main.circle
 	fmt.Println(reflect.ValueOf(cir1).Kind()) // struct
 
-	fmt.Println(reflect.TypeOf(cir2))         // main.circle
+	fmt.Printf("type of cir2: %T \n", cir2)   // main.circle
 	fmt.Println(reflect.ValueOf(cir2).Kind()) // struct
 
-	fmt.Println(reflect.TypeOf(circle2))         // *main.circle
-	fmt.Println(reflect.ValueOf(circle2).Kind()) // ptr
+	fmt.Printf("type of circle2: %T \n", circle2) // *main.circle
+	fmt.Println(reflect.ValueOf(circle2).Kind())  // ptr
 
-	fmt.Println(reflect.TypeOf(circle3))         // *main.circle
-	fmt.Println(reflect.ValueOf(circle3).Kind()) // ptr
+	// fmt.Println(reflect.TypeOf(circle3))         // *main.circle
+	fmt.Printf("type of circle3: %T \n", circle3)
 
 	//Comparing Structs
 	rect3 := new(rectangle)
 	var rect4 = &rectangle{}
+
+	// rect3 := circle{10, 20, "Green"}
+	// rect4 := circle{10, 20, "Green"}
 
 	if rect3 == rect4 {
 		fmt.Println("True")
@@ -225,4 +229,27 @@ func main() {
 	}
 	fmt.Println(&rect3, &rect4)
 
+	//embedding
+
+	Ystack := branchandlink{
+		number_of_collaborators: 3,
+		our_project:             project{learnprogramming: "golang"},
+	}
+
+	var ystack branchandlink
+	ystack.number_of_collaborators = 3
+	ystack.our_project.learnprogramming = "kubernetes"
+
+	fmt.Println(Ystack)
+	fmt.Println(ystack)
+
+}
+
+type project struct {
+	learnprogramming string
+}
+
+type branchandlink struct {
+	number_of_collaborators int
+	our_project             project
 }
