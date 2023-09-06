@@ -11,7 +11,7 @@ Goroutine parallel eyni anda bir neçə funksiyanı icra etmək üçündür.
 
 
 
-Goroutine-ləri istifad etmək üçün funksiya çağırışlarının əvvəlinə go sözünü əlavə edirik.  
+Goroutine-ləri istifadə etmək üçün funksiya çağırışlarının əvvəlinə ```go``` sözünü əlavə edirik.  
 defer kimi bunda da funksiyaya verilən arqumentlərin qiymətləndirilməsi çağırış anında baş verir.  
 Funksiyanın icrası isə yeni goroutine-də baş verir.  
 ```
@@ -64,7 +64,7 @@ func main() {
 
 
 ##### Go planlaşdırıcı(scheduler)  
-Go planlaşdırıcı çoxlu sayda goroutinlərin icrasını nizamlayır. Go planlaşdırıcı Go runtime tərkib hissəsidir.  
+Go planlaşdırıcı çoxlu sayda goroutinlərin icrasını nizamlayır. Go planlaşdırıcı Go runtime-ın tərkib hissəsidir.  
 Bu əməliyyat sisteminin verdiyi thread-lərə (parallel icra axınları) nisbətdə daha yüngüldür.  
 Həmçinin goroutine-lər arası keçidlər də daha tez və sürətlidir.  
 
@@ -105,16 +105,16 @@ func main() {
     1 ) Yupiter
 
 
-Qeyd edək ki, runtime.GOMAXPROCS(-1) eynianda icra edə biləcək maximum məntiqi Cpu nüvələrini göstərir.  
-Göründüyü kimi bu adi halda sistemdə olan nüvə sayına bərabərdir.  
+Qeyd edək ki, runtime.GOMAXPROCS(-1) eynianda icra edə biləcək maximum sayı göstərir.  
+Göründüyü kimi bu adi halda sistemdə olan məntiqi nüvə sayına bərabərdir.  
 Ümumilikdə qeyd edək ki, Go planlaşdırıcı icra edilən goroutine-lərin hamısı üçün vaxt ayırmasına şərait yaratmağa çalışacaq.  
-Həmçinin Goroutine daxilində primitiv sinxronlaşma blokları, sistem, io çağırışlar olduqda digər goroutine icrasına keçid ola bilər. Bu məsələlər adətən parallel məntiqi nüvə sayı 1 və ya az olduqda, goroutine sayı isə həddindən artıq olanda vacib olur.   
+Həmçinin Goroutine daxilində primitiv sinxronlaşma blokları, sistem, io çağırışları olduqda digər goroutine icrasına keçid ola bilər. Bu məsələlər adətən parallel məntiqi nüvə sayı az, goroutine sayı isə həddindən artıq olanda vacib olur.   
 Bu mövzuya xüsusi baxış lazım olduğundan gələcəkdə dərindən nəzərdən keçirəcəyik.
 
 ### Goroutine-lərlə işləmə
 
 Yuxarıdakı misallarda biz gözləmə ilə fasilə verirdik. 
-Fasilə vermədiyimiz halda nə baş verəcəyini nəzərdən keçirək
+Fasilə vermədiyimiz halda nə baş verəcəyini nəzərdən keçirək.
 
 
 ```go
@@ -141,15 +141,10 @@ func main() {
     1 ) ++++++
 
 
-Fikir verdiksə əsas main goroutine-i bitdikdən sonra proqram çıxır. 
-Proqram digər goroutine-lərə vaxt ayrılmağa macal tapmır.  
-Aydın məsələdir ki, main çıxmamışdan əvvəl goroutine-lərin icrasının bitməsini də gözləmək 
+Göründüyü kimi əsas (main) goroutine-i bitdikdən sonra proqram çıxır. 
+Proqram digər goroutine-lərə vaxt ayırmağa macal tapmır.  
+Aydın məsələdir ki, proqram çıxmamışdan əvvəl goroutine-lərin icrasının bitməsini gözləmək 
 daha düzgün olardı.  
-Bundan başqa goroutinlər bir birilə necə əlaqə saxlaya və eyni dəyişənə problemsiz müraciəto barədə də qısa danışaq. 
-Belə ki, Goroutine də icra edilən funksiyalar eyni yaddaş fəzasını əhatə edir.  
-Ona görə ortaq dəyişənlərin dəyişdirilməsi 
-məlumat pozğunluğuna səbəb ola bilər (data race - məlumat dəyişimi üçün yarış). O səbəbdən həmin məlumatın dəyişdirilməsi  
-sinxronlaşdırılmalıdır. 
 
 #### Channels (kanallar)
 
@@ -167,14 +162,14 @@ kanal2 = make(chan string)
 
 ```
 Channel-ə yazmaq və oxumaq üçün <- operatorundan istifadə edirik.  
-Oxun istiqaməti yazı və ya oxuma olduğunu göstərir
+Oxun istiqaməti (channel dəyişəninə nisbətdə) ona yazı və ya ondan oxuma olduğunu göstərir
 ```Go
 kanal <- v    // kanal Channel-inə v məlumatını göndər 
 z := <- kanal  // kanal Channel-dən məlumatı oxu və z dəyişəninə mənimsət 
 
 ```
 
-Adi halda Channel-ə oxu və yazı əməliyyatı digər tərəfin istifadə edəcəyi anadək blok olur.  
+Adi halda Channel-ə oxu və yazı əməliyyatı digər tərəfin istifadə edəcəyi anadək bloka düşür.  
 Bu səbəbdən Channel vasitəsilə biz goroutine-ləri nəinki bir birilə əlaqələndirə həm də sinxronlaşdıra bilərik.  
 
 
@@ -210,8 +205,8 @@ kanal2 <- "blok deadlock"
 
 
 Channel-i ```close``` builtin funksiyası ilə bağlamaq olur. Bu zaman yadda saxlamaq lazımdır ki, 
-bağlanmış kanala göndərmək xəta ilə nəticələnir.  Adətən channel əgər for dövrəsi içində oxuyursa bağlama 
-zamanı o dövrdən çıxacaq. Ümumən isə channel-i bağlama vacib deyil, sadəcə for range loop üçün əhəmiyyət kəsb edir. 
+bağlanmış kanala yazmaq xəta ilə nəticələnir.  Adətən channel əgər for dövrəsi içində oxuyursa bağlama 
+zamanı o dövrdən çıxacaq. Ümumən isə channel-i bağlamaq vacib deyil, sadəcə for range loop üçün əhəmiyyət kəsb edir. 
 channel-in bağlandığını başqa cür isə belə yoxlamaq olar. 
 ```Go
 
@@ -247,7 +242,7 @@ func main() {
 	kanal <- "Səid"
 	t = time.Now().UnixMilli() - t
 	close(kanal)
-	print("göndərmələrdə keçən vaxt ", t, "ms")
+	print("göndərmələrə sərf olunan vaxt ", t, "ms")
 	time.Sleep(100 * time.Millisecond)
 }
 ```
@@ -258,19 +253,21 @@ func main() {
     Sona
     Vahid
     Əli
+
+
+    göndərmələrə sərf olunan vaxt 3003ms
+
     Səid
 
 
-    göndərmələrdə keçən vaxt 3004ms
-
-Qedy edək ki, kanallara həmçinin **bufferləşmiş** də ola bilər. Bu zaman kanala yazmalar buffer tam dolanda bloklanır. 
+Qedy edək ki, kanallar həmçinin **bufferləşmiş** də ola bilər. Bu zaman kanala yazma əməliyyatları buffer tam dolduqdan sonra bloka düşür. 
 
 
 ```Go
 kanal := make(chan string, 100)
 
 ```
-Gəlin eyni misalda göndərmələrdə bloklanma olmadığını və az vaxt almasını yoxlayaq. 
+Aşağıdakı nümunədə göndərmələrə sərf olunan vaxtı əvvəlki ilə müqayisə edin. 
 
 
 ```go
@@ -287,12 +284,12 @@ func main() {
 	kanal <- "Səid"
 	t = time.Now().UnixMilli() - t
 	close(kanal)
-	print("göndərmələrdə keçən vaxt ", t, "ms")
+	print("göndərmələrə sərf olunan vaxt ", t, "ms")
 	time.Sleep(5 * time.Second)
 }
 ```
 
-    göndərmələrdə keçən vaxt 0ms
+    göndərmələrə sərf olunan vaxt 0ms
 
     Akif
     Zakir
@@ -303,14 +300,14 @@ func main() {
     Səid
 
 
-Yuxarıdakı misalda channel ikitərəfli olduğundan hər iki tərəf həm göndərə həm də 
-oxuya bilər. Bu çox zaman arzuolunmazdır. Bəzən biz istəyirik bir tərəf yalnız oxua bilsin. 
-Və bir tərəf yalnız yaza bilsin. Həmçinin bu halda ona göndərmələr və kanal bağlanması da bir tərəfin məsuliyyətində olur.  
+Yuxarıdakı misalda channel ikitərəfli olduğundan hər iki tərəf həm göndərə, həm də 
+oxuya bilər. Bu çox zaman arzuolunmazdır. Bəzən biz istəyirik ki, bir tərəf yalnız oxuya bilsin. 
+və bir tərəf yalnız yaza bilsin. Həmçinin, bu zaman müvafiq əməliyyatlar bir tərəfin məsuliyyətində olur.  
 ```Go
 
-var adiKanal chan string // kanala hər kəs yaza, ondan oxuya və ya onu bağlaya bilər
-var oxuKanalı <-chan string // kanaldan oxuya bilər lakin  yaza bağlaya bilməz
-var yazıKanalı chan<- string  // kanala yaza, ya onu bağlaya bilər. Lakin ondan oxuya bilməz
+var adiKanal chan string // kanala hər kəs yaza, ondan oxuya və ya onu bağlaya bilər.
+var oxuKanalı <-chan string // kanaldan oxuya bilər lakin  yaza bağlaya bilməz.
+var yazıKanalı chan<- string  // kanala yaza və ya onu bağlaya bilər. Lakin ondan oxuya bilməz.
 
 readOnly := make(<-chan string) // oxu
 sendOnly := make(chan<- string) // yazı
@@ -358,7 +355,7 @@ func main() {
 
     göndərmələrdə keçən vaxt 3004ms
 
-Qeyd edək ki, baxmayaraq ki kanal channel-i ikitərəfli elan olunub, goroutine funksiyasına verilən arqument daxildə
+Baxmayaraq ki, kanal channel-i ikitərəfli elan olunub, goroutine funksiyasına verilən arqument daxildə
 yalnız birtərəfli oxu kanalı olur. channel reference olduğundan aydın məsələ hər ikisinin alt kanalı eynidir. 
 
 ```Go
@@ -368,7 +365,8 @@ var növbəOxuKanalı <-chan string
 
 kanal = make(chan string)
 
-növbəOxuKanalı = kanal //hər ikisi altda eyni kanalı saxlasa da növbəOxuKanalı yalnız oxuya bilər
+növbəOxuKanalı = kanal //hər ikisi altda eyni kanalı saxlasa da növbəOxuKanalı 
+                       //vasitəsilə yalnız oxuma əməliyyatları etmək olar
 
 ```
 
@@ -380,7 +378,7 @@ Kanal üzərində əməliyyatlar və nəticələri:
 Oxumaq      | nil                | Bloka Deadlock-a düşür
 _         |Açıq və boş deyil  | qiyməti oxuyur
 _         | Açıq və boş| Bloka düşür
-_         | Bağlı              | default qiymət, false qaytarır
+_         | Bağlı              | (default qiymət, false) qaytarır
 _         | Yalnız Yazı kanalı        | Kompilyasiya xətası
 Yazmaq     | nil                | Bloka Deadlock-a düşür
 _         | Açıq və doludur      | Bloka düşür
@@ -394,7 +392,9 @@ _         | Bağlı              | panic
 
 #### Select
 
-Select vasitəsilə biz bir neçə kanallarda baş verən kommunikasiya əməliyyatlarını izləyə və gözləyə bilərik. Həmçinin default halını da əlavə etsək, bu zaman default hissə digər əməliyyatlarda bloka düşmə olduğu halda işə düşəcək. 
+Select vasitəsilə biz bir neçə kanallarda baş verən kommunikasiya əməliyyatlarını izləyə və gözləyə bilərik.  
+Həmçinin, default halını da əlavə etsək, bu zaman default hissə digər əməliyyatlarda bloka düşmə olduğu halda işə düşəcək.  
+ 
 
 ```Go
 select {
@@ -411,7 +411,7 @@ select {
 
 
 
-<span style="color:red"> Diqqət edin ki select bloku heçnəsiz və ya nil kanallarla icra edilsə tam bloka və deadlock-a düşür </span>
+<span style="color:red"> Diqqət: select bloku heçnəsiz və ya nil kanallarla icra edilsə tam bloka və deadlock-a düşür </span>
 
 
 
@@ -556,4 +556,6 @@ func main() {
     3 )  Dünya
 
 
-sync paketində digər sinxronlaşdırma primitivləri ilə daha sonra tanış olacağıq.
+sync paketində digər sinxronlaşdırma primitivləri ilə daha sonra tanış olacağıq.  
+Belə ki, goroutine-lər eyni yaddaş fəzasında icra edildiyindən dəyişənlərə müraciət sinxronlaşdırılmalıdır.  
+əks halda data race (məlumatı dəyişmək üzrə yarış) hadisəsi baş verir və dəyişənin qiyməti arzuolunmaz pozğunluqla nəticələnə bilər. 
