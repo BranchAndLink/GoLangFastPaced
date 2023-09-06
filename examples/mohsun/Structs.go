@@ -231,17 +231,14 @@ func main() {
 
 	//embedding
 
-	Ystack := branchandlink{
-		number_of_collaborators: 3,
-		our_project:             project{learnprogramming: "golang"},
-	}
-
 	var ystack branchandlink
 	ystack.number_of_collaborators = 3
-	ystack.our_project.learnprogramming = "kubernetes"
+	ystack.learnprogramming = "kubernetes"
 
-	fmt.Println(Ystack)
+	var team_info branchandlink = branchandlink{3, project{"e commerce solution"}}
+
 	fmt.Println(ystack)
+	fmt.Println(team_info.number_of_collaborators, team_info.learnprogramming)
 
 }
 
@@ -251,5 +248,5 @@ type project struct {
 
 type branchandlink struct {
 	number_of_collaborators int
-	our_project             project
+	project
 }
