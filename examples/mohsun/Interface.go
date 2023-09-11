@@ -56,7 +56,40 @@ func main() {
 
 	//both structs provide implementation for the area() method
 
+	var h human
+
+	h = employee{name: "John"}
+	h.breathe()
+	h.walk()
+	h.speak()
+
 }
 
 //When a struct implements an interface, it should provide an implementation for all the methods of the interface.
 //If it fails to implement any method, we will get an error.
+
+type animal interface {
+	breathe()
+	walk()
+}
+
+type human interface {
+	animal
+	speak()
+}
+
+type employee struct {
+	name string
+}
+
+func (e employee) breathe() {
+	fmt.Println("Employee breathes")
+}
+
+func (e employee) walk() {
+	fmt.Println("Employee walk")
+}
+
+func (e employee) speak() {
+	fmt.Println("Employee speaks")
+}
