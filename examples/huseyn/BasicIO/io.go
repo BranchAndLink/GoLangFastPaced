@@ -50,20 +50,35 @@ func main() {
 	var c int
 	var d int
 
-	input := "10 \n 20"
 
-	fmt.Sscan(input, &a, &b)
+	fmt.Scan(&a, &b)
 	// burada inputu deyisenle gonderdik cunki goda input islemediyinden bele edirik
 	fmt.Println("a:",a, "b:",b)
 
-	fmt.Sscanln(input, &c, &d) 
+	fmt.Scanln(&c, &d) 
 	fmt.Println("c:",c, "d:",d)
 	// buradad eynidir lakin bu sefer \n den sonrani yeni
 	// yeni setiri oxumayacaq
 	//output: c: 10 d: 0
 
-	fmt.Sscanf(input, "%d %f", &c, &d)
+	fmt.Scanf("%d %f", &c, &d)
 	//Buda birinci yazdiqimiz sscan kimidir
 	//lakin burada daha deqiq olaraq format vermek olur
 	
+
+	//Userlerin maasi
+	fmt.Print("Huseynin maashi: ")
+	fmt.Scan(&a)
+	fmt.Print("Abdulkerimin maashi: ")
+	fmt.Scan(&b)
+	fmt.Print("Rufet maashi: ")
+	fmt.Scan(&c)
+	fmt.Printf("%-15s | %-15s | %-15s |  %-10s \n","Ad", "Soyad", "Shirket", "Maash")
+	fmt.Println("────────────────────────────────────────────────────────────")
+	fmt.Printf("%-15s | %-15s | %-15s |  %5d \n","Huseyn", "Huseynli", "Smart Scoring", a)
+	fmt.Println("────────────────────────────────────────────────────────────")
+	fmt.Printf("%-15s | %-15s | %-15s |  %5d  \n","Abdulkerim", "Eliyev", "Asan Yol", b)
+	fmt.Println("────────────────────────────────────────────────────────────")
+	fmt.Printf("%-15s | %-15s | %-15s |  %5d  \n","Rufet", "Recebov", "SOCAR", c)
+	fmt.Println("────────────────────────────────────────────────────────────")
 }
