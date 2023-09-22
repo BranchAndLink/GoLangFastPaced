@@ -44,17 +44,12 @@ func main() {
 		fmt.Println(myError)
 	}
 
-	name := "Programiz"
+	name := "Salam"
 
 	// call the function
 	err := checkName(name)
 
-	// check if the err is nil or not
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("Valid Name", err)
-	}
+	fmt.Println(err)
 
 	age := -14
 
@@ -92,6 +87,10 @@ func main() {
 	//The lines of code after the panic statement are not executed.
 	fmt.Println("Oh! counting for defer is happening now.")
 
+	go display("Process 1")
+
+	display("Process 2")
+
 	division(4, 2)
 	division(8, 0)
 	division(56, 8)
@@ -123,4 +122,9 @@ func handlePanic() {
 		fmt.Println("RECOVER", a)
 	}
 
+}
+
+func display(message string) {
+
+	fmt.Println(message)
 }
