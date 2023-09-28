@@ -14,9 +14,8 @@ go mod tidy
 echo "build edek"
 go build .
 echo "install edek"
-go install #burda uje path var he
+go install 
 
 echo "calculatoru cahgiraq"
 calculator
 
-#exi sen go nu da rm eledin ee, hee yox yada)okdi
