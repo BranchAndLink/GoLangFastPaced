@@ -6,6 +6,6 @@ Go dili sadədən mürəkkəbə doğru
 
 
 
-lectures/ - Jupyter Notebook and GONB interaktiv mövzular. Qeyd saytın məzmunu burdan çevrilir
-examples/ - GO dilində mövzuya uyğun nümunələr 
+- lectures/ - Jupyter Notebook and GONB interaktiv mövzular. Qeyd saytın məzmunu bunlardan alınır.
+- examples/ - GO dilində mövzuya uyğun nümunələr 
 
