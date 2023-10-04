@@ -1,4 +1,4 @@
-Aşağıdakı üsullarla bu proyektə yardın edə bilərsiniz.  
+Aşağıdakı üsullarla bu proyektə yardım edə bilərsiniz.  
 
 lectures bölməsində əlavə və dəyişikliklər:
 - cümlələrin Azərbaycan türkcəsində daha rahat və asan cümlələr əvəz olunması.
