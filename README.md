@@ -1,4 +1,4 @@
-# GoLangFastPaced
+# GoLangFastPaced - Golang sürətli templə
 Go dili sadədən mürəkkəbə doğru
 
 #### Azərbaycan Türkcəsində olan mövzular. Başlıqlar ingilis dilindədir.
