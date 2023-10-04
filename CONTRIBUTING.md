@@ -10,3 +10,8 @@ lectures bölməsində əlavə və dəyişikliklər:
 example bölməsində (dili sadəcə öyrənənlər üçün):
 - mövzuya uyğun əhatəli nümunə.
 - Mümkünsə tək fay əvəzinə tam program
+
+
+ 
+Sadəcə issue açmaq.
+Pul request açmaq və kiçik müzakirə.
