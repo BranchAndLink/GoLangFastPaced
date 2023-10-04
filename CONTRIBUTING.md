@@ -1,7 +1,7 @@
 Aşağıdakı üsullarla bu proyektə yardım edə bilərsiniz.  
 
 lectures bölməsində əlavə və dəyişikliklər:
-- cümlələrin Azərbaycan türkcəsində daha rahat və asan cümlələr əvəz olunması.
+- cümlələrin Azərbaycan türkcəsində daha rahat və asan cümlələrlə əvəz olunması.
 - terminoloji düzəlişlər
 - qrammatik və leksik, orfoqrafik səhvlər düzəlişi
 - izahatda olan səhvlər
