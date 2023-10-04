@@ -1,11 +1,11 @@
 # GoLangFastPaced
-Golang fast-paced course aims to help developers to migrate and understand Go language
+Go dili sadədən mürəkkəbə doğru
 
-#### Educational Jupyter Notebooks contents in our GoLangFactPaced site (in Azerbaijan Turkish language)
+#### Azərbaycan Türkcəsində olan mövzular. Başlıqlar ingilis dilindədir.
 [BranchAndLink  GoLangFastPaced](https://branchandlink.github.io/GoLangFastPaced/)
 
 
 
-lectures/ - lectures written with Jupyter Notebook and GONB   
-examples/ - GO examples for each topic  
+lectures/ - Jupyter Notebook and GONB interaktiv mövzular. Qeyd saytın məzmunu burdan çevrilir
+examples/ - GO dilində mövzuya uyğun nümunələr 
 
