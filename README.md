@@ -1,6 +1,8 @@
 # GoLangFastPaced - Golang sürətli templə
 Go dili sadədən mürəkkəbə doğru
 
+<img src="https://github.com/egonelbre/gophers/blob/master/vector/superhero/standing.svg" width="200px" />
+
 #### Azərbaycan Türkcəsində olan mövzular. Başlıqlar ingilis dilindədir.  
 
 web oxuma üçün sayt: 
