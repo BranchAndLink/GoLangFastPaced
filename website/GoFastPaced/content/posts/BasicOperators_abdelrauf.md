@@ -1,7 +1,7 @@
 ---
 title: " Basic Operators"
 author: "abdelrauf"
-date: 2023-07-27
+date: 2023-07-31
 tags: ["Basic", "Operators", "Go" ]
 ---
 

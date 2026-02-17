@@ -9,7 +9,7 @@ tags: ["Error", "defer", "panic", "recover", "Go" ]
 
 Ümumən, proqramlaşdırmada xətaların idarə edilməsi önəmlidir.  
 Bu səbəbdən Go dilində universal blokda təyin edilən error builtin tipi var.   
-Bu error tipi interfeysdir.  
+Bu error tipi interfeysdir.   
 ```Go
 type error interface {
     Error() string

@@ -1,7 +1,7 @@
 ---
 title: " Basic Input"
 author: "abdelrauf"
-date: 2023-07-27
+date: 2023-07-31
 tags: ["Basic", "Input", "Go" ]
 ---
 

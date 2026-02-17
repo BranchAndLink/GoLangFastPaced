@@ -1,7 +1,7 @@
 ---
 title: " Variables Data Types Constants"
 author: "abdelrauf"
-date: 2023-07-25
+date: 2023-08-31
 tags: ["Variables", "Data", "Types", "Constants", "Go" ]
 ---
 
