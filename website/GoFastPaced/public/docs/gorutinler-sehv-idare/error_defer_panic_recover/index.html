@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="az" dir="ltr">
+<head><script src="/GoLangFastPaced/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=GoLangFastPaced/livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Error (Xəta)# Ümumən, proqramlaşdırmada xətaların idarə edilməsi önəmlidir.
+Bu səbəbdən Go dilində universal blokda təyin edilən error builtin tipi var.
+Bu error tipi interfeysdir.
+type error interface { Error() string }Biz bu interfeyslə dolayı olsa da Basic Input Output fəslində qarşılaşmışdıq.
+Məsələn:
+func Scan(a ...any) (n int, err error)Məsələn burada ədəd yerinə fərqli bir şey yazsaq
+“expected integer” xətası baş verəcək.
+import ( &#34;fmt&#34; &#34;github.com/janpfeifer/gonb/gonbui&#34; ) %% gonbui.RequestInput(&#34;Eded daxil et: &#34;, false) var x int _, err := fmt.Scan(&amp;x) if err !=nil { fmt.Println(err) }expected integer İnterfeysimiz sadədir. Aydın məsələdir ki, bunu implementasiya etmək rahatdır.
+Lakin çox zaman bizə elə mətn qaytaran error və onunla əlaqəli funksiyalar bəs edir, hansı ki errors və fmt package-də var.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/GoLangFastPaced/docs/gorutinler-sehv-idare/error_defer_panic_recover/">
+  <meta property="og:site_name" content="GoFastPaced">
+  <meta property="og:title" content="Error defer panic recover">
+  <meta property="og:description" content="Error (Xəta)# Ümumən, proqramlaşdırmada xətaların idarə edilməsi önəmlidir.
+Bu səbəbdən Go dilində universal blokda təyin edilən error builtin tipi var.
+Bu error tipi interfeysdir.
+type error interface { Error() string }Biz bu interfeyslə dolayı olsa da Basic Input Output fəslində qarşılaşmışdıq.
+Məsələn:
+func Scan(a ...any) (n int, err error)Məsələn burada ədəd yerinə fərqli bir şey yazsaq
+“expected integer” xətası baş verəcək.
+import ( &#34;fmt&#34; &#34;github.com/janpfeifer/gonb/gonbui&#34; ) %% gonbui.RequestInput(&#34;Eded daxil et: &#34;, false) var x int _, err := fmt.Scan(&amp;x) if err !=nil { fmt.Println(err) }expected integer İnterfeysimiz sadədir. Aydın məsələdir ki, bunu implementasiya etmək rahatdır.
+Lakin çox zaman bizə elə mətn qaytaran error və onunla əlaqəli funksiyalar bəs edir, hansı ki errors və fmt package-də var.">
+  <meta property="og:locale" content="az">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:tag" content="Error">
+    <meta property="article:tag" content="Defer">
+    <meta property="article:tag" content="Panic">
+    <meta property="article:tag" content="Recover">
+    <meta property="article:tag" content="Go">
+
+
+  <meta itemprop="name" content="Error defer panic recover">
+  <meta itemprop="description" content="Error (Xəta)# Ümumən, proqramlaşdırmada xətaların idarə edilməsi önəmlidir.
+Bu səbəbdən Go dilində universal blokda təyin edilən error builtin tipi var.
+Bu error tipi interfeysdir.
+type error interface { Error() string }Biz bu interfeyslə dolayı olsa da Basic Input Output fəslində qarşılaşmışdıq.
+Məsələn:
+func Scan(a ...any) (n int, err error)Məsələn burada ədəd yerinə fərqli bir şey yazsaq
+“expected integer” xətası baş verəcək.
+import ( &#34;fmt&#34; &#34;github.com/janpfeifer/gonb/gonbui&#34; ) %% gonbui.RequestInput(&#34;Eded daxil et: &#34;, false) var x int _, err := fmt.Scan(&amp;x) if err !=nil { fmt.Println(err) }expected integer İnterfeysimiz sadədir. Aydın məsələdir ki, bunu implementasiya etmək rahatdır.
+Lakin çox zaman bizə elə mətn qaytaran error və onunla əlaqəli funksiyalar bəs edir, hansı ki errors və fmt package-də var.">
+  <meta itemprop="wordCount" content="881">
+  <meta itemprop="keywords" content="Error,Defer,Panic,Recover,Go">
+
+<title>Error defer panic recover | GoFastPaced</title>
+<link rel="icon" href="/GoLangFastPaced/favicon.png" >
+<link rel="manifest" href="/GoLangFastPaced/manifest.json">
+<link rel="canonical" href="http://localhost:1313/GoLangFastPaced/docs/gorutinler-sehv-idare/error_defer_panic_recover/">
+<link rel="stylesheet" href="/GoLangFastPaced/book.min.cc2c524ed250aac81b23d1f4af87344917b325208841feca0968fe450f570575.css" integrity="sha256-zCxSTtJQqsgbI9H0r4c0SRezJSCIQf7KCWj&#43;RQ9XBXU=" crossorigin="anonymous">
+
+
+  <script defer src="/GoLangFastPaced/fuse.min.js"></script>
+  <script defer src="/GoLangFastPaced/en.search.min.c7f7c307715a68257099927aa4338b971330e5a2d97cb3dcbb8cf5a1434424c2.js" integrity="sha256-x/fDB3FaaCVwmZJ6pDOLlxMw5aLZfLPcu4z1oUNEJMI=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/GoLangFastPaced/"><span>GoFastPaced</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/" class="">
+      Fəsil 1: Esaslar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/variables_datatypesconstants/" class="">
+      Variables Data Types Constants</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/basicinput/" class="">
+      Basic Input</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/basicoutput/" class="">
+      Basic Output</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/basicoperators/" class="">
+      Basic Operators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/flowcontrols/" class="">
+      Flow Controls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/stringnumber/" class="">
+      String Number</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/massivler-xerite/" class="">
+      Fəsil 2: Massivler Xerite</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/massivler-xerite/arrayandslice/" class="">
+      Array And Slice</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/massivler-xerite/map/" class="">
+      Map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/" class="">
+      Fəsil 3: Funksiyalar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/functionsintro/" class="">
+      Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/functionsrecursiveanonymousclosure/" class="">
+      Functions Recursive Anonymous Closure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/pointers/" class="">
+      Pointers</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/" class="">
+      Fəsil 4: Interfeysler Generikler</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/basicinterfacetypeassertions/" class="">
+      Basic Interface Type Assertions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/genericstypeconstraintsgeneralinterface/" class="">
+      Generics Type Constraints General Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/typedefinitonsaliasesstructs/" class="">
+      Type Definitons Aliases Structs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/gorutinler-sehv-idare/" class="">
+      Fəsil 5: Gorutinler Sehv Idare</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/" class="">
+      Goroutine Channels Select Wait Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/gorutinler-sehv-idare/error_defer_panic_recover/" class="active">
+      Error defer panic recover</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/modullar-qurulma/" class="">
+      Fəsil 6: Modullar Qurulma</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/modullar-qurulma/modulespackagesbuild/" class="">
+      Modules Packages Build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/modullar-qurulma/buildinstalltest/" class="">
+      Build Install Test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/GoLangFastPaced/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Error defer panic recover</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h3 id="error-xəta">Error (Xəta)<a class="anchor" href="#error-x%c9%99ta">#</a></h3>
+<p>Ümumən, proqramlaşdırmada xətaların idarə edilməsi önəmlidir.<br>
+Bu səbəbdən Go dilində universal blokda təyin edilən error builtin tipi var.<br>
+Bu error tipi interfeysdir.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#66d9ef">error</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Biz bu interfeyslə dolayı olsa da Basic Input Output fəslində qarşılaşmışdıq.<br>
+Məsələn:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Scan</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">any</span>) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)</span></span></code></pre></div><p>Məsələn burada ədəd yerinə fərqli bir şey yazsaq<br>
+&ldquo;expected integer&rdquo; xətası baş verəcək.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;github.com/janpfeifer/gonb/gonbui&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">gonbui</span>.<span style="color:#a6e22e">RequestInput</span>(<span style="color:#e6db74">&#34;Eded daxil et: &#34;</span>, <span style="color:#66d9ef">false</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Scan</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">x</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span><span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><pre><code>expected integer
+</code></pre>
+<p>İnterfeysimiz sadədir. Aydın məsələdir ki, bunu implementasiya etmək rahatdır.<br>
+Lakin çox zaman bizə elə mətn qaytaran error və onunla əlaqəli funksiyalar bəs edir, hansı ki errors və fmt package-də var.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#75715e">// errorString   error-un sadə implementasiyası .</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">errorString</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">s</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">e</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">errorString</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">s</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Onun istifadəsinə baxaq</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;errors&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;Xeta#1&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T %v\n&#34;</span>, <span style="color:#a6e22e">err1</span>, <span style="color:#a6e22e">err1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;Xeta#%d&#34;</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T %v\n&#34;</span>, <span style="color:#a6e22e">err2</span>, <span style="color:#a6e22e">err2</span>)</span></span></code></pre></div><pre><code>*errors.errorString Xeta#1
+*errors.errorString Xeta#2
+</code></pre>
+<p>errors və fmt package üzrə digər metodlara aid nümunəyə baxaq.<br>
+Xüsusilə  real kodlama zamanı səhvləri yuxarı ötürməyimizdə kömək edən aşağıdakı<br>
+qayda ilə bağlamaya almaq və açmaq məsələsinə baxaq.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;Xeta#1&#34;</span>)  
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//fmt.Errorf %w ilə error bağlaması düzəldə bilərik</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err_wrapped</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;Xeta#2 (%w )&#34;</span> , <span style="color:#a6e22e">err1</span> ) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;{\n&#34;</span>,<span style="color:#a6e22e">err_wrapped</span>,<span style="color:#e6db74">&#34;\n}&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err_wrapped2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;Xeta#3 (%w )&#34;</span> , <span style="color:#a6e22e">err_wrapped</span> ) 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;{\n&#34;</span>,<span style="color:#a6e22e">err_wrapped2</span>,<span style="color:#e6db74">&#34;\n}&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//bağlamanı açaq</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err_unwrapped2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Unwrap</span>(<span style="color:#a6e22e">err_wrapped2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err_unwrapped2</span> )
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err_unwrapped1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Unwrap</span>(<span style="color:#a6e22e">err_unwrapped2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err_unwrapped1</span> )</span></span></code></pre></div><pre><code>{
+ Xeta#2 (Xeta#1 ) 
+}
+{
+ Xeta#3 (Xeta#2 (Xeta#1 ) ) 
+}
+Xeta#2 (Xeta#1 )
+Xeta#1
+</code></pre>
+<p>Və son olaraq öz error tipimizə aid nümunəyə baxaq.<br>
+(Sadəlik üçün burda bütün hallarda xəta qaytarırıq.)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">BizimXeta</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">xeta_mesaji</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">xeta_kodu</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">bx</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">BizimXeta</span>) <span style="color:#a6e22e">Error</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;msg:{%v}, kod:{%d}&#34;</span>, <span style="color:#a6e22e">bx</span>.<span style="color:#a6e22e">xeta_mesaji</span>, <span style="color:#a6e22e">bx</span>.<span style="color:#a6e22e">xeta_kodu</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hemishe_xetali</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">BizimXeta</span>{<span style="color:#e6db74">&#34;xeta mesajimiz&#34;</span>, <span style="color:#ae81ff">44</span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hemishe_xetali_ikinci_funksiya</span>() <span style="color:#66d9ef">error</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ret</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">hemishe_xetali</span>()
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Errorf</span>(<span style="color:#e6db74">&#34;hemishe_xetali_ikinci_funksiya xeta [%w]&#34;</span>, <span style="color:#a6e22e">ret</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">hemishe_xetali_ikinci_funksiya</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>) </span></span></code></pre></div><pre><code>hemishe_xetali_ikinci_funksiya xeta [msg:{xeta mesajimiz}, kod:{44}]
+</code></pre>
+<p>Errors və fmt paketini, həmçinin bu mövzunu daha ətraflı və geniş nəzərdən keçirmək üçün<br>
+<a href="https://go.dev/blog/error-handling-and-go">https://go.dev/blog/error-handling-and-go</a><br>
+<a href="https://pkg.go.dev/errors">https://pkg.go.dev/errors</a><br>
+<a href="https://pkg.go.dev/fmt#Errorf">https://pkg.go.dev/fmt#Errorf</a></p>
+<h3 id="defer--təxirə-salma">Defer  (Təxirə salma)<a class="anchor" href="#defer--t%c9%99xir%c9%99-salma">#</a></h3>
+<p><strong>defer</strong> ifadəsi ilə funksiya bloku daxilində olan funksiya çağırışlarını siyahıya alıb icrasını təxirə salmaq olur.<br>
+Həmin siyahıdakı funksiya çağırışlarının icrası funksiya blokundan return ilə çıxdıqdan sonra baş verir.<br>
+Defer adətən müxtəlif resurslarla işlədiyimiz zaman onların düzgün azad edilməsində işimizə yarayır. (Məsələn: File-larla işlədikdə)<br>
+İndi isə defer-in işləmə xüsusiyyətlərini sadalayaq:</p>
+<ol>
+<li>defer edilmiş funksiya çağırışlarının arqumentlərinin qiymətləndirilməsi defer çağrıldığı anda həyata keçir</li>
+<li>siyahıya alınmış funksiya çağırışları lifo(last in first out) sıralaması ilə icra edilir. Yəni sonuncu ilk icra edilir.</li>
+<li>defer edilmiş funksiya çağırışları içərisində adlı nəticə dəyişənlərini həm istifadə edə həm də onlara oxuyub mənimsədə bilərik.<br>
+( return-dən sonra icra edildiyini unutma).</li>
+</ol>
+<p>1-ciyə aid nümunəyə baxaq</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">a</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;defer icra&#34;</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;---&#34;</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>()</span></span></code></pre></div><pre><code>--- 1
+defer icra 0
+</code></pre>
+<p>2-ciyə aid nümunə</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">b</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; <span style="color:#ae81ff">4</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;deferred funksiya&#34;</span>, <span style="color:#a6e22e">i</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">b</span>()</span></span></code></pre></div><pre><code>deferred funksiya 3
+deferred funksiya 2
+deferred funksiya 1
+deferred funksiya 0
+</code></pre>
+<p>3-cüyə aid nümunə:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">c</span>() (<span style="color:#a6e22e">i</span> <span style="color:#66d9ef">int</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>() { <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> }()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ret</span><span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>)</span></span></code></pre></div><pre><code>2
+</code></pre>
+<h4 id="panic-və-recover">Panic və Recover<a class="anchor" href="#panic-v%c9%99-recover">#</a></h4>
+<p>Go dilində <strong>panic</strong> builtin funksiyası vasitəsilə proqramın normal icrası dayanır.<br>
+Nəticə etibarilə panic baş verən funksiyada defer edilmiş funksiya çağırışları icra edilir və<br>
+geri qayıdır. Geri qayıdılan funksiyada yenə həmin iş təkrarlanır.  Bu proses  proqramdan<br>
+çıxışa səbəb olana kimi davam edir.<br>
+Qeyd edək ki panic kodda istifadə edilməsilə yanaşı, həmçinin məşhur runtime(icra prosesində) xətalar zamanı da baş verir.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">h</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">456</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">z</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Qeyd h/0 birbaşa yazsaq ağıllı GO kompilyasiya zamanı problemdən xəbər verəcək</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">h</span>=<span style="color:#a6e22e">h</span><span style="color:#f92672">/</span><span style="color:#a6e22e">z</span> </span></span></code></pre></div><pre><code>panic: runtime error: integer divide by zero
+
+goroutine 1 [running]:
+main.main()
+	 [7m[[ Cell [2] Line 4 ]][0m /tmp/gonb_f39407f7/main.go:12 +0x5a
+exit status 2
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">h</span> =   [<span style="color:#f92672">...</span>] <span style="color:#66d9ef">int</span> {<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">h</span>[<span style="color:#ae81ff">2</span>]) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">h</span>[<span style="color:#a6e22e">h</span>[<span style="color:#ae81ff">4</span>]]) </span></span></code></pre></div><pre><code>3
+
+
+panic: runtime error: index out of range [5] with length 5
+
+goroutine 1 [running]:
+main.main()
+	 [7m[[ Cell [8] Line 4 ]][0m /tmp/gonb_f39407f7/main.go:13 +0x12b
+exit status 2
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hemishe_panic</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;defer#hemishe_panic&#34;</span>)
+</span></span><span style="display:flex;"><span>	panic(<span style="color:#e6db74">&#34;gözlənilməz xəta&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">caller</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;defer#caller&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">hemishe_panic</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">caller</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//görsənməyəcək</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;davam&#34;</span>)</span></span></code></pre></div><pre><code>defer#hemishe_panic
+defer#caller
+
+
+panic: gözlənilməz xəta
+
+goroutine 1 [running]:
+main.hemishe_panic()
+	 [7m[[ Cell [27] Line 3 ]][0m /tmp/gonb_f39407f7/main.go:42 +0x73
+main.caller()
+	 [7m[[ Cell [27] Line 8 ]][0m /tmp/gonb_f39407f7/main.go:33 +0x70
+main.main()
+	 [7m[[ Cell [27] Line 12 ]][0m /tmp/gonb_f39407f7/main.go:57 +0x5e
+exit status 2
+</code></pre>
+<h5 id="recover">recover<a class="anchor" href="#recover">#</a></h5>
+<p>Bəzən bəzi runtime xətalarını həll etməklə proqramın icrasını dayandırma-maq daha münasib sayılır.<br>
+Bu hallar üçün biz <strong>recover</strong> funksiyasından istifadə edə bilərik.<br>
+Qeyd edək ki, recover defer edilmiş funksiya çağırışları içində əhəmiyyət kəsb edir.<br>
+Əgər proqramın icrası əsasında panic baş vermişsə recover həmin panic kəmiyyətini götürür və icra prosesi normal qaydada davam edir.<br>
+Həmçinin heç bir şey baş verməyibsə bu halda recover sadəcə nil qaytarır və əks təsirə səbəb olmur.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">division</span> (<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span><span style="color:#f92672">/</span><span style="color:#a6e22e">b</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">caller</span>(<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>(){
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ret</span><span style="color:#f92672">:=</span>recover(); <span style="color:#a6e22e">ret</span> <span style="color:#f92672">!=</span><span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Xəta&#34;</span>, <span style="color:#a6e22e">ret</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">division</span>(<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">caller</span>(<span style="color:#ae81ff">44</span>,<span style="color:#ae81ff">11</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">caller</span>(<span style="color:#ae81ff">44</span>,<span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;davam&#34;</span>)</span></span></code></pre></div><pre><code>4
+Xəta runtime error: integer divide by zero
+0
+davam
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">hemishe_panic</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;defer#hemishe_panic&#34;</span>)
+</span></span><span style="display:flex;"><span>	panic(<span style="color:#e6db74">&#34;gözlənilməz xəta&#34;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">caller</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#66d9ef">func</span>(){
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;defer#caller&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">ret</span><span style="color:#f92672">:=</span>recover()
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">ret</span><span style="color:#f92672">!=</span><span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">ret</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">hemishe_panic</span>()
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">caller</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//görsənəcək</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;davam&#34;</span>)</span></span></code></pre></div><pre><code>defer#hemishe_panic
+defer#caller
+gözlənilməz xəta
+davam
+</code></pre>
+<p>Qeyd:
+Proqramda normal gözlənilən xətalar üçün error-dan istifadə etmək lazımdır.<br>
+Məsələn, istifadəçi tərəfindən daxil edilən məlumatın düzgünlüyü və s.<br>
+Lakin gözlənilməyən və ya proqramın dayandırılmasını labüd edən xətalar üçün panic istifadə etmək daha məsləhətdir.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/GoLangFastPaced/docs/gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/" class="flex align-center">
+        <img src="/GoLangFastPaced/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Goroutine Channels Select Wait Group</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/GoLangFastPaced/docs/modullar-qurulma/" class="flex align-center">
+        <span>Fəsil 6: Modullar Qurulma</span>
+        <img src="/GoLangFastPaced/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

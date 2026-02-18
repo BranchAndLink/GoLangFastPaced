@@ -9,9 +9,9 @@
     <atom:link href="http://localhost:1313/GoLangFastPaced/tags/channels/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Goroutine Channels Select Wait Group</title>
-      <link>http://localhost:1313/GoLangFastPaced/content/05-gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/</link>
+      <link>http://localhost:1313/GoLangFastPaced/docs/gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/GoLangFastPaced/content/05-gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/</guid>
+      <guid>http://localhost:1313/GoLangFastPaced/docs/gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/</guid>
       <description>&lt;h3 id=&#34;goroutine&#34;&gt;Goroutine&lt;a class=&#34;anchor&#34; href=&#34;#goroutine&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Goroutine — eyni zaman daxilində bir neçə funksiyanı bölüşdürülmüş şəkildə(concurrent) icra etmək üçündür.&lt;/p&gt;&#xA;&lt;p&gt;Qeyd: Eyni vaxtda dedikdə hər ikisinin eyni anda tam paralel icrası nəzərdə tutulmur. Bu baş verə bilər, baş verməyə də bilər. Əsasən nəzərdə tutulur ki, bu funksiyaların icrası üçün ayrılan prosess bölüşdürülür. Bu bölüşdürmə isə nizamlayıcı və əməliyyat sisteminin öz nizamlayıcısı ilə baş verir. Bütün proqramlaşdırma məsələlərini real həyatdan nümunə çəkərək izah edə bilərik. Məsələn: siz yeməyi su ilə birlikdə yeyərkən, birinci yeməyi bitirib sonra su içə bilərsiniz və ya əksinə. Eyni vaxtlı dedikdə isə nəzərdə tutulur ki, bir neçə qaşıq yeməkdən yeyir, bir neçə udum sudan içirsiniz. Və bunun necə və hansı vaxt bölgüsündə baş verəcəyini nizamlayan isə özünüzsünüz.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="az" dir="ltr">
+<head><script src="/GoLangFastPaced/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=GoLangFastPaced/livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Generics# Bəzən biz funksiya və yeni mürəkkəb tip quranda onun istifadə etdiyi parametrlərin və
+dəyişənlərin tipini istifadə zamanı müəyyən edilməsini istəyirik.
+Aydın məsələdir ki bu boş interfeysdən fərqli olaraq daha sürətli olacaq.
+Buna Go dilində bir çox dillərdə olduğu kimi generics type deyilən yanaşma ilə nail olunur.
+Go dilinin yeni versiyalarında (&gt;=1.18) artıq bunu istifadə etmək mümkündür.
+Tip elan edilməsinə yenidən baxaq:
+type ad [TipParametri] tip Burada TipParametri: [ ] arasında ad və Məhdudiyyət cütlüklərindən ibarət olan siyahı olur Məsələn [T Constraint], [T Məhdudiyyət1, V Məhdudiyyət2, ...] (Tip Məhdudiyyətlərini aşağıda xüsusi bölmədə izah edəcəyik. ) Yeni tipimizə metod vermək üçün func (x * ad[T]) metod_adı(parametrlər... ) nəticə... { ...} Həmçinin generic funksiya elan edilməsinə baxaq:
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/GoLangFastPaced/docs/interfeysler-generikler/genericstypeconstraintsgeneralinterface/">
+  <meta property="og:site_name" content="GoFastPaced">
+  <meta property="og:title" content="Generics Type Constraints General Interface">
+  <meta property="og:description" content="Generics# Bəzən biz funksiya və yeni mürəkkəb tip quranda onun istifadə etdiyi parametrlərin və
+dəyişənlərin tipini istifadə zamanı müəyyən edilməsini istəyirik.
+Aydın məsələdir ki bu boş interfeysdən fərqli olaraq daha sürətli olacaq.
+Buna Go dilində bir çox dillərdə olduğu kimi generics type deyilən yanaşma ilə nail olunur.
+Go dilinin yeni versiyalarında (&gt;=1.18) artıq bunu istifadə etmək mümkündür.
+Tip elan edilməsinə yenidən baxaq:
+type ad [TipParametri] tip Burada TipParametri: [ ] arasında ad və Məhdudiyyət cütlüklərindən ibarət olan siyahı olur Məsələn [T Constraint], [T Məhdudiyyət1, V Məhdudiyyət2, ...] (Tip Məhdudiyyətlərini aşağıda xüsusi bölmədə izah edəcəyik. ) Yeni tipimizə metod vermək üçün func (x * ad[T]) metod_adı(parametrlər... ) nəticə... { ...} Həmçinin generic funksiya elan edilməsinə baxaq:">
+  <meta property="og:locale" content="az">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:tag" content="Generics">
+    <meta property="article:tag" content="Type">
+    <meta property="article:tag" content="Constraints">
+    <meta property="article:tag" content="General">
+    <meta property="article:tag" content="Interface">
+    <meta property="article:tag" content="Go">
+
+
+  <meta itemprop="name" content="Generics Type Constraints General Interface">
+  <meta itemprop="description" content="Generics# Bəzən biz funksiya və yeni mürəkkəb tip quranda onun istifadə etdiyi parametrlərin və
+dəyişənlərin tipini istifadə zamanı müəyyən edilməsini istəyirik.
+Aydın məsələdir ki bu boş interfeysdən fərqli olaraq daha sürətli olacaq.
+Buna Go dilində bir çox dillərdə olduğu kimi generics type deyilən yanaşma ilə nail olunur.
+Go dilinin yeni versiyalarında (&gt;=1.18) artıq bunu istifadə etmək mümkündür.
+Tip elan edilməsinə yenidən baxaq:
+type ad [TipParametri] tip Burada TipParametri: [ ] arasında ad və Məhdudiyyət cütlüklərindən ibarət olan siyahı olur Məsələn [T Constraint], [T Məhdudiyyət1, V Məhdudiyyət2, ...] (Tip Məhdudiyyətlərini aşağıda xüsusi bölmədə izah edəcəyik. ) Yeni tipimizə metod vermək üçün func (x * ad[T]) metod_adı(parametrlər... ) nəticə... { ...} Həmçinin generic funksiya elan edilməsinə baxaq:">
+  <meta itemprop="wordCount" content="1122">
+  <meta itemprop="keywords" content="Generics,Type,Constraints,General,Interface,Go">
+
+<title>Generics Type Constraints General Interface | GoFastPaced</title>
+<link rel="icon" href="/GoLangFastPaced/favicon.png" >
+<link rel="manifest" href="/GoLangFastPaced/manifest.json">
+<link rel="canonical" href="http://localhost:1313/GoLangFastPaced/docs/interfeysler-generikler/genericstypeconstraintsgeneralinterface/">
+<link rel="stylesheet" href="/GoLangFastPaced/book.min.cc2c524ed250aac81b23d1f4af87344917b325208841feca0968fe450f570575.css" integrity="sha256-zCxSTtJQqsgbI9H0r4c0SRezJSCIQf7KCWj&#43;RQ9XBXU=" crossorigin="anonymous">
+
+
+  <script defer src="/GoLangFastPaced/fuse.min.js"></script>
+  <script defer src="/GoLangFastPaced/en.search.min.c7f7c307715a68257099927aa4338b971330e5a2d97cb3dcbb8cf5a1434424c2.js" integrity="sha256-x/fDB3FaaCVwmZJ6pDOLlxMw5aLZfLPcu4z1oUNEJMI=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-docs">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/GoLangFastPaced/"><span>GoFastPaced</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/" class="">
+      Fəsil 1: Esaslar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/variables_datatypesconstants/" class="">
+      Variables Data Types Constants</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/basicinput/" class="">
+      Basic Input</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/basicoutput/" class="">
+      Basic Output</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/basicoperators/" class="">
+      Basic Operators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/flowcontrols/" class="">
+      Flow Controls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/esaslar/stringnumber/" class="">
+      String Number</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/massivler-xerite/" class="">
+      Fəsil 2: Massivler Xerite</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/massivler-xerite/arrayandslice/" class="">
+      Array And Slice</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/massivler-xerite/map/" class="">
+      Map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/" class="">
+      Fəsil 3: Funksiyalar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/functionsintro/" class="">
+      Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/functionsrecursiveanonymousclosure/" class="">
+      Functions Recursive Anonymous Closure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/funksiyalar/pointers/" class="">
+      Pointers</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/" class="">
+      Fəsil 4: Interfeysler Generikler</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/basicinterfacetypeassertions/" class="">
+      Basic Interface Type Assertions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/genericstypeconstraintsgeneralinterface/" class="active">
+      Generics Type Constraints General Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/interfeysler-generikler/typedefinitonsaliasesstructs/" class="">
+      Type Definitons Aliases Structs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/gorutinler-sehv-idare/" class="">
+      Fəsil 5: Gorutinler Sehv Idare</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/" class="">
+      Goroutine Channels Select Wait Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/gorutinler-sehv-idare/error_defer_panic_recover/" class="">
+      Error defer panic recover</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/modullar-qurulma/" class="">
+      Fəsil 6: Modullar Qurulma</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/modullar-qurulma/modulespackagesbuild/" class="">
+      Modules Packages Build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/docs/modullar-qurulma/buildinstalltest/" class="">
+      Build Install Test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/GoLangFastPaced/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Generics Type Constraints General Interface</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h3 id="generics">Generics<a class="anchor" href="#generics">#</a></h3>
+<p>Bəzən biz funksiya və yeni mürəkkəb tip quranda onun istifadə etdiyi parametrlərin və<br>
+dəyişənlərin tipini istifadə zamanı müəyyən edilməsini istəyirik.<br>
+Aydın məsələdir ki bu boş interfeysdən fərqli olaraq daha sürətli olacaq.<br>
+Buna Go dilində bir çox dillərdə olduğu kimi generics type deyilən yanaşma ilə nail olunur.<br>
+Go dilinin yeni versiyalarında (&gt;=1.18) artıq bunu istifadə etmək mümkündür.</p>
+<p>Tip elan edilməsinə yenidən baxaq:</p>
+<pre>
+
+ 
+type ad [TipParametri] tip 
+
+Burada TipParametri:
+[ ] arasında ad və Məhdudiyyət cütlüklərindən ibarət olan siyahı olur
+Məsələn [T Constraint], [T Məhdudiyyət1, V Məhdudiyyət2, ...]
+
+(Tip Məhdudiyyətlərini aşağıda xüsusi bölmədə izah edəcəyik.  )
+
+Yeni tipimizə metod vermək üçün  
+
+func (x * ad[T]) metod_adı(parametrlər... ) nəticə... { ...}
+
+</pre>
+<p>Həmçinin generic funksiya elan edilməsinə baxaq:</p>
+<pre>
+
+func G[T Constraint](p T) { ... }
+
+</pre>
+<p>Hələki tip məhdudiyyəti kimi <strong>any</strong> götürək hansı ki bütün tipləri götürür.<br>
+Onda Generics-ə nümunə olaraq bunları göstərə bilərik</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#75715e">//generic List</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">List</span>[<span style="color:#a6e22e">T</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">next</span>  <span style="color:#f92672">*</span><span style="color:#a6e22e">List</span>[<span style="color:#a6e22e">T</span>]
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">value</span> <span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// List[T] biz üçün metod vermə qaydasına nümunə</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">l</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">List</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Len</span>() <span style="color:#66d9ef">int</span>  { <span style="color:#f92672">...</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//generic Print funksiyamız</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Print</span>[<span style="color:#a6e22e">T</span> <span style="color:#66d9ef">any</span>](<span style="color:#a6e22e">s</span> []<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">s</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">v</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Print</span>[<span style="color:#a6e22e">T</span> <span style="color:#66d9ef">any</span>](<span style="color:#a6e22e">s</span> []<span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">s</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">v</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Print</span>[<span style="color:#66d9ef">int</span>]([]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Print</span>[<span style="color:#66d9ef">string</span>]([]<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;alma&#34;</span>,<span style="color:#e6db74">&#34;banan&#34;</span>, <span style="color:#e6db74">&#34;kivi&#34;</span>})</span></span></code></pre></div><pre><code>1
+2
+3
+alma
+banan
+kivi
+</code></pre>
+<p>Yuxarıdakı çağırış tərzini sadələşdirmək də olar.<br>
+Go bizim yerimizə parametrdən tipi təyin edəcək.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Print</span>([]<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;alma&#34;</span>,<span style="color:#e6db74">&#34;banan&#34;</span>, <span style="color:#e6db74">&#34;kivi&#34;</span>, <span style="color:#e6db74">&#34;armud&#34;</span>})</span></span></code></pre></div><pre><code>alma
+banan
+kivi
+armud
+</code></pre>
+<h4 id="type-contraints--tip-məhdudiyyətləri">Type Contraints  (Tip məhdudiyyətləri)<a class="anchor" href="#type-contraints--tip-m%c9%99hdudiyy%c9%99tl%c9%99ri">#</a></h4>
+<p>Tip məhdudiyyəti müvafiq tip parametri üçün icazə verilən tip arqumentlər dəstini təyin edir.<br>
+Bu dəstəklənən əməliyyatlara nəzarət edən interfeysdir.</p>
+<p>Tərifdən də aydın olur ki biz niyə any istifadə etmişik. Çünki any boş interfeysdir.</p>
+<p>Aşağıdakı tip məhdudiyyətlərinin elanına fikir verək</p>
+<pre>
+[T any]  //[T interface{}]
+[T interface{[]P}]
+[T interface{~int}]
+[T interface{int|string}]
+</pre>
+<p>Fikir verdinizsə digər interfeys yazıları bizə tanış deyil.<br>
+Biz interfeys daxilində ya boşluq ya da funksiya (func-suz) elanı istifadə edirdik.<br>
+Bu tip interfeys sadə interfeysdən fərqlidir və buna ümumi interfeys deyirik. (General İnterface)</p>
+<h5 id="general-interface-ümumi-interfeys">General Interface (Ümumi interfeys)<a class="anchor" href="#general-interface-%c3%bcmumi-interfeys">#</a></h5>
+<p>Ümumi interfeysin elanı.<br>
+Asan olsun deyə qaydalar şəklində yox göstərməklə təyin nümunlərinə baxaq:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#75715e">// Interfeys yalnız &#34;tip&#34; tipini əhatə edir.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">tip</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Məsələn:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Interfeys alt tipi &#34;tip&#34; olan bütün tipləri əhatə edir.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// yəni alt tipi &#34;tip&#34; olan bütün tiplər interfeysin tip çoxluğunda olur.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	~<span style="color:#a6e22e">tip</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Məsələn:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	~<span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// MyInt alt tipi int olduğundan interfeys tərəfindən qəbul olunacaq</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MyInt</span> <span style="color:#66d9ef">int</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Interfeys alt tipi &#34;tip&#34; olan və həmçinin &#34;metod_adı&#34; metodu elan edilmiş tipləri əhatə edir.  </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// yəni interfeysin tip çoxluğunda olur.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	~<span style="color:#a6e22e">tip</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">metod_adı</span>(<span style="color:#a6e22e">parameterlər</span>) <span style="color:#a6e22e">nəticələr</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Məsələn:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	~<span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">MyInt2</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">v</span> <span style="color:#a6e22e">MyInt2</span>) <span style="color:#a6e22e">String</span>() <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Aşağıdakı misalda isə heç bir tip əhatə olunmayacaq. Çünki bir tipin həm int, həm string tipi olması mümkün deyil.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Qeyd edək ki | məntiqi və ya bağlayıcısı ilə də məhdudiyyət interfeysi hazırlaya bilərik</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Interfeys &#34;tip1&#34; və ya &#34;tip2&#34; və ya &#34;tip3&#34; tipini əhatə edir.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">tip1</span> | <span style="color:#a6e22e">tip2</span> | <span style="color:#a6e22e">tip3</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Məsələn:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//alt tipi int və ya string olan tiplər</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	~<span style="color:#66d9ef">int</span> | <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// https://pkg.go.dev/golang.org/x/exp/constraints </span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Signed</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	~<span style="color:#66d9ef">int</span> | ~<span style="color:#66d9ef">int8</span> | ~<span style="color:#66d9ef">int16</span> | ~<span style="color:#66d9ef">int32</span> | ~<span style="color:#66d9ef">int64</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Unsigned</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	~<span style="color:#66d9ef">uint</span> | ~<span style="color:#66d9ef">uint8</span> | ~<span style="color:#66d9ef">uint16</span> | ~<span style="color:#66d9ef">uint32</span> | ~<span style="color:#66d9ef">uint64</span> | ~<span style="color:#66d9ef">uintptr</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Integer</span> <span style="color:#66d9ef">interface</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Signed</span> | <span style="color:#a6e22e">Unsigned</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><p>Daha dəqiq və ətraflı qaydalar və istifadə toplumu üçün dilə baxa bilərsiniz.<br>
+<a href="https://go.dev/ref/spec#Interface_types">https://go.dev/ref/spec#Interface_types</a></p>
+<p>Qeyd edək ki, bəzi tip məhdudiyyətlərini sadə üsulla da elan edə bilərik.<br>
+Məsələn:</p>
+<pre>
+[T []P]                      // = [T interface{[]P}]
+[T int]                     // = [T interface{int}]
+[T ~int]                     // = [T interface{~int}]
+[T int|string]               // = [T interface{int|string}]
+</pre>
+<p>(Qeyd: bu halda [T int] -də int-i tip yox, tip məhdudiyyəti kimi başa düşmək daha düzgündür)</p>
+<p>Amma  nəzərə almaq lazımdır ki bu sadələşdirmə
+qarışıqlığa səbəb olsa onda onu xüsusi üsulla qeyd etmək lazımdır.<br>
+Məsələn aşağıdakı C məhdudiyyəti üçün qarışıqlıq yarana bilər.</p>
+<pre>
+type X1[P *C] ..
+type X2[P (C)] ...
+type X3[P *C|Q] ...
+</pre>
+<p>Bu qarşılıqlığı aradan qaldırmaq üçün ya təzədən məhdudiyyətləri interface{} almaq, ya da &ldquo;,&rdquo; işarəsini sonuna əlavə etmək lazımdır</p>
+<pre>
+type X1[P interface{*C}] ...
+type X1[P *C,] ...
+</pre>
+<p>Dediyimiz qarşılıqlığa aid real nümunə verək və çıxan səhvə baxaq:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Lx</span> [ <span style="color:#a6e22e">T</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>] <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">val</span> <span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><style>
+.gonb-err-location {
+	background: var(--jp-err-color2);  
+	border-radius: 3px;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: var(--jp-border-color2);
+}
+.gonb-err-location:hover {
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--jp-border-color2);
+}
+.gonb-err-context {
+	display: none;
+}
+.gonb-err-location:hover + .gonb-err-context {
+	background: var(--jp-dialog-background);  
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: var(--jp-border-color2);
+	display: block;
+	white-space: pre;
+	font-family: monospace;
+}
+.gonb-err-line {
+	border-radius: 3px;
+	border-style: dotted;
+	border-width: 1px;	
+	border-color: var(--jp-border-color2);
+	background-color: var(--jp-rendermime-err-background);
+	font-weight: bold;
+}
+.gonb-cell-line-info {
+	background: var(--jp-layout-color2);
+	color: #999;
+	margin: 0.1em;
+	border: 1px solid var(--jp-border-color1);
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
+</style>
+<div class="lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child">
+<div class="lm-Widget p-Widget jp-RenderedText jp-mod-trusted jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" style="font-family: monospace;">
+<p><span style="white-space: pre;"> # gonb_93df4279</span></p>
+<br/>
+<p><span class="gonb-cell-line-info">Cell[24]: Line 1</span>
+<span class="gonb-err-location">./main.go:11:11: </span> undefined: T</p>
+<div class="gonb-err-context">
+type List[T any] struct {
+    head, tail *element[T]
+}
+<div class="gonb-err-line">type Lx [ T *int] struct {
+</div>	val T
+}
+</div>
+<br/>
+<p><span class="gonb-cell-line-info">Cell[24]: Line 1</span>
+<span class="gonb-err-location">./main.go:11:14: </span> int (type) is not an expression</p>
+<div class="gonb-err-context">
+type List[T any] struct {
+    head, tail *element[T]
+}
+<div class="gonb-err-line">type Lx [ T *int] struct {
+</div>	val T
+}
+</div>
+<br/>
+<p><span class="gonb-cell-line-info">Cell[24]: Line 2</span>
+<span class="gonb-err-location">./main.go:12:6: </span> undefined: T</p>
+<div class="gonb-err-context">
+    head, tail *element[T]
+}
+type Lx [ T *int] struct {
+<div class="gonb-err-line">	val T
+</div>}
+type element[T any] struct {
+</div>
+<br/>
+<p><span style="white-space: pre;"> </span></p>
+<br/>
+</div>
+<pre><code>failed to run &quot;/usr/local/go/bin/go build -o /tmp/gonb_93df4279/gonb_93df4279&quot;: exit status 1
+</code></pre>
+<p>Gördüyünüz kimi Go bunu düzgün parse edə bilmədi. Bu adətən o zaman baş verirki<br>
+yazılış ifadəyə oxşayır. İndi isə həmin problemi aradan qaldıran yazılışa baxaq:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Normal interface{ } içində elanla</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Lx</span> [ <span style="color:#a6e22e">T</span> <span style="color:#66d9ef">interface</span>{<span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>}] <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">val</span> <span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// Əlavə vergül yazmaqla</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Lx</span> [ <span style="color:#a6e22e">T</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">int</span>,] <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">val</span> <span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><h5 id="comparable">comparable<a class="anchor" href="#comparable">#</a></h5>
+<p>Go dilində any interfeysi ilə yanaşı comparable interfeys məhdudiyyəti var.<br>
+comparable məhdudiyyətinin əhatə etdiyi tiplər üzərində  müqayisə əməliyyatlarını ( ==, != ) həyata keçirmək mümkündür.<br>
+Əks halda həmin tip comparable interfeys çoxluğuna daxil olmur.
+(Go 1.20-dən any də comparable tipin interfeys çoxluğundadır)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">beraber</span>[<span style="color:#a6e22e">T</span> <span style="color:#a6e22e">comparable</span>](<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#a6e22e">T</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">y</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>} 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>=<span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">b</span>=<span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">beraber</span>[<span style="color:#66d9ef">int</span>](<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">beraber</span>(<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">b</span>))</span></span></code></pre></div><pre><code>false
+true
+</code></pre>
+<p>Məsələn bilirik ki funksiya tipləri müqayisə olunmur.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span><span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">5</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">b</span><span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">8</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">beraber</span>(<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>))</span></span></code></pre></div><style>
+.gonb-err-location {
+	background: var(--jp-err-color2);  
+	border-radius: 3px;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: var(--jp-border-color2);
+}
+.gonb-err-location:hover {
+	border-width: 2px;
+	border-style: solid;
+	border-color: var(--jp-border-color2);
+}
+.gonb-err-context {
+	display: none;
+}
+.gonb-err-location:hover + .gonb-err-context {
+	background: var(--jp-dialog-background);  
+	border-radius: 3px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: var(--jp-border-color2);
+	display: block;
+	white-space: pre;
+	font-family: monospace;
+}
+.gonb-err-line {
+	border-radius: 3px;
+	border-style: dotted;
+	border-width: 1px;	
+	border-color: var(--jp-border-color2);
+	background-color: var(--jp-rendermime-err-background);
+	font-weight: bold;
+}
+.gonb-cell-line-info {
+	background: var(--jp-layout-color2);
+	color: #999;
+	margin: 0.1em;
+	border: 1px solid var(--jp-border-color1);
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
+</style>
+<div class="lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child">
+<div class="lm-Widget p-Widget jp-RenderedText jp-mod-trusted jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" style="font-family: monospace;">
+<p><span style="white-space: pre;"> # gonb_93df4279</span></p>
+<br/>
+<p><span class="gonb-cell-line-info">Cell[32]: Line 5</span>
+<span class="gonb-err-location">./main.go:56:21: </span> func() int does not satisfy comparable</p>
+<div class="gonb-err-context">
+	flag.Parse()
+	a:= func() int {return 5}
+	b:= func() int {return 8}
+<div class="gonb-err-line">	fmt.Println(beraber(a,b))
+</div>
+</div>
+<br/>
+<p><span style="white-space: pre;"> </span></p>
+<br/>
+</div>
+<pre><code>failed to run &quot;/usr/local/go/bin/go build -o /tmp/gonb_93df4279/gonb_93df4279&quot;: exit status 1
+</code></pre>
+<p>Təəssüf ki, Go dilində öz tipimizi comparable çoxluğuna əlavə etmək üçün elan<br>
+etdiyimiz tip üçün xüsusi == != metodlarını əlavə edə bilmirik.  Bu xüsusi qaydalara əsasən təyin edilir.<br>
+Məsələn struct tipimizin bütün eleməntləri müqayisə edilən olduqda bizim struct da comparable interfeys çoxluğuna daxil olur.<br>
+Tam qaydaları<br>
+<a href="https://go.dev/ref/spec#Comparison_operators">https://go.dev/ref/spec#Comparison_operators</a> bölməsində tapmaq olar</p>
+<p>Generics-ə aid List nümunəsinə baxaq.<br>
+Bu nümunə <a href="https://gobyexample.com/generics">https://gobyexample.com/generics</a> götürülüb</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">List</span>[<span style="color:#a6e22e">T</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">head</span>, <span style="color:#a6e22e">tail</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">element</span>[<span style="color:#a6e22e">T</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">element</span>[<span style="color:#a6e22e">T</span> <span style="color:#66d9ef">any</span>] <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">next</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">element</span>[<span style="color:#a6e22e">T</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">val</span>  <span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>} 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">lst</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">List</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">Push</span>(<span style="color:#a6e22e">v</span> <span style="color:#a6e22e">T</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">head</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">element</span>[<span style="color:#a6e22e">T</span>]{<span style="color:#a6e22e">val</span>: <span style="color:#a6e22e">v</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">tail</span> = <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">head</span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">tail</span>.<span style="color:#a6e22e">next</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">element</span>[<span style="color:#a6e22e">T</span>]{<span style="color:#a6e22e">val</span>: <span style="color:#a6e22e">v</span>}
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">tail</span> = <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">tail</span>.<span style="color:#a6e22e">next</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">lst</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">List</span>[<span style="color:#a6e22e">T</span>]) <span style="color:#a6e22e">GetAll</span>() []<span style="color:#a6e22e">T</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">elems</span> []<span style="color:#a6e22e">T</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">head</span>; <span style="color:#a6e22e">e</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span>; <span style="color:#a6e22e">e</span> = <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">next</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">elems</span> = append(<span style="color:#a6e22e">elems</span>, <span style="color:#a6e22e">e</span>.<span style="color:#a6e22e">val</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">elems</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lst</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">List</span>[<span style="color:#66d9ef">int</span>]{}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">Push</span>(<span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">Push</span>(<span style="color:#ae81ff">13</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">Push</span>(<span style="color:#ae81ff">23</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;list:&#34;</span>, <span style="color:#a6e22e">lst</span>.<span style="color:#a6e22e">GetAll</span>())</span></span></code></pre></div><pre><code>list: [10 13 23]
+</code></pre>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/GoLangFastPaced/docs/interfeysler-generikler/basicinterfacetypeassertions/" class="flex align-center">
+        <img src="/GoLangFastPaced/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Basic Interface Type Assertions</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/GoLangFastPaced/docs/interfeysler-generikler/typedefinitonsaliasesstructs/" class="flex align-center">
+        <span>Type Definitons Aliases Structs</span>
+        <img src="/GoLangFastPaced/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

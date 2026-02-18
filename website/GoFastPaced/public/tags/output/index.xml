@@ -9,9 +9,9 @@
     <atom:link href="http://localhost:1313/GoLangFastPaced/tags/output/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Basic Output</title>
-      <link>http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoutput/</link>
+      <link>http://localhost:1313/GoLangFastPaced/docs/esaslar/basicoutput/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoutput/</guid>
+      <guid>http://localhost:1313/GoLangFastPaced/docs/esaslar/basicoutput/</guid>
       <description>&lt;h3 id=&#34;basic-input-output&#34;&gt;BASIC INPUT OUTPUT&lt;a class=&#34;anchor&#34; href=&#34;#basic-input-output&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Sadə proqramlarda giriş və əks etdirmə üsullarına baxaq.&lt;/p&gt;&#xA;&lt;p&gt;Ümumən, ilk öncə stdin stderr stdout anlamlarını qısa şərh edək.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;stdin - Standart giriş (Standard Input) proqramın daxil olan məlumatı oxuduğu kommunikasiya kanalıdır.&lt;/li&gt;&#xA;&lt;li&gt;stdout - Standart çıxış (Standard Output) proqramın xaric olan məlumatı yazdığı kommunikasiya kanalıdır.&lt;/li&gt;&#xA;&lt;li&gt;stderr - Standart xəta (Standard Error) proqramın xaric olan xəta məlumatlarını yazdığı kommunikasiya kanalıdır.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;Bunları həmçinin axın (stream) adlandıra bilərik.&lt;br&gt;&#xA;Linux-da ümumən isə fayl sözünü də işlədə bilərik.&lt;br&gt;&#xA;Bu zaman stdin, stdout, stderr -in fayl deskriptorları da olacaq. Fayl deskriptoru deyəndə açılan fayla xas ədəd nəzərdə tutulur.&lt;/p&gt;</description>
     </item>
   </channel>

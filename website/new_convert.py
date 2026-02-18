@@ -10,21 +10,21 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 root_folder = Path(sys.argv[1])
-base_dir = Path("GoFastPaced/content")
+base_dir = Path("GoFastPaced/content/docs")
 
 # Azerbaijani chapter folders and descriptions
 chapters = {
-    "01-esaslar": "Go dilinin əsasları: dəyişənlər, sabitlər, giriş/çıxış, operatorlar və idarəetmə axını.",
-    "02-massivler-xerite": "Massivlər, dilimlər və xəritələrlə işləmək.",
-    "03-funksiyalar": "Funksiyalar, rekursiya, anonim funksiyalar və göstəricilər.",
-    "04-interfeysler-generikler": "İnterfeyslər, generiklər və strukturlar.",
-    "05-gorutinler-sehv-idare": "Gorutinlər, kanallar, səhvlərin idarəsi.",
-    "06-modullar-qurulma": "Modullar, paketlər, qurulma və test."
+    "esaslar": "Go dilinin əsasları: dəyişənlər, sabitlər, giriş/çıxış, operatorlar və idarəetmə axını.",
+    "massivler-xerite": "Massivlər, dilimlər və xəritələrlə işləmək.",
+    "funksiyalar": "Funksiyalar, rekursiya, anonim funksiyalar və göstəricilər.",
+    "interfeysler-generikler": "İnterfeyslər, generiklər və strukturlar.",
+    "gorutinler-sehv-idare": "Gorutinlər, kanallar, səhvlərin idarəsi.",
+    "modullar-qurulma": "Modullar, paketlər, qurulma və test."
 }
 
 # Notebook mapping to chapters
 mapping = {
-    "01-esaslar": [
+    "esaslar": [
         "Variables_DataTypesConstants.ipynb",
         "BasicInput.ipynb",
         "BasicOutput.ipynb",
@@ -32,11 +32,11 @@ mapping = {
         "FlowControls.ipynb",
         "StringNumber.ipynb"
     ],
-    "02-massivler-xerite": ["ArrayAndSlice.ipynb", "Map.ipynb"],
-    "03-funksiyalar": ["FunctionsIntro.ipynb", "FunctionsRecursiveAnonymousClosure.ipynb", "Pointers.ipynb"],
-    "04-interfeysler-generikler": ["BasicInterfaceTypeAssertions.ipynb", "GenericsTypeConstraintsGeneralInterface.ipynb", "TypeDefinitonsAliasesStructs.ipynb"],
-    "05-gorutinler-sehv-idare": ["GoroutineChannelsSelectWaitGroup.ipynb", "Error_defer_panic_recover.ipynb"],
-    "06-modullar-qurulma": ["ModulesPackagesBuild.ipynb", "BuildInstallTest.ipynb"]
+    "massivler-xerite": ["ArrayAndSlice.ipynb", "Map.ipynb"],
+    "funksiyalar": ["FunctionsIntro.ipynb", "FunctionsRecursiveAnonymousClosure.ipynb", "Pointers.ipynb"],
+    "interfeysler-generikler": ["BasicInterfaceTypeAssertions.ipynb", "GenericsTypeConstraintsGeneralInterface.ipynb", "TypeDefinitonsAliasesStructs.ipynb"],
+    "gorutinler-sehv-idare": ["GoroutineChannelsSelectWaitGroup.ipynb", "Error_defer_panic_recover.ipynb"],
+    "modullar-qurulma": ["ModulesPackagesBuild.ipynb", "BuildInstallTest.ipynb"]
 }
 
 def generate_tags(filename: str):

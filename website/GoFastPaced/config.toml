@@ -10,7 +10,7 @@ author = "BranchAndLink"
   name = "BranchAndLink"
   bio = "GoLang Fast Paced"
   BookSearch = true
-  BookSection = "content"
+  BookSection = "docs"
   BookToC = false
 
 [markup]

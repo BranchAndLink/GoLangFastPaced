@@ -9,9 +9,9 @@
     <atom:link href="http://localhost:1313/GoLangFastPaced/tags/pointers/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pointers</title>
-      <link>http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/pointers/</link>
+      <link>http://localhost:1313/GoLangFastPaced/docs/funksiyalar/pointers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/pointers/</guid>
+      <guid>http://localhost:1313/GoLangFastPaced/docs/funksiyalar/pointers/</guid>
       <description>&lt;h3 id=&#34;pointer&#34;&gt;Pointer&lt;a class=&#34;anchor&#34; href=&#34;#pointer&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Pointer yaddaşda hər hansı bir tip üçün ayrılan yerin ünvanını saxlayır. Həmin tipə pointer-in əsas tipi deyilir.&lt;/p&gt;&#xA;&lt;p&gt;Pointer tipi:  * Esas_Tip&lt;/p&gt;&#xA;&lt;p&gt;Göründüyü kimi Tip-in əvvəlinə * artırmaqla pointer tipini təyin edirik.&lt;br&gt;&#xA;Adi elan edildikə pointer tipi nil saxlayır. nil o demekdir ki pointer heç bir address saxlamır və boşluğa işarə edir.&lt;br&gt;&#xA;(Qeyd: C dilində ədəd olaraq null ( Go nil ) dedikdə 0 addressi nəzərdə tutulur. Çünki bir çox sistemlərdə 0 virtual addressi fiziki yaddaşa map olmur və ona müraciət xətaya səbəb olur.&lt;br&gt;&#xA;Lakin məntiq olaraq nil 0 deyil. )&lt;/p&gt;</description>
     </item>
   </channel>

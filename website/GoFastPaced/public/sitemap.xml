@@ -2,53 +2,53 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/02-massivler-xerite/arrayandslice/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/massivler-xerite/arrayandslice/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/04-interfeysler-generikler/basicinterfacetypeassertions/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/interfeysler-generikler/basicinterfacetypeassertions/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/esaslar/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/functionsintro/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/funksiyalar/functionsintro/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/05-gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/06-modullar-qurulma/modulespackagesbuild/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/modullar-qurulma/modulespackagesbuild/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/variables_datatypesconstants/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/esaslar/variables_datatypesconstants/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicinput/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/esaslar/basicinput/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/06-modullar-qurulma/buildinstalltest/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/modullar-qurulma/buildinstalltest/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/05-gorutinler-sehv-idare/error_defer_panic_recover/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/gorutinler-sehv-idare/error_defer_panic_recover/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/02-massivler-xerite/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/massivler-xerite/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/functionsrecursiveanonymousclosure/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/funksiyalar/functionsrecursiveanonymousclosure/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/04-interfeysler-generikler/genericstypeconstraintsgeneralinterface/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/interfeysler-generikler/genericstypeconstraintsgeneralinterface/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/02-massivler-xerite/map/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/massivler-xerite/map/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoutput/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/esaslar/basicoutput/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/funksiyalar/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/pointers/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/funksiyalar/pointers/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/04-interfeysler-generikler/typedefinitonsaliasesstructs/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/interfeysler-generikler/typedefinitonsaliasesstructs/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoperators/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/esaslar/basicoperators/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/04-interfeysler-generikler/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/interfeysler-generikler/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/05-gorutinler-sehv-idare/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/gorutinler-sehv-idare/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/flowcontrols/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/esaslar/flowcontrols/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/06-modullar-qurulma/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/modullar-qurulma/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/stringnumber/</loc>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/esaslar/stringnumber/</loc>
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/aliases/</loc>
   </url><url>
@@ -74,8 +74,6 @@
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/constraints/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/</loc>
-  </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/controls/</loc>
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/data/</loc>
@@ -83,6 +81,8 @@
     <loc>http://localhost:1313/GoLangFastPaced/tags/defer/</loc>
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/definitons/</loc>
+  </url><url>
+    <loc>http://localhost:1313/GoLangFastPaced/docs/</loc>
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/error/</loc>
   </url><url>
