@@ -50,8 +50,6 @@
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/content/01-esaslar/stringnumber/</loc>
   </url><url>
-    <loc>http://localhost:1313/GoLangFastPaced/content/</loc>
-  </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/aliases/</loc>
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/and/</loc>
@@ -75,6 +73,8 @@
     <loc>http://localhost:1313/GoLangFastPaced/tags/constants/</loc>
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/constraints/</loc>
+  </url><url>
+    <loc>http://localhost:1313/GoLangFastPaced/content/</loc>
   </url><url>
     <loc>http://localhost:1313/GoLangFastPaced/tags/controls/</loc>
   </url><url>
