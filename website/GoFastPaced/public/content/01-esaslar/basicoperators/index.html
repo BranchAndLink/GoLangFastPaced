@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="az" dir="ltr">
+<head><script src="/GoLangFastPaced/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=GoLangFastPaced/livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sadə Operatorlar# iki operand (əməl həyata keçirilən dəyişən ədəd və s) işlədilən operatorlara binary operatorlar deyirik. Məsələn toplama iki ədədin arasında işlədilir 5 &#43; 9
+tək operandın önündə işlənə bilən operatorlara unary operatorlar deyirik. Məsələn mənfi işarəsi -8
+Hesablama operatorları# &#43;,-,*,/,%, &#43;&#43;, –
+bütün ədəd tipləri üçün işləyir və toplamadır. string tipi üçün də işləyir lakin birləşdirmə əməliyyatı aparır %% var ( a ,b int = 5 ,6 c, d float32 = 4.5, 7.87 e, h complex64 = 5, 7&#43;9i m1, m2 = &#34;Learn-&#34;, &#34;Go&#34; ) fmt.Println(a&#43;b, c &#43; d, m1 &#43; m2, e &#43; h)11 12.37 Learn-Go (12&#43;9i) % modul bildirir və yalnız tam ədədlər üçün işləyir
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoperators/">
+  <meta property="og:site_name" content="GoFastPaced">
+  <meta property="og:title" content="Basic Operators">
+  <meta property="og:description" content="Sadə Operatorlar# iki operand (əməl həyata keçirilən dəyişən ədəd və s) işlədilən operatorlara binary operatorlar deyirik. Məsələn toplama iki ədədin arasında işlədilir 5 &#43; 9
+tək operandın önündə işlənə bilən operatorlara unary operatorlar deyirik. Məsələn mənfi işarəsi -8
+Hesablama operatorları# &#43;,-,*,/,%, &#43;&#43;, –
+bütün ədəd tipləri üçün işləyir və toplamadır. string tipi üçün də işləyir lakin birləşdirmə əməliyyatı aparır %% var ( a ,b int = 5 ,6 c, d float32 = 4.5, 7.87 e, h complex64 = 5, 7&#43;9i m1, m2 = &#34;Learn-&#34;, &#34;Go&#34; ) fmt.Println(a&#43;b, c &#43; d, m1 &#43; m2, e &#43; h)11 12.37 Learn-Go (12&#43;9i) % modul bildirir və yalnız tam ədədlər üçün işləyir">
+  <meta property="og:locale" content="az">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="content">
+    <meta property="article:tag" content="Basic">
+    <meta property="article:tag" content="Operators">
+    <meta property="article:tag" content="Go">
+
+
+  <meta itemprop="name" content="Basic Operators">
+  <meta itemprop="description" content="Sadə Operatorlar# iki operand (əməl həyata keçirilən dəyişən ədəd və s) işlədilən operatorlara binary operatorlar deyirik. Məsələn toplama iki ədədin arasında işlədilir 5 &#43; 9
+tək operandın önündə işlənə bilən operatorlara unary operatorlar deyirik. Məsələn mənfi işarəsi -8
+Hesablama operatorları# &#43;,-,*,/,%, &#43;&#43;, –
+bütün ədəd tipləri üçün işləyir və toplamadır. string tipi üçün də işləyir lakin birləşdirmə əməliyyatı aparır %% var ( a ,b int = 5 ,6 c, d float32 = 4.5, 7.87 e, h complex64 = 5, 7&#43;9i m1, m2 = &#34;Learn-&#34;, &#34;Go&#34; ) fmt.Println(a&#43;b, c &#43; d, m1 &#43; m2, e &#43; h)11 12.37 Learn-Go (12&#43;9i) % modul bildirir və yalnız tam ədədlər üçün işləyir">
+  <meta itemprop="wordCount" content="812">
+  <meta itemprop="keywords" content="Basic,Operators,Go">
+
+<title>Basic Operators | GoFastPaced</title>
+<link rel="icon" href="/GoLangFastPaced/favicon.png" >
+<link rel="manifest" href="/GoLangFastPaced/manifest.json">
+<link rel="canonical" href="http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoperators/">
+<link rel="stylesheet" href="/GoLangFastPaced/book.min.cc2c524ed250aac81b23d1f4af87344917b325208841feca0968fe450f570575.css" integrity="sha256-zCxSTtJQqsgbI9H0r4c0SRezJSCIQf7KCWj&#43;RQ9XBXU=" crossorigin="anonymous">
+
+
+  <script defer src="/GoLangFastPaced/fuse.min.js"></script>
+  <script defer src="/GoLangFastPaced/en.search.min.0d9eed8cbaeb3f34cb5979faed548d81e8505e6ef67011d0e2b856f394af6f75.js" integrity="sha256-DZ7tjLrrPzTLWXn67VSNgehQXm72cBHQ4rhW85Svb3U=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-content">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/GoLangFastPaced/"><span>GoFastPaced</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/" class="">
+      Fəsil 1: 01 Esaslar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/variables_datatypesconstants/" class="">
+      Variables Data Types Constants</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicinput/" class="">
+      Basic Input</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicoutput/" class="">
+      Basic Output</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicoperators/" class="active">
+      Basic Operators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/flowcontrols/" class="">
+      Flow Controls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/stringnumber/" class="">
+      String Number</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/" class="">
+      Fəsil 2: 02 Massivler Xerite</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/arrayandslice/" class="">
+      Array And Slice</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/map/" class="">
+      Map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/" class="">
+      Fəsil 3: 03 Funksiyalar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/functionsintro/" class="">
+      Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/functionsrecursiveanonymousclosure/" class="">
+      Functions Recursive Anonymous Closure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/pointers/" class="">
+      Pointers</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/" class="">
+      Fəsil 4: 04 Interfeysler Generikler</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/basicinterfacetypeassertions/" class="">
+      Basic Interface Type Assertions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/genericstypeconstraintsgeneralinterface/" class="">
+      Generics Type Constraints General Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/typedefinitonsaliasesstructs/" class="">
+      Type Definitons Aliases Structs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/" class="">
+      Fəsil 5: 05 Gorutinler Sehv Idare</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/" class="">
+      Goroutine Channels Select Wait Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/error_defer_panic_recover/" class="">
+      Error defer panic recover</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/" class="">
+      Fəsil 6: 06 Modullar Qurulma</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/modulespackagesbuild/" class="">
+      Modules Packages Build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/buildinstalltest/" class="">
+      Build Install Test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/GoLangFastPaced/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Basic Operators</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="sadə-operatorlar">Sadə Operatorlar<a class="anchor" href="#sad%c9%99-operatorlar">#</a></h2>
+<p>iki operand (əməl həyata keçirilən dəyişən ədəd və s) işlədilən operatorlara <strong>binary operator</strong>lar deyirik.  <br>
+Məsələn toplama iki ədədin arasında işlədilir 5 + 9<br>
+tək operandın önündə işlənə bilən operatorlara <strong>unary operator</strong>lar deyirik. <br>
+Məsələn mənfi işarəsi  -8</p>
+<h4 id="hesablama-operatorları">Hesablama operatorları<a class="anchor" href="#hesablama-operatorlar%c4%b1">#</a></h4>
+<p>+,-,*,/,%, ++, &ndash;</p>
+<ul>
+<li>bütün ədəd tipləri üçün işləyir və toplamadır.  <span style="color:red">string tipi üçün də işləyir  lakin <strong>birləşdirmə</strong> əməliyyatı aparır</span></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">a</span> ,<span style="color:#a6e22e">b</span> <span style="color:#66d9ef">int</span> = <span style="color:#ae81ff">5</span> ,<span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">d</span> <span style="color:#66d9ef">float32</span> =  <span style="color:#ae81ff">4.5</span>, <span style="color:#ae81ff">7.87</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">e</span>, <span style="color:#a6e22e">h</span> <span style="color:#66d9ef">complex64</span> = <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">7</span><span style="color:#f92672">+</span><span style="color:#ae81ff">9i</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">m1</span>, <span style="color:#a6e22e">m2</span> = <span style="color:#e6db74">&#34;Learn-&#34;</span>, <span style="color:#e6db74">&#34;Go&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span><span style="color:#f92672">+</span><span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">c</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">m1</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">m2</span>, <span style="color:#a6e22e">e</span>  <span style="color:#f92672">+</span> <span style="color:#a6e22e">h</span>)</span></span></code></pre></div><pre><code>11 12.37 Learn-Go (12+9i)
+</code></pre>
+<p>% modul bildirir və yalnız <strong>tam ədədlər</strong> üçün işləyir</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">m</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">12</span> , <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">d</span><span style="color:#f92672">%</span><span style="color:#a6e22e">m</span>)</span></span></code></pre></div><pre><code>2
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">c</span>,<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span><span style="color:#f92672">*</span><span style="color:#a6e22e">b</span><span style="color:#f92672">-</span><span style="color:#a6e22e">d</span><span style="color:#f92672">/</span><span style="color:#a6e22e">c</span>)</span></span></code></pre></div><pre><code>18
+</code></pre>
+<p><strong>C dilindən fərqli olaraq ++ və &ndash; operatoru <strong>postfix</strong> dir və ifadə içində yazılmır</strong>. Dəyişənin qiymətini 1 vahid artırır və ya azaldır</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">i</span><span style="color:#f92672">--</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">i</span>)</span></span></code></pre></div><pre><code>1
+</code></pre>
+<p>Bit üzrə operatorlar. Bu operatorlar yalnız <strong>tam ədədlər üzərində</strong> işləyir</p>
+<table>
+  <thead>
+      <tr>
+          <th>Bit (İkili sayda) operatoru</th>
+          <th>İzahı</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>m &amp; n</td>
+          <td>bit and, ədədin bitləri üzrə hər ikisi 1 olduqda 1 əksa halda 0</td>
+      </tr>
+      <tr>
+          <td>m | n</td>
+          <td>bit or, hər ikisi 0 olduqda 0, qalan hallarda 1</td>
+      </tr>
+      <tr>
+          <td>m ^ n</td>
+          <td>xor eyni olduqda 0 fərqli olduqda 1</td>
+      </tr>
+      <tr>
+          <td>^n</td>
+          <td>n dəki bitlər əksinə çevrilir</td>
+      </tr>
+      <tr>
+          <td>m &amp;^ n</td>
+          <td>bit clear (and  not m &amp; (^n)) n də 1 olan mərtəbələr m ədədində sıfırlanır</td>
+      </tr>
+      <tr>
+          <td>m &laquo; n</td>
+          <td>m ədədini n sayda sola sürüşdürür</td>
+      </tr>
+      <tr>
+          <td>m &raquo; n</td>
+          <td>m ədədini n sayda sağa sürüşdürür</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> <span style="color:#66d9ef">uint16</span> = <span style="color:#ae81ff">1235</span>, <span style="color:#ae81ff">4536</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%016b(onluq: %d)\n&amp;\n%016b(onluq: %d)\n__________________\n%016b  (onluq: %d)\n\n\n&#34;</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&amp;</span><span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&amp;</span><span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%016b(onluq: %d)\n|\n%016b(onluq: %d)\n__________________\n%016b  (onluq: %d)\n\n\n&#34;</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span>|<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span>|<span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%016b(onluq: %d)\n^\n%016b(onluq: %d)\n__________________\n%016b  (onluq: %d)\n\n\n&#34;</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span>^<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span>^<span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%016b(onluq: %d)\n&amp;^\n%016b(onluq: %d)\n__________________\n%016b  (onluq: %d)\n\n\n&#34;</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&amp;^</span><span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&amp;^</span><span style="color:#a6e22e">b</span>)</span></span></code></pre></div><pre><code>0000010011010011(onluq: 1235)
+&amp;
+0001000110111000(onluq: 4536)
+__________________
+0000000010010000  (onluq: 144)
+
+
+0000010011010011(onluq: 1235)
+|
+0001000110111000(onluq: 4536)
+__________________
+0001010111111011  (onluq: 5627)
+
+
+0000010011010011(onluq: 1235)
+^
+0001000110111000(onluq: 4536)
+__________________
+0001010101101011  (onluq: 5483)
+
+
+0000010011010011(onluq: 1235)
+&amp;^
+0001000110111000(onluq: 4536)
+__________________
+0000010001000011  (onluq: 1091)
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">n</span> <span style="color:#66d9ef">uint16</span> = <span style="color:#ae81ff">1235</span>, <span style="color:#ae81ff">4536</span>, <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;^\n%016b(onluq: %d)\n__________________\n%016b  (onluq: %d)\n\n\n&#34;</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">b</span>,^<span style="color:#a6e22e">b</span>,^<span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%016b(onluq: %d)\n&gt;&gt;\n%16d\n__________________\n%016b  (onluq: %d)\n\n\n&#34;</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">n</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;&gt;</span><span style="color:#a6e22e">n</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&gt;&gt;</span><span style="color:#a6e22e">n</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%016b(onluq: %d)\n&lt;&lt;\n%16d\n__________________\n%016b  (onluq: %d)\n\n\n&#34;</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">n</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#a6e22e">n</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">&lt;&lt;</span><span style="color:#a6e22e">n</span>)</span></span></code></pre></div><pre><code>^
+0001000110111000(onluq: 4536)
+__________________
+1110111001000111  (onluq: 60999)
+
+
+0000010011010011(onluq: 1235)
+&gt;&gt;
+               3
+__________________
+0000000010011010  (onluq: 154)
+
+
+0000010011010011(onluq: 1235)
+&lt;&lt;
+               3
+__________________
+0010011010011000  (onluq: 9880)
+</code></pre>
+<p>Müqayisə operatorları</p>
+<table>
+  <thead>
+      <tr>
+          <th>operator</th>
+          <th>izahı</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>==</td>
+          <td>bərabərdir</td>
+      </tr>
+      <tr>
+          <td>!=</td>
+          <td>bərabər deyil</td>
+      </tr>
+      <tr>
+          <td>&lt;</td>
+          <td>kiçikdir</td>
+      </tr>
+      <tr>
+          <td>&lt;=</td>
+          <td>kiçik bərabərdir</td>
+      </tr>
+      <tr>
+          <td>&gt;</td>
+          <td>böyükdür</td>
+      </tr>
+      <tr>
+          <td>&gt;=</td>
+          <td>böyük bərabərdir</td>
+      </tr>
+  </tbody>
+</table>
+<p>Ədəd tipləri və string müqayisə ediləndir. (string tipində kodlaşdırma hərf sırası müqayisəyə təsir edir).<br>
+Həmçinin array də müqayisə ediləndir.<br>
+Əgər struct tipinin bütün elementləri müqayisə ediləndirsə onlar da müqayisə ediləndir<br>
+Daha ətraflı spesifikasiyaya baxa bilərsiniz</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">d</span>,<span style="color:#a6e22e">e</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">102</span>, <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s</span>,<span style="color:#a6e22e">v</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Ananas&#34;</span>, <span style="color:#e6db74">&#34;Anar&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span> (<span style="color:#a6e22e">d</span>,<span style="color:#e6db74">&#34;&gt;&#34;</span>,<span style="color:#a6e22e">e</span>, <span style="color:#e6db74">&#34;: &#34;</span>, <span style="color:#a6e22e">d</span> &gt; <span style="color:#a6e22e">e</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span> (<span style="color:#a6e22e">s</span>,<span style="color:#e6db74">&#34;&gt;&#34;</span>, <span style="color:#a6e22e">v</span>, <span style="color:#e6db74">&#34;: &#34;</span>, <span style="color:#a6e22e">s</span> &gt; <span style="color:#a6e22e">v</span>)</span></span></code></pre></div><pre><code>102 &gt; 100 :  true
+Ananas &gt; Anar :  false
+</code></pre>
+<p>Məntiqi operatorlar</p>
+<table>
+  <thead>
+      <tr>
+          <th>operator</th>
+          <th>izahı</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>&amp;&amp;</td>
+          <td>məntiqi və. hər ikisi true olduqda true</td>
+      </tr>
+      <tr>
+          <td>||</td>
+          <td>məntiqi və ya. ikisindən biri true olduqda true.</td>
+      </tr>
+      <tr>
+          <td>!</td>
+          <td>əksi true olduqda</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">c</span>,<span style="color:#a6e22e">d</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span>&gt;<span style="color:#a6e22e">b</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">c</span>&gt;<span style="color:#a6e22e">d</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span>&gt;<span style="color:#a6e22e">b</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">c</span>&gt;<span style="color:#a6e22e">d</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( !(<span style="color:#a6e22e">c</span>&gt;<span style="color:#a6e22e">d</span>) )</span></span></code></pre></div><pre><code>false
+true
+true
+</code></pre>
+<p>Mənimsətmə operatorları</p>
+<table>
+  <thead>
+      <tr>
+          <th>operator</th>
+          <th>nümunə</th>
+          <th>izah</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>=</td>
+          <td>x = y</td>
+          <td>x-ə y-in qiyməti mənimsənir</td>
+      </tr>
+      <tr>
+          <td>+=</td>
+          <td>x += y</td>
+          <td>x = x + y</td>
+      </tr>
+      <tr>
+          <td>-=</td>
+          <td>x -= y</td>
+          <td>x = x - y</td>
+      </tr>
+      <tr>
+          <td>*=</td>
+          <td>x *= y</td>
+          <td>x = x * y</td>
+      </tr>
+      <tr>
+          <td>/=</td>
+          <td>x /= y</td>
+          <td>x = x / y</td>
+      </tr>
+      <tr>
+          <td>%=</td>
+          <td>x %= y</td>
+          <td>x = x % y</td>
+      </tr>
+      <tr>
+          <td>&amp;=</td>
+          <td>x &amp;= y</td>
+          <td>x = x &amp; y</td>
+      </tr>
+      <tr>
+          <td>|=</td>
+          <td>x |= y</td>
+          <td>x = x | y</td>
+      </tr>
+      <tr>
+          <td>^=</td>
+          <td>x ^= y</td>
+          <td>x = x ^ y</td>
+      </tr>
+      <tr>
+          <td>&raquo;=</td>
+          <td>x &raquo;= y</td>
+          <td>x = x &raquo; y</td>
+      </tr>
+      <tr>
+          <td>&laquo;=</td>
+          <td>x &laquo;= y</td>
+          <td>x = x &laquo; y</td>
+      </tr>
+  </tbody>
+</table>
+<p>Mənimsətmə , vergul ilə</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> = <span style="color:#a6e22e">a</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">b</span><span style="color:#f92672">-</span><span style="color:#a6e22e">a</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>)</span></span></code></pre></div><pre><code>1 5
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> = <span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">a</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>)</span></span></code></pre></div><pre><code>5 0
+</code></pre>
+<p>Əgər funksiya tuple (bir neçə tip) qaytarırsa. <span style="color:red">Funksiyaları növbəti dərslərdə keçəcəyik</span></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">tt</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">string</span>)  {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">x</span> , <span style="color:#e6db74">&#34;hello&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tt</span>(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">_</span>,<span style="color:#a6e22e">c</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tt</span>(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">c</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">d</span>,<span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">tt</span>(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">d</span>)
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div><pre><code>7 hello
+hello
+9
+</code></pre>
+<p>Operatorların üstünlüyü və assosasitivliyi və tiplərə bağlılığı</p>
+<p>Ən üstdəki daha güclü operator sayılır. Məsələn * +-dən güclü olduğu üçün ilk öncə o yerinə yetirilir<br>
+Üstünlük yuxarıdan aşağıya doğru</p>
+<table>
+  <thead>
+      <tr>
+          <th>kateqoriya</th>
+          <th>operator</th>
+          <th>assosasitivliyi</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>5. Əsasən Multiplikativ</td>
+          <td>*  /   % &laquo;   &raquo; &amp; &amp;^</td>
+          <td>Soldan Sağa</td>
+      </tr>
+      <tr>
+          <td>4. Əsasən Additiv</td>
+          <td>+ -	| ^</td>
+          <td>Soldan Sağa</td>
+      </tr>
+      <tr>
+          <td>3. Müqayisə</td>
+          <td>== != &lt;  &lt;=  &gt;  &gt;=</td>
+          <td>Soldan Sağa</td>
+      </tr>
+      <tr>
+          <td>2. Məntiqi AND</td>
+          <td>&amp;&amp;</td>
+          <td>Soldan Sağa</td>
+      </tr>
+      <tr>
+          <td>1. Məntiqi OR</td>
+          <td>||</td>
+          <td>Soldan Sağa</td>
+      </tr>
+  </tbody>
+</table>
+<p>Assosativlik eyni güclü operatorlarda hesablama və  həyata keçirmə ardıcıllığını göstərir.</p>
+<p><span style="color:red"><strong>Proqramçı qeydi.</strong> Bu cədvəl dillərdən dillərə dəyişilir. Ona görə digər dildən Go dilinə çevirəndə ordakı üstünlük cədvəlini nəzərdən keçirmək lazımdır.<br>
+Ümumən məsləhətdir ki mötərizələrdən istifadə edilsin.</span></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">c</span>  = <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">netice</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">c</span>  <span style="color:#75715e">// (a/b)*c  yoxsa a/(b*c) ?</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%d/%d*%d ifadesinde (%d/%d)*%d = %d yoxsa %d/(%d*%d) = %d ?\n&#34;</span>,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">c</span> ,(<span style="color:#a6e22e">a</span><span style="color:#f92672">/</span><span style="color:#a6e22e">b</span>)<span style="color:#f92672">*</span><span style="color:#a6e22e">c</span> ,<span style="color:#a6e22e">a</span>,<span style="color:#a6e22e">b</span>,<span style="color:#a6e22e">c</span>,<span style="color:#a6e22e">a</span><span style="color:#f92672">/</span>(<span style="color:#a6e22e">b</span><span style="color:#f92672">*</span><span style="color:#a6e22e">c</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Asosativlik soldan saga oldugu uchun\nnetice: &#34;</span>, <span style="color:#a6e22e">netice</span>)</span></span></code></pre></div><pre><code>18/2*3 ifadesinde (18/2)*3 = 27 yoxsa 18/(2*3) = 3 ?
+Asosativlik soldan saga oldugu uchun
+netice:  27
+</code></pre>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/GoLangFastPaced/content/01-esaslar/basicoutput/" class="flex align-center">
+        <img src="/GoLangFastPaced/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Basic Output</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/GoLangFastPaced/content/01-esaslar/flowcontrols/" class="flex align-center">
+        <span>Flow Controls</span>
+        <img src="/GoLangFastPaced/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

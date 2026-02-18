@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Generics on GoFastPaced</title>
+    <link>http://localhost:1313/GoLangFastPaced/tags/generics/</link>
+    <description>Recent content in Generics on GoFastPaced</description>
+    <generator>Hugo</generator>
+    <language>az</language>
+    <atom:link href="http://localhost:1313/GoLangFastPaced/tags/generics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generics Type Constraints General Interface</title>
+      <link>http://localhost:1313/GoLangFastPaced/content/04-interfeysler-generikler/genericstypeconstraintsgeneralinterface/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/content/04-interfeysler-generikler/genericstypeconstraintsgeneralinterface/</guid>
+      <description>&lt;h3 id=&#34;generics&#34;&gt;Generics&lt;a class=&#34;anchor&#34; href=&#34;#generics&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Bəzən biz funksiya və yeni mürəkkəb tip quranda onun istifadə etdiyi parametrlərin və&lt;br&gt;&#xA;dəyişənlərin tipini istifadə zamanı müəyyən edilməsini istəyirik.&lt;br&gt;&#xA;Aydın məsələdir ki bu boş interfeysdən fərqli olaraq daha sürətli olacaq.&lt;br&gt;&#xA;Buna Go dilində bir çox dillərdə olduğu kimi generics type deyilən yanaşma ilə nail olunur.&lt;br&gt;&#xA;Go dilinin yeni versiyalarında (&amp;gt;=1.18) artıq bunu istifadə etmək mümkündür.&lt;/p&gt;&#xA;&lt;p&gt;Tip elan edilməsinə yenidən baxaq:&lt;/p&gt;&#xA;&lt;pre&gt;&#xA;&#xA; &#xA;type ad [TipParametri] tip &#xA;&#xA;Burada TipParametri:&#xA;[ ] arasında ad və Məhdudiyyət cütlüklərindən ibarət olan siyahı olur&#xA;Məsələn [T Constraint], [T Məhdudiyyət1, V Məhdudiyyət2, ...]&#xA;&#xA;(Tip Məhdudiyyətlərini aşağıda xüsusi bölmədə izah edəcəyik.  )&#xA;&#xA;Yeni tipimizə metod vermək üçün  &#xA;&#xA;func (x * ad[T]) metod_adı(parametrlər... ) nəticə... { ...}&#xA;&#xA;&lt;/pre&gt;&#xA;&lt;p&gt;Həmçinin generic funksiya elan edilməsinə baxaq:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

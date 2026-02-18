@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on GoFastPaced</title>
+    <link>http://localhost:1313/GoLangFastPaced/tags/</link>
+    <description>Recent content in Tags on GoFastPaced</description>
+    <generator>Hugo</generator>
+    <language>az</language>
+    <atom:link href="http://localhost:1313/GoLangFastPaced/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Aliases</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/aliases/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/aliases/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>And</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/and/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/and/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Anonymous</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/anonymous/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/anonymous/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Array</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/array/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/array/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Assertions</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/assertions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/assertions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Basic</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/basic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/basic/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Build</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/build/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/build/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Channels</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/channels/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/channels/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Closure</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/closure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/closure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Constants</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/constants/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/constants/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Constraints</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/constraints/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/constraints/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Controls</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/controls/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/controls/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/data/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Defer</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/defer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/defer/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Definitons</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/definitons/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/definitons/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Error</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/error/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/error/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Flow</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/flow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/flow/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Functions</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/functions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/functions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>General</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/general/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/general/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Generics</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/generics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/generics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Go</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/go/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Goroutine</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/goroutine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/goroutine/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Group</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/group/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/group/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Input</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/input/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/input/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Install</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/install/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Interface</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/interface/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/interface/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Map</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/map/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/map/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Modules</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/modules/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/modules/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Number</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/number/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/number/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Operators</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/operators/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/operators/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Output</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/output/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/output/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Packages</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/packages/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/packages/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Panic</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/panic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/panic/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pointers</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/pointers/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/pointers/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Recover</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/recover/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/recover/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Recursive</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/recursive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/recursive/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Select</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/select/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/select/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Slice</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/slice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/slice/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>String</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/string/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/string/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Structs</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/structs/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/structs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Test</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/test/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Type</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/type/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/type/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Types</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/types/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/types/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Variables</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/variables/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/variables/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Wait</title>
+      <link>http://localhost:1313/GoLangFastPaced/tags/wait/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/GoLangFastPaced/tags/wait/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

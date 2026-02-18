@@ -1,3 +1,9 @@
 [submodule "website/GoFastPaced/themes/hugo-paper"]
 	path = website/GoFastPaced/themes/hugo-paper
 	url = https://github.com/BranchAndLink/hugo-paper
+[submodule "website/GoFastPaced/themes/themes/hugo-book"]
+	path = website/GoFastPaced/themes/themes/hugo-book
+	url = https://github.com/alex-shpak/hugo-book
+[submodule "website/GoFastPaced/themes/hugo-book"]
+	path = website/GoFastPaced/themes/hugo-book
+	url = https://github.com/alex-shpak/hugo-book

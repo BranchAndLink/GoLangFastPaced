@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="az" dir="ltr">
+<head><script src="/GoLangFastPaced/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=GoLangFastPaced/livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="First Class Function (1-ci sinif funksiyalar)# Go dilində funksiyalar 1-ci sinifdir. Bu o deməkdir ki, funksiyalar dəyişənə mənimsədilə, digər funksiyaya ötürülə, nəticə kimi qaytarıla bilinir.
+Dediklərimizi misallarla göstərək
+Funksiya dəyişən kimi
+func Go(h int) int { return h &#43; 5 } %% funksiya := Go fmt.Printf(&#34;%T\n&#34;, funksiya) fmt.Println(funksiya(55))func(int) int 60 Funksiya arqument kimi
+func DoCalc( operator func(int, int) int, initial int, args ...int) (netice int) { netice = initial for _, x:= range args { netice = operator(netice, x) } return } func Toplama (x, y int) int { return x&#43;y } func Vurma (x, y int) int { return x*y } %% ededler := [...] int {4,5,6,7,8,9,7,5,3,2} fmt.Println( &#34;Toplama&#34;, DoCalc(Toplama, 0, ededler[:]...)) fmt.Println( &#34;Vurma&#34;, DoCalc(Vurma, 1, ededler[:]...))Toplama 56 Vurma 12700800 Funksiya nəticə kimi
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/functionsrecursiveanonymousclosure/">
+  <meta property="og:site_name" content="GoFastPaced">
+  <meta property="og:title" content="Functions Recursive Anonymous Closure">
+  <meta property="og:description" content="First Class Function (1-ci sinif funksiyalar)# Go dilində funksiyalar 1-ci sinifdir. Bu o deməkdir ki, funksiyalar dəyişənə mənimsədilə, digər funksiyaya ötürülə, nəticə kimi qaytarıla bilinir.
+Dediklərimizi misallarla göstərək
+Funksiya dəyişən kimi
+func Go(h int) int { return h &#43; 5 } %% funksiya := Go fmt.Printf(&#34;%T\n&#34;, funksiya) fmt.Println(funksiya(55))func(int) int 60 Funksiya arqument kimi
+func DoCalc( operator func(int, int) int, initial int, args ...int) (netice int) { netice = initial for _, x:= range args { netice = operator(netice, x) } return } func Toplama (x, y int) int { return x&#43;y } func Vurma (x, y int) int { return x*y } %% ededler := [...] int {4,5,6,7,8,9,7,5,3,2} fmt.Println( &#34;Toplama&#34;, DoCalc(Toplama, 0, ededler[:]...)) fmt.Println( &#34;Vurma&#34;, DoCalc(Vurma, 1, ededler[:]...))Toplama 56 Vurma 12700800 Funksiya nəticə kimi">
+  <meta property="og:locale" content="az">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="content">
+    <meta property="article:tag" content="Functions">
+    <meta property="article:tag" content="Recursive">
+    <meta property="article:tag" content="Anonymous">
+    <meta property="article:tag" content="Closure">
+    <meta property="article:tag" content="Go">
+
+
+  <meta itemprop="name" content="Functions Recursive Anonymous Closure">
+  <meta itemprop="description" content="First Class Function (1-ci sinif funksiyalar)# Go dilində funksiyalar 1-ci sinifdir. Bu o deməkdir ki, funksiyalar dəyişənə mənimsədilə, digər funksiyaya ötürülə, nəticə kimi qaytarıla bilinir.
+Dediklərimizi misallarla göstərək
+Funksiya dəyişən kimi
+func Go(h int) int { return h &#43; 5 } %% funksiya := Go fmt.Printf(&#34;%T\n&#34;, funksiya) fmt.Println(funksiya(55))func(int) int 60 Funksiya arqument kimi
+func DoCalc( operator func(int, int) int, initial int, args ...int) (netice int) { netice = initial for _, x:= range args { netice = operator(netice, x) } return } func Toplama (x, y int) int { return x&#43;y } func Vurma (x, y int) int { return x*y } %% ededler := [...] int {4,5,6,7,8,9,7,5,3,2} fmt.Println( &#34;Toplama&#34;, DoCalc(Toplama, 0, ededler[:]...)) fmt.Println( &#34;Vurma&#34;, DoCalc(Vurma, 1, ededler[:]...))Toplama 56 Vurma 12700800 Funksiya nəticə kimi">
+  <meta itemprop="wordCount" content="1037">
+  <meta itemprop="keywords" content="Functions,Recursive,Anonymous,Closure,Go">
+
+<title>Functions Recursive Anonymous Closure | GoFastPaced</title>
+<link rel="icon" href="/GoLangFastPaced/favicon.png" >
+<link rel="manifest" href="/GoLangFastPaced/manifest.json">
+<link rel="canonical" href="http://localhost:1313/GoLangFastPaced/content/03-funksiyalar/functionsrecursiveanonymousclosure/">
+<link rel="stylesheet" href="/GoLangFastPaced/book.min.cc2c524ed250aac81b23d1f4af87344917b325208841feca0968fe450f570575.css" integrity="sha256-zCxSTtJQqsgbI9H0r4c0SRezJSCIQf7KCWj&#43;RQ9XBXU=" crossorigin="anonymous">
+
+
+  <script defer src="/GoLangFastPaced/fuse.min.js"></script>
+  <script defer src="/GoLangFastPaced/en.search.min.0d9eed8cbaeb3f34cb5979faed548d81e8505e6ef67011d0e2b856f394af6f75.js" integrity="sha256-DZ7tjLrrPzTLWXn67VSNgehQXm72cBHQ4rhW85Svb3U=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-content">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/GoLangFastPaced/"><span>GoFastPaced</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/" class="">
+      Fəsil 1: 01 Esaslar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/variables_datatypesconstants/" class="">
+      Variables Data Types Constants</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicinput/" class="">
+      Basic Input</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicoutput/" class="">
+      Basic Output</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicoperators/" class="">
+      Basic Operators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/flowcontrols/" class="">
+      Flow Controls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/stringnumber/" class="">
+      String Number</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/" class="">
+      Fəsil 2: 02 Massivler Xerite</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/arrayandslice/" class="">
+      Array And Slice</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/map/" class="">
+      Map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/" class="">
+      Fəsil 3: 03 Funksiyalar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/functionsintro/" class="">
+      Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/functionsrecursiveanonymousclosure/" class="active">
+      Functions Recursive Anonymous Closure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/pointers/" class="">
+      Pointers</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/" class="">
+      Fəsil 4: 04 Interfeysler Generikler</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/basicinterfacetypeassertions/" class="">
+      Basic Interface Type Assertions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/genericstypeconstraintsgeneralinterface/" class="">
+      Generics Type Constraints General Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/typedefinitonsaliasesstructs/" class="">
+      Type Definitons Aliases Structs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/" class="">
+      Fəsil 5: 05 Gorutinler Sehv Idare</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/" class="">
+      Goroutine Channels Select Wait Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/error_defer_panic_recover/" class="">
+      Error defer panic recover</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/" class="">
+      Fəsil 6: 06 Modullar Qurulma</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/modulespackagesbuild/" class="">
+      Modules Packages Build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/buildinstalltest/" class="">
+      Build Install Test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/GoLangFastPaced/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Functions Recursive Anonymous Closure</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h4 id="first-class-function-1-ci-sinif-funksiyalar">First Class Function (1-ci sinif funksiyalar)<a class="anchor" href="#first-class-function-1-ci-sinif-funksiyalar">#</a></h4>
+<p>Go dilində funksiyalar 1-ci sinifdir. Bu o deməkdir ki, funksiyalar dəyişənə mənimsədilə, digər funksiyaya ötürülə, nəticə kimi qaytarıla bilinir.<br>
+Dediklərimizi misallarla göstərək</p>
+<p>Funksiya dəyişən kimi</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Go</span>(<span style="color:#a6e22e">h</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">h</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">funksiya</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Go</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T\n&#34;</span>, <span style="color:#a6e22e">funksiya</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">funksiya</span>(<span style="color:#ae81ff">55</span>))</span></span></code></pre></div><pre><code>func(int) int
+60
+</code></pre>
+<p>Funksiya arqument kimi</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">DoCalc</span>( <span style="color:#a6e22e">operator</span> <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">initial</span> <span style="color:#66d9ef">int</span>,  <span style="color:#a6e22e">args</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">int</span>) (<span style="color:#a6e22e">netice</span> <span style="color:#66d9ef">int</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">netice</span> = <span style="color:#a6e22e">initial</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">x</span><span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">args</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">netice</span> = <span style="color:#a6e22e">operator</span>(<span style="color:#a6e22e">netice</span>, <span style="color:#a6e22e">x</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Toplama</span> (<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">+</span><span style="color:#a6e22e">y</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Vurma</span> (<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span><span style="color:#f92672">*</span><span style="color:#a6e22e">y</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ededler</span> <span style="color:#f92672">:=</span> [<span style="color:#f92672">...</span>] <span style="color:#66d9ef">int</span> {<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#e6db74">&#34;Toplama&#34;</span>, <span style="color:#a6e22e">DoCalc</span>(<span style="color:#a6e22e">Toplama</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">ededler</span>[:]<span style="color:#f92672">...</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#e6db74">&#34;Vurma&#34;</span>,  <span style="color:#a6e22e">DoCalc</span>(<span style="color:#a6e22e">Vurma</span>, <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">ededler</span>[:]<span style="color:#f92672">...</span>))</span></span></code></pre></div><pre><code>Toplama 56
+Vurma 12700800
+</code></pre>
+<p>Funksiya nəticə kimi</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Funksiya</span> ( <span style="color:#a6e22e">op</span> <span style="color:#66d9ef">string</span> )  <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>  {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">op</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;+&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Toplama</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;*&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Vurma</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">default</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Toplama</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ededler</span> <span style="color:#f92672">:=</span> [<span style="color:#f92672">...</span>] <span style="color:#66d9ef">int</span> {<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#e6db74">&#34;Toplama&#34;</span>, <span style="color:#a6e22e">DoCalc</span>(<span style="color:#a6e22e">Funksiya</span>(<span style="color:#e6db74">&#34;+&#34;</span>), <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">ededler</span>[:]<span style="color:#f92672">...</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#e6db74">&#34;Vurma&#34;</span>,  <span style="color:#a6e22e">DoCalc</span>(<span style="color:#a6e22e">Funksiya</span>(<span style="color:#e6db74">&#34;*&#34;</span>), <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">ededler</span>[:]<span style="color:#f92672">...</span>))</span></span></code></pre></div><pre><code>Toplama 56
+Vurma 12700800
+</code></pre>
+<h5 id="anonymous-function-anonim-funksiya">Anonymous Function (Anonim funksiya)<a class="anchor" href="#anonymous-function-anonim-funksiya">#</a></h5>
+<p>Bəzən müvəqqəti adsız funksiya düzəltmək istəyirik. Bu zaman anonim funksiyadan (və ya lambda-dan) istifadə edə bilərik.<br>
+Bu funksiyanı istənilən yerdə elan edə bilməyimiz işimizi asanlaşdırır.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">funksiya</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">h</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T\n&#34;</span>, <span style="color:#a6e22e">funksiya</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">funksiya</span>(<span style="color:#ae81ff">55</span>))</span></span></code></pre></div><pre><code>func(int) int
+60
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sechim</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span> ( <span style="color:#a6e22e">op</span> <span style="color:#66d9ef">string</span> )  <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>  {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">op</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;+&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span>,<span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;*&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>  <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span>,<span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">y</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">default</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>  <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span>,<span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">y</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ededler</span> <span style="color:#f92672">:=</span> [<span style="color:#f92672">...</span>] <span style="color:#66d9ef">int</span> {<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#e6db74">&#34;Toplama&#34;</span>, <span style="color:#a6e22e">DoCalc</span>(<span style="color:#a6e22e">sechim</span>(<span style="color:#e6db74">&#34;+&#34;</span>), <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">ededler</span>[:]<span style="color:#f92672">...</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>( <span style="color:#e6db74">&#34;Vurma&#34;</span>,  <span style="color:#a6e22e">DoCalc</span>(<span style="color:#a6e22e">sechim</span>(<span style="color:#e6db74">&#34;*&#34;</span>), <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">ededler</span>[:]<span style="color:#f92672">...</span>))</span></span></code></pre></div><pre><code>Toplama 56
+Vurma 12700800
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>,<span style="color:#a6e22e">name</span>)
+</span></span><span style="display:flex;"><span>}(<span style="color:#e6db74">&#34;GoLang&#34;</span>)</span></span></code></pre></div><pre><code>Hello GoLang
+</code></pre>
+<p>Funksiya əgər digər funksiyaları arqument kimi götürüb və ya nəticə kimi qaytarırsa<br>
+ona <strong>High Order functions</strong> deyirik.</p>
+<h5 id="closure--klojr">Closure  (klojr)<a class="anchor" href="#closure--klojr">#</a></h5>
+<p>Closure dedikdə funksiya xaricində olan dəyişənləri funksiya daxilində (arqument kimi verilmədən) işlətmək imkanı nəzərdə tutulur.<br>
+Bu özəllik bizə bir çox məsələləri daha sadə həll etməyə imkan  verəcək.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">name</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;Golang&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Hello&#34;</span>,<span style="color:#a6e22e">name</span>)
+</span></span><span style="display:flex;"><span>}()</span></span></code></pre></div><pre><code>Hello Golang
+</code></pre>
+<p>Aşağıdakı misalda toplayan() funksiyası cem dəyişənini özündə saxlayan closure qaytaracaq.<br>
+Nəticə etibarilə hər dəfə closure-i çağırdıqda cem dəyişəcək.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">toplayan</span>() <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">cem</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">cem</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">x</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">cem</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s</span><span style="color:#f92672">:=</span><span style="color:#a6e22e">toplayan</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s</span>(<span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s</span>(<span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">s</span>(<span style="color:#ae81ff">5</span>))</span></span></code></pre></div><pre><code>5
+10
+15
+</code></pre>
+<p>Yuxarıda öyrəndiklərimizi tətbiq etməklə bəzi maraqlı funksiyalar yığaq</p>
+<p>Funksiyaların kompozisiyası. Mürəkkəb funksiya</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">MurekkebFunksiya</span>( <span style="color:#a6e22e">f</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">float64</span>, <span style="color:#a6e22e">g</span>  <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">string</span> )   <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">g</span>(<span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">x</span>))
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">f</span><span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">float64</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> float64(<span style="color:#a6e22e">x</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">g</span><span style="color:#f92672">:=</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">float64</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">metn</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;~~%g~~&#34;</span>, <span style="color:#a6e22e">x</span>) 
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">metn</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mmm</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">MurekkebFunksiya</span>(<span style="color:#a6e22e">f</span>,<span style="color:#a6e22e">g</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">mmm</span>(<span style="color:#ae81ff">456</span>))</span></span></code></pre></div><pre><code>~~228~~
+</code></pre>
+<p>Filter funksiyası arqument kimi</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Filter</span>  <span style="color:#66d9ef">func</span>(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SliceFilterInPlace</span>(<span style="color:#a6e22e">a</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">filterFunk</span> <span style="color:#a6e22e">Filter</span>) (<span style="color:#a6e22e">len</span> <span style="color:#66d9ef">int</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">a</span> {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">filterFunk</span>(<span style="color:#a6e22e">x</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">a</span>[<span style="color:#a6e22e">len</span>] = <span style="color:#a6e22e">x</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">len</span><span style="color:#f92672">++</span>
+</span></span><span style="display:flex;"><span>	   }
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SliceFilter</span>(<span style="color:#a6e22e">a</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">filterFunk</span> <span style="color:#a6e22e">Filter</span>) [] <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">slice</span> <span style="color:#f92672">:=</span> make([]<span style="color:#66d9ef">int</span>, <span style="color:#ae81ff">0</span>, len(<span style="color:#a6e22e">a</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">x</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">a</span> {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">filterFunk</span>(<span style="color:#a6e22e">x</span>) {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">slice</span> = append(<span style="color:#a6e22e">slice</span>, <span style="color:#a6e22e">x</span>)
+</span></span><span style="display:flex;"><span>	   }
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">slice</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">vals</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">int</span>{<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">99</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">66</span>, <span style="color:#ae81ff">7</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">111</span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">lenx</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">SliceFilterInPlace</span>(<span style="color:#a6e22e">vals</span>, <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span>&lt;<span style="color:#ae81ff">77</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">filtered</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">SliceFilter</span>(<span style="color:#a6e22e">vals</span>[:<span style="color:#a6e22e">lenx</span>], <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span> ) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span>&gt;<span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">filtered2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">SliceFilter</span>(<span style="color:#a6e22e">filtered</span>, <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">x</span> <span style="color:#66d9ef">int</span> ) <span style="color:#66d9ef">bool</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">x</span>&gt;<span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">vals</span>[:<span style="color:#a6e22e">lenx</span>], <span style="color:#a6e22e">filtered</span>, <span style="color:#a6e22e">filtered2</span>)</span></span></code></pre></div><pre><code>[-2 -8 8 5 0 1 9 7 55 66 7 -3 -5 6] [8 5 1 9 7 55 66 7 6] [55 66]
+</code></pre>
+<p>Currying.
+Currying dedikdə, Funksiyanın arqumentlərini ardıcıl vermə bacarığı nəzərdə tutulur. <br>
+Haskell kimi dillərdə adi funksiya bu özəlliyə sahibdir.<br>
+Go dilində biz bu özəlliyi bildiklərimizlə əldə edə bilərik.
+Arqumentləri sıra ilə tətbiq etmək.<br>
+Qeyd: Bundan daha yaxşı istifadə üçün <strong>curry aid paketlərdən</strong> istifadə etmək lazımdır.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CR1</span> <span style="color:#66d9ef">func</span> (<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CR2</span> <span style="color:#66d9ef">func</span> (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CR3</span> <span style="color:#66d9ef">func</span> (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CR4</span> <span style="color:#66d9ef">func</span> (<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#a6e22e">CR1</span>) <span style="color:#a6e22e">Curry</span>( <span style="color:#a6e22e">arg</span> <span style="color:#66d9ef">int</span> )  <span style="color:#66d9ef">func</span>() <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span> () <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	   <span style="color:#66d9ef">return</span>  <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">arg</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#a6e22e">CR2</span>) <span style="color:#a6e22e">Curry</span>( <span style="color:#a6e22e">arg</span> <span style="color:#66d9ef">int</span> )  <span style="color:#a6e22e">CR1</span> {
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">h</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>  <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">h</span>)
+</span></span><span style="display:flex;"><span>	 }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#a6e22e">CR3</span>) <span style="color:#a6e22e">Curry</span>( <span style="color:#a6e22e">arg</span> <span style="color:#66d9ef">int</span> )  <span style="color:#a6e22e">CR2</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span> ( <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>  {
+</span></span><span style="display:flex;"><span>	   <span style="color:#66d9ef">return</span>  <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">f</span> <span style="color:#a6e22e">CR4</span>) <span style="color:#a6e22e">Curry</span>( <span style="color:#a6e22e">arg</span> <span style="color:#66d9ef">int</span> ) <span style="color:#a6e22e">CR3</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">func</span> ( <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">z</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	   <span style="color:#66d9ef">return</span>  <span style="color:#a6e22e">f</span>(<span style="color:#a6e22e">arg</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">z</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fn</span> <span style="color:#a6e22e">CR4</span>  = <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">x</span>,<span style="color:#a6e22e">y</span>,<span style="color:#a6e22e">z</span>, <span style="color:#a6e22e">d</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">x</span><span style="color:#f92672">+</span><span style="color:#a6e22e">y</span> <span style="color:#f92672">+</span><span style="color:#a6e22e">z</span> )<span style="color:#f92672">*</span><span style="color:#a6e22e">d</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fn4</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fn</span>.<span style="color:#a6e22e">Curry</span>(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fn4_5</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fn4</span>.<span style="color:#a6e22e">Curry</span>(<span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fn4_5_6</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fn4_5</span>.<span style="color:#a6e22e">Curry</span>(<span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fn4_5_6_2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fn4_5_6</span>.<span style="color:#a6e22e">Curry</span>(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T %v\n&#34;</span>,<span style="color:#a6e22e">fn</span>,  <span style="color:#a6e22e">fn</span>(<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T %v\n&#34;</span>,<span style="color:#a6e22e">fn4</span>,  <span style="color:#a6e22e">fn4</span>(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T %v\n&#34;</span>,<span style="color:#a6e22e">fn4_5</span>,  <span style="color:#a6e22e">fn4_5</span>(<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">2</span>)) 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T %v\n&#34;</span>,<span style="color:#a6e22e">fn4_5_6</span>,  <span style="color:#a6e22e">fn4_5_6</span>(<span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%T %v\n&#34;</span>,<span style="color:#a6e22e">fn4_5_6_2</span>,  <span style="color:#a6e22e">fn4_5_6_2</span>())
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fn882</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fn</span>.<span style="color:#a6e22e">Curry</span>(<span style="color:#ae81ff">8</span>).<span style="color:#a6e22e">Curry</span>(<span style="color:#ae81ff">8</span>).<span style="color:#a6e22e">Curry</span>(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;(8+8+2) * 55 = %v\n&#34;</span>,<span style="color:#a6e22e">fn882</span>(<span style="color:#ae81ff">55</span>))</span></span></code></pre></div><pre><code>main.CR4 30
+main.CR3 30
+main.CR2 30
+main.CR1 30
+func() int 30
+(8+8+2) * 55 = 990
+</code></pre>
+<h4 id="rekursion-rekursiya">Rekursion (Rekursiya)<a class="anchor" href="#rekursion-rekursiya">#</a></h4>
+<p>Funksiya əgər daxildə öz funksiyasını çağırırsa buna rekursiya deyilir. Həmçinin Əgər funksiya çağırdığı funksiyalardan biri də yenidən onu çağırırsa<br>
+rekursiya baş verir. Rekursiv funksiyalarla biz bəzi alqoritmik məsələləri həll edə bilərik.<br>
+Lakin nəzərə almaq lazımdır ki rekursiya (call stack) stek yaddaşın dolmasına səbəb olur.<br>
+(<span style="color:red">Qeyd GO-da hələki rekursiv funksiyalar (tail recursion optimization) <b>optimallaş-ma-dığından</b> alqoritmik həlləri for iterasiyası ilə yığmaq məsləhətdir.</span>)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">faktorial</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">faktorial</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#a6e22e">faktorial</span>(<span style="color:#ae81ff">6</span>))</span></span></code></pre></div><pre><code>720
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">cem</span>( <span style="color:#a6e22e">a</span> [] <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">a</span>) &lt;<span style="color:#ae81ff">2</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">a</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#a6e22e">cem</span>(<span style="color:#a6e22e">a</span>[<span style="color:#ae81ff">1</span>:])
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#a6e22e">cem</span>([]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">10000</span>}))</span></span></code></pre></div><pre><code>11145
+</code></pre>
+<p>Aşağıdakı misalda  anonim closure funksiyasında rekursiyanı vermək üçün fibonacci dəyişənini var ilə <strong>əvvəlcədən</strong> bəyan etməli oluruq.<br>
+Əks halda closure-mız funksiyanı təyin edə bilmir.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fibonacci</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fibonacci</span> = <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> &lt; <span style="color:#ae81ff">2</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>
+</span></span><span style="display:flex;"><span>	} 
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fibonacci</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">fibonacci</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>print(<span style="color:#a6e22e">fibonacci</span>(<span style="color:#ae81ff">15</span>))</span></span></code></pre></div><pre><code>610
+</code></pre>
+<p>Fibonnaci misalında təkrar hesablamalar üçün memoization(yaddaş, keş) texnikasını əlavə edə bilərik</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">fibonacci</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">yaddash</span> = make(<span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">int</span>]<span style="color:#66d9ef">int</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fibonacci</span> = <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">int</span>  {
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">n</span> &lt; <span style="color:#ae81ff">2</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">n</span>
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">//eger hesablama varsa yaddash-dan gotur</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">v</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">yaddash</span>[<span style="color:#a6e22e">n</span>]; <span style="color:#a6e22e">ok</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">v</span>
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fibonacci</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">fibonacci</span>(<span style="color:#a6e22e">n</span><span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#a6e22e">yaddash</span>[<span style="color:#a6e22e">n</span>] = <span style="color:#a6e22e">result</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">result</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>print(<span style="color:#a6e22e">fibonacci</span>(<span style="color:#ae81ff">15</span>))</span></span></code></pre></div><pre><code>610
+</code></pre>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/GoLangFastPaced/content/03-funksiyalar/functionsintro/" class="flex align-center">
+        <img src="/GoLangFastPaced/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Functions</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/GoLangFastPaced/content/03-funksiyalar/pointers/" class="flex align-center">
+        <span>Pointers</span>
+        <img src="/GoLangFastPaced/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

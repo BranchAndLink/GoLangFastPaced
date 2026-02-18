@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="az" dir="ltr">
+<head><script src="/GoLangFastPaced/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=GoLangFastPaced/livereload" data-no-instant defer></script>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BASIC INPUT OUTPUT# Sadə proqramlarda giriş və əks etdirmə üsullarına baxaq.
+Ümumən, ilk öncə stdin stderr stdout anlamlarını qısa şərh edək.
+stdin - Standart giriş (Standard Input) proqramın daxil olan məlumatı oxuduğu kommunikasiya kanalıdır. stdout - Standart çıxış (Standard Output) proqramın xaric olan məlumatı yazdığı kommunikasiya kanalıdır. stderr - Standart xəta (Standard Error) proqramın xaric olan xəta məlumatlarını yazdığı kommunikasiya kanalıdır. Bunları həmçinin axın (stream) adlandıra bilərik.
+Linux-da ümumən isə fayl sözünü də işlədə bilərik.
+Bu zaman stdin, stdout, stderr -in fayl deskriptorları da olacaq. Fayl deskriptoru deyəndə açılan fayla xas ədəd nəzərdə tutulur.
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoutput/">
+  <meta property="og:site_name" content="GoFastPaced">
+  <meta property="og:title" content="Basic Output">
+  <meta property="og:description" content="BASIC INPUT OUTPUT# Sadə proqramlarda giriş və əks etdirmə üsullarına baxaq.
+Ümumən, ilk öncə stdin stderr stdout anlamlarını qısa şərh edək.
+stdin - Standart giriş (Standard Input) proqramın daxil olan məlumatı oxuduğu kommunikasiya kanalıdır. stdout - Standart çıxış (Standard Output) proqramın xaric olan məlumatı yazdığı kommunikasiya kanalıdır. stderr - Standart xəta (Standard Error) proqramın xaric olan xəta məlumatlarını yazdığı kommunikasiya kanalıdır. Bunları həmçinin axın (stream) adlandıra bilərik.
+Linux-da ümumən isə fayl sözünü də işlədə bilərik.
+Bu zaman stdin, stdout, stderr -in fayl deskriptorları da olacaq. Fayl deskriptoru deyəndə açılan fayla xas ədəd nəzərdə tutulur.">
+  <meta property="og:locale" content="az">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="content">
+    <meta property="article:tag" content="Basic">
+    <meta property="article:tag" content="Output">
+    <meta property="article:tag" content="Go">
+
+
+  <meta itemprop="name" content="Basic Output">
+  <meta itemprop="description" content="BASIC INPUT OUTPUT# Sadə proqramlarda giriş və əks etdirmə üsullarına baxaq.
+Ümumən, ilk öncə stdin stderr stdout anlamlarını qısa şərh edək.
+stdin - Standart giriş (Standard Input) proqramın daxil olan məlumatı oxuduğu kommunikasiya kanalıdır. stdout - Standart çıxış (Standard Output) proqramın xaric olan məlumatı yazdığı kommunikasiya kanalıdır. stderr - Standart xəta (Standard Error) proqramın xaric olan xəta məlumatlarını yazdığı kommunikasiya kanalıdır. Bunları həmçinin axın (stream) adlandıra bilərik.
+Linux-da ümumən isə fayl sözünü də işlədə bilərik.
+Bu zaman stdin, stdout, stderr -in fayl deskriptorları da olacaq. Fayl deskriptoru deyəndə açılan fayla xas ədəd nəzərdə tutulur.">
+  <meta itemprop="wordCount" content="978">
+  <meta itemprop="keywords" content="Basic,Output,Go">
+
+<title>Basic Output | GoFastPaced</title>
+<link rel="icon" href="/GoLangFastPaced/favicon.png" >
+<link rel="manifest" href="/GoLangFastPaced/manifest.json">
+<link rel="canonical" href="http://localhost:1313/GoLangFastPaced/content/01-esaslar/basicoutput/">
+<link rel="stylesheet" href="/GoLangFastPaced/book.min.cc2c524ed250aac81b23d1f4af87344917b325208841feca0968fe450f570575.css" integrity="sha256-zCxSTtJQqsgbI9H0r4c0SRezJSCIQf7KCWj&#43;RQ9XBXU=" crossorigin="anonymous">
+
+
+  <script defer src="/GoLangFastPaced/fuse.min.js"></script>
+  <script defer src="/GoLangFastPaced/en.search.min.0d9eed8cbaeb3f34cb5979faed548d81e8505e6ef67011d0e2b856f394af6f75.js" integrity="sha256-DZ7tjLrrPzTLWXn67VSNgehQXm72cBHQ4rhW85Svb3U=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-content">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/GoLangFastPaced/"><span>GoFastPaced</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="Search"
+    aria-label="Search"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/" class="">
+      Fəsil 1: 01 Esaslar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/variables_datatypesconstants/" class="">
+      Variables Data Types Constants</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicinput/" class="">
+      Basic Input</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicoutput/" class="active">
+      Basic Output</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/basicoperators/" class="">
+      Basic Operators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/flowcontrols/" class="">
+      Flow Controls</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/01-esaslar/stringnumber/" class="">
+      String Number</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/" class="">
+      Fəsil 2: 02 Massivler Xerite</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/arrayandslice/" class="">
+      Array And Slice</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/02-massivler-xerite/map/" class="">
+      Map</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/" class="">
+      Fəsil 3: 03 Funksiyalar</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/functionsintro/" class="">
+      Functions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/functionsrecursiveanonymousclosure/" class="">
+      Functions Recursive Anonymous Closure</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/03-funksiyalar/pointers/" class="">
+      Pointers</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/" class="">
+      Fəsil 4: 04 Interfeysler Generikler</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/basicinterfacetypeassertions/" class="">
+      Basic Interface Type Assertions</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/genericstypeconstraintsgeneralinterface/" class="">
+      Generics Type Constraints General Interface</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/04-interfeysler-generikler/typedefinitonsaliasesstructs/" class="">
+      Type Definitons Aliases Structs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/" class="">
+      Fəsil 5: 05 Gorutinler Sehv Idare</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/goroutinechannelsselectwaitgroup/" class="">
+      Goroutine Channels Select Wait Group</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/05-gorutinler-sehv-idare/error_defer_panic_recover/" class="">
+      Error defer panic recover</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/" class="">
+      Fəsil 6: 06 Modullar Qurulma</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/modulespackagesbuild/" class="">
+      Modules Packages Build</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/GoLangFastPaced/content/06-modullar-qurulma/buildinstalltest/" class="">
+      Build Install Test</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/GoLangFastPaced/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Basic Output</h3>
+
+  <label for="toc-control">
+    
+  </label>
+</div>
+
+
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h3 id="basic-input-output">BASIC INPUT OUTPUT<a class="anchor" href="#basic-input-output">#</a></h3>
+<p>Sadə proqramlarda giriş və əks etdirmə üsullarına baxaq.</p>
+<p>Ümumən, ilk öncə stdin stderr stdout anlamlarını qısa şərh edək.</p>
+<ul>
+<li>stdin - Standart giriş (Standard Input) proqramın daxil olan məlumatı oxuduğu kommunikasiya kanalıdır.</li>
+<li>stdout - Standart çıxış (Standard Output) proqramın xaric olan məlumatı yazdığı kommunikasiya kanalıdır.</li>
+<li>stderr - Standart xəta (Standard Error) proqramın xaric olan xəta məlumatlarını yazdığı kommunikasiya kanalıdır.</li>
+</ul>
+<p>Bunları həmçinin axın (stream) adlandıra bilərik.<br>
+Linux-da ümumən isə fayl sözünü də işlədə bilərik.<br>
+Bu zaman stdin, stdout, stderr -in fayl deskriptorları da olacaq. Fayl deskriptoru deyəndə açılan fayla xas ədəd nəzərdə tutulur.</p>
+<p>Proses yarananda 3 standard fayl axını yaranır.</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">Fayl desktiptoru</th>
+          <th style="text-align: center">Standard fayl axını</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">0</td>
+          <td style="text-align: center">stdin</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">1</td>
+          <td style="text-align: center">stdout</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">2</td>
+          <td style="text-align: center">stderr</td>
+      </tr>
+  </tbody>
+</table>
+<pre>
+             |         |    -> stdout
+stdin  --->  | proqram |
+             |         |    -> stderr
+
+</pre>
+<p>Adi halda axınlar belə bağlanır.</p>
+<ul>
+<li>stdin  - klaviaturaya (keyboard)</li>
+<li>stdout - konsol ekranına</li>
+<li>stderr - konsol ekranına</li>
+</ul>
+<p>Shell-də program icra etdikdə fərqli yerlərə də bağlamaq olar.</p>
+<p>Meselen:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./bizim_program  &lt;input_fayl.txt   1&gt;output.txt  2&gt; error.txt   </span></span></code></pre></div><p>Burada</p>
+<p>stdin - input_fayl.txt<br>
+stdout - output.txt<br>
+stderr - error.txt faylına bağlanır.</p>
+<h4 id="golang--de-output">Golang -de output<a class="anchor" href="#golang--de-output">#</a></h4>
+<p>Bunun üçün &ldquo;fmt&rdquo; standard kitabxanasından istifade edirik.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">any</span>) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">any</span>) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Printf</span>(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">any</span>) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Burada</span> <span style="color:#a6e22e">Arqumentlər</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">a</span> <span style="color:#a6e22e">istənilen</span> <span style="color:#a6e22e">tip</span> <span style="color:#a6e22e">və</span> <span style="color:#a6e22e">sayda</span> <span style="color:#a6e22e">dəyişən</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">format</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">format</span> <span style="color:#a6e22e">mətni</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Funksiya</span> <span style="color:#a6e22e">qaytarır</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">n</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">yazılmış</span> <span style="color:#a6e22e">bayt</span> <span style="color:#a6e22e">sayı</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">err</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">xəta</span>. <span style="color:#a6e22e">Baş</span> <span style="color:#a6e22e">vermədikdə</span> <span style="color:#66d9ef">nil</span> <span style="color:#a6e22e">olur</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;fmt&#34;</span></span></span></code></pre></div><p>İndi ise ekrana yazı verək.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span> </span></span></code></pre></div><p>Qeyd edək ki, o dəyişənlərin qiymətlərini stdout-a yazanda arasına &quot; &quot; boşluq əlavə edəcək.<br>
+Sonuna isə yeni sətir əlavə olunur.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Salam&#34;</span>,<span style="color:#e6db74">&#34;Dünya&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;Salam&#34;</span>,<span style="color:#e6db74">&#34;Azərbaycan&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">2023</span>, <span style="color:#ae81ff">5.789</span>)</span></span></code></pre></div><pre><code>Salam Dünya
+Salam Azərbaycan
+44 2023 5.789
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span> </span></span></code></pre></div><p>Bu da eyni işi görür. Ancaq string qiymətlərinin sonuna boşluq, və ümumi sonluğa yeni sətir əlavə etmir.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#e6db74">&#34;Salam&#34;</span>,<span style="color:#e6db74">&#34;Dünya&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#e6db74">&#34;Salam&#34;</span>,<span style="color:#e6db74">&#34;Azərbaycan&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">2023</span>, <span style="color:#ae81ff">5.789</span>)</span></span></code></pre></div><pre><code>SalamDünyaSalamAzərbaycan44 2023 5.789
+</code></pre>
+<p>Yeni sətir və boşluqları özümüz əlavə etmək istədikdə:</p>
+<pre> 
+' ' - boşluq 
+&#92;n  - yeni sətir 
+&#92;&#92;  - geri sləş &#92; 
+&#92;t  - tab 
+&#92;n&#92;r  - yeni sətir (windows üçün)
+&#92;" - dırnaq
+</pre>
+<p>Burada \ geri sləş vasitəsilə həmin yazıla bilinməyən simvolları veririk.<br>
+Həmçinin geri sləş-in özünü vermək üçün iki dəfə \\ istifadə etmişik.<br>
+Həmçinin string tipimizin qiyməti &quot; içərisində olduğundan onu da \-lə veririk.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#e6db74">&#34;Salam &#34;</span>,<span style="color:#e6db74">&#34;Dünya\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#e6db74">&#34;Salam &#34;</span>,<span style="color:#e6db74">&#34;\&#34;Azərbaycan\&#34;\n&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#ae81ff">44</span>, <span style="color:#ae81ff">2023</span>, <span style="color:#ae81ff">5.789</span>)</span></span></code></pre></div><pre><code>Salam Dünya
+Salam &quot;Azərbaycan&quot;
+44 2023 5.789
+</code></pre>
+<h5 id="formatlı-print">Formatlı print<a class="anchor" href="#formatl%c4%b1-print">#</a></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Go" data-lang="Go"><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span></span></span></code></pre></div><p>Bəzi Formatlara baxaq:</p>
+<table>
+  <thead>
+      <tr>
+          <th>format</th>
+          <th>əks etdirmə şəkli</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>%b</td>
+          <td>ikili sayda</td>
+      </tr>
+      <tr>
+          <td>%o</td>
+          <td>8-lik say sistemində</td>
+      </tr>
+      <tr>
+          <td>%O</td>
+          <td>8-lik say sistemi o prefiksi ilə</td>
+      </tr>
+      <tr>
+          <td>%d</td>
+          <td>10-luq sayda</td>
+      </tr>
+      <tr>
+          <td>%x</td>
+          <td>16-lıq sayda 1 baytı iki simvolla  [0-9a-f]</td>
+      </tr>
+      <tr>
+          <td>%X</td>
+          <td>16-lıq say  1 baytı iki simvolla, lakin  böyük hərflə [0-9A-F]</td>
+      </tr>
+      <tr>
+          <td>%g</td>
+          <td>onluq kəsr ədədləri kimi</td>
+      </tr>
+      <tr>
+          <td>%s</td>
+          <td>mətn ve simvollar ardıcıllığı</td>
+      </tr>
+      <tr>
+          <td>%t</td>
+          <td>bul üçün true false kimi</td>
+      </tr>
+      <tr>
+          <td>%e</td>
+          <td>elmi riyazi formatda</td>
+      </tr>
+      <tr>
+          <td>%v</td>
+          <td>təyin edilən tipin formatına uyğun</td>
+      </tr>
+      <tr>
+          <td>%#v</td>
+          <td>Go sintaksis formatına uygun</td>
+      </tr>
+      <tr>
+          <td>%T</td>
+          <td>arqumentin Tipi</td>
+      </tr>
+      <tr>
+          <td>%c</td>
+          <td>simvol</td>
+      </tr>
+      <tr>
+          <td>%q</td>
+          <td>simvol və ya simvol ardıcıllığı dırnaq daxilində</td>
+      </tr>
+      <tr>
+          <td>%+q</td>
+          <td>simvol və ya simvol ardıcıllığı dırnaq daxilində, ASCII-dən fərqli simvolları \ ilə əks etdirir</td>
+      </tr>
+      <tr>
+          <td>%U</td>
+          <td>unikod</td>
+      </tr>
+      <tr>
+          <td>%#U</td>
+          <td>unikod + simvol</td>
+      </tr>
+      <tr>
+          <td>%p</td>
+          <td>pointer</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">h</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">3.85</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mətn</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;👍Mətn&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">simvol</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#39;👍&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Formatlı əks %d, %g, %e, %s, %v, %v\n&#34;</span>, int(<span style="color:#a6e22e">h</span>), <span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">mətn</span>, <span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">mətn</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Formatlı əks %#v, %T, %q, %+q, %q, %U, %#U\n&#34;</span>, <span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">h</span>, <span style="color:#a6e22e">mətn</span>, <span style="color:#a6e22e">mətn</span>, <span style="color:#a6e22e">simvol</span>, <span style="color:#a6e22e">simvol</span>, <span style="color:#a6e22e">simvol</span>)</span></span></code></pre></div><pre><code>Formatlı əks 3, 3.85, 3.850000e+00, 👍Mətn, 3.85, 👍Mətn
+Formatlı əks 3.85, float64, &quot;👍Mətn&quot;, &quot;\U0001f44dM\u0259tn&quot;, '👍', U+1F44D, U+1F44D '👍'
+</code></pre>
+<p>Bundan əlavə aşağıdakı format dəyişimlərindən də istifadə etmək olar.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Görüntü</th>
+          <th>Format dəyişimi</th>
+          <th>izah</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td></td>
+          <td>&lsquo;#&rsquo;</td>
+          <td>alternativ format yaradır:  Məsələn: 0b (%#b) ikilik, 0x 16-lıq %#x  və s</td>
+      </tr>
+      <tr>
+          <td>&lsquo; 24&rsquo;</td>
+          <td>&lsquo;% &rsquo;, &lsquo;% d&rsquo;</td>
+          <td>boşluq əlavə edir. formatlar: &lsquo;% d&rsquo;, &lsquo;% x&rsquo;, &lsquo;% X&rsquo;</td>
+      </tr>
+      <tr>
+          <td>&lsquo;41 6C 6D 61 6C C4 B1&rsquo;</td>
+          <td>&lsquo;% &rsquo;, &lsquo;% X&rsquo;</td>
+          <td>16-lıq sayda bir bayt iki simvolla və aralarında boşluqla</td>
+      </tr>
+      <tr>
+          <td>&lsquo;+24&rsquo;</td>
+          <td>&lsquo;%+&rsquo;, &lsquo;%+d&rsquo;</td>
+          <td>işarəli ədəd ,yalnız (%q və %d ilə işlənir)</td>
+      </tr>
+      <tr>
+          <td>&lsquo;\U0001f44dM\u0259tn&rsquo;</td>
+          <td>&lsquo;%+&rsquo;, &lsquo;%+q&rsquo;</td>
+          <td>%q ilə işlənib ASCII simvol</td>
+      </tr>
+      <tr>
+          <td>&lsquo;    20&rsquo;</td>
+          <td>&lsquo;%{n}d&rsquo; , &lsquo;%4d&rsquo;</td>
+          <td>n sayda olub sağa sıxılmış yazı (nümunədə 4 sayda)</td>
+      </tr>
+      <tr>
+          <td>&lsquo;15    &rsquo;</td>
+          <td>&lsquo;%-{n}d&rsquo;, &lsquo;%-4d&rsquo;</td>
+          <td>n sayda sola sıxılmış yazı (nümunədə 4 sayda)</td>
+      </tr>
+      <tr>
+          <td>&lsquo;0025&rsquo;</td>
+          <td>&lsquo;%0{n}d&rsquo;, &lsquo;%02d&rsquo;</td>
+          <td>n sayda 0 əlavə (nümunədə 2 sayda)</td>
+      </tr>
+      <tr>
+          <td>&lsquo;122.15&rsquo;</td>
+          <td>&lsquo;%.{m}f&rsquo;, &lsquo;%.2f&rsquo;</td>
+          <td>m sayda onluqdan sonrakı kəsr hissə sayı</td>
+      </tr>
+      <tr>
+          <td>&rsquo;  122.46&rsquo;</td>
+          <td>&lsquo;%{n}.{m}f&rsquo;</td>
+          <td>n sayda ümumi uzunluq sayı, m sayda kəsr hissə sayı</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">mətn</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;👍Mətn&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%X və ya %#X \n&#34;</span>, <span style="color:#e6db74">&#34;alma&#34;</span>, <span style="color:#e6db74">&#34;alma&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%U və ya %#U \n&#34;</span>, <span style="color:#e6db74">&#39;👍&#39;</span>, <span style="color:#e6db74">&#39;👍&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%q və ya %+q \n&#34;</span>, <span style="color:#a6e22e">mətn</span>, <span style="color:#a6e22e">mətn</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%5s | %5s | %7.5f | A% d \n&#34;</span>,<span style="color:#e6db74">&#34;Al&#34;</span>, <span style="color:#e6db74">&#34;sat&#34;</span>, <span style="color:#ae81ff">3.45</span>, <span style="color:#ae81ff">44</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%X \n&#34;</span>,<span style="color:#e6db74">&#34;Almalı&#34;</span>)  
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;% X \n&#34;</span>,<span style="color:#e6db74">&#34;Almalı&#34;</span>) </span></span></code></pre></div><pre><code>616C6D61 və ya 0X616C6D61 
+U+1F44D və ya U+1F44D '👍' 
+&quot;👍Mətn&quot; və ya &quot;\U0001f44dM\u0259tn&quot; 
+   Al |   sat | 3.45000 | A 44 
+416C6D616CC4B1 
+41 6C 6D 61 6C C4 B1 
+</code></pre>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%-5s | %-5s | %7.5f \n&#34;</span>,<span style="color:#e6db74">&#34;Al&#34;</span>, <span style="color:#e6db74">&#34;sat&#34;</span>, <span style="color:#ae81ff">3.45</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%-5s | %-5s | %7.5f \n&#34;</span>,<span style="color:#e6db74">&#34;Vur&#34;</span>, <span style="color:#e6db74">&#34;yix&#34;</span>, <span style="color:#ae81ff">3.45</span>)</span></span></code></pre></div><pre><code>Al    | sat   | 3.45000 
+Vur   | yix   | 3.45000 
+</code></pre>
+<p>Bundan başqa həmin format dəyişimlərində olan ədədləri də dəyişən kimi verə bilərik.<br>
+Buna dəyişim ədədlərini [arqumentin_indeksi + 1]*, formatı isə [arqumentin_indeksi + 1]format verməklə nail ola bilərik.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%6.4f\n&#34;</span>, <span style="color:#ae81ff">12.0</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%[3]*.[2]*[1]f\n&#34;</span>, <span style="color:#ae81ff">12.0</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">6</span>) <span style="color:#75715e">//[1]f 12.0, [2]* 4, [3]* isə 6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%-10s |\n&#34;</span>, <span style="color:#e6db74">&#34;Al&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%-[2]*[1]s |\n&#34;</span>, <span style="color:#e6db74">&#34;Al&#34;</span>, <span style="color:#ae81ff">10</span>) <span style="color:#75715e">//[1]s AL, [2]* isə 10 </span></span></span></code></pre></div><pre><code>12.0000
+12.0000
+Al         |
+Al         |
+</code></pre>
+<p>%v Vasitəsilə Go dili tipə uyğun formatı təyin edir.
+Həmçinin bununla mürəkkəb tipləri də çıxara bilirik.<br>
+%#v isə Go sintaksisinə uyğun əks etdirir.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%v, %v, %v, %v\n&#34;</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">55.789</span>, <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">4i</span>, [<span style="color:#f92672">...</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>})
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%#v, %#v, %#v, %#v\n&#34;</span>, <span style="color:#ae81ff">55</span>, <span style="color:#ae81ff">55.789</span>, <span style="color:#ae81ff">5</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">4i</span>, [<span style="color:#f92672">...</span>]<span style="color:#66d9ef">int</span>{<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>})</span></span></code></pre></div><pre><code>55, 55.789, (5+4i), [4 5 6]
+55, 55.789, (5+4i), [3]int{4, 5, 6}
+</code></pre>
+<p>Əgər format-ı səhv versək xəta baş verir və o yazıda da ( %! işarəsi ilə) görsənir.<br>
+Məsələn: ədəd formatına string versək</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#e6db74">&#34;hi&#34;</span>)</span></span></code></pre></div><pre><code>%!d(string=hi)
+</code></pre>
+<h5 id="stdout-stderr-i-özümüz-yönləndirək">stdout, stderr-i özümüz yönləndirək<a class="anchor" href="#stdout-stderr-i-%c3%b6z%c3%bcm%c3%bcz-y%c3%b6nl%c9%99ndir%c9%99k">#</a></h5>
+<p>(Qeyd: digər açdığımız fayla da yönləndirə bilərik)<br>
+Bunun üçün Fprintf -dən istifadə edirik.<br>
+Əslən Printf elə Fprintf stdout-dur.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// os paketini import edək.  </span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;os&#34;</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintln</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#e6db74">&#34;Hello stdout&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintln</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;Hello stderr&#34;</span>)</span></span></code></pre></div><pre><code>Hello stderr
+
+
+Hello stdout
+</code></pre>
+<p>Go-da fmt paketi yerinə <strong>print, println</strong> builtin funksiyalarını da istifadə etmək olar.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">%%</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;builtin print  &#34;</span>)
+</span></span><span style="display:flex;"><span>println(<span style="color:#ae81ff">99</span>)
+</span></span><span style="display:flex;"><span>println(<span style="color:#ae81ff">88</span>)</span></span></code></pre></div><pre><code>builtin print  99
+88
+</code></pre>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+<div>
+
+</div>
+
+<div>
+
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+  
+  <div class="flex flex-wrap justify-between">
+    <span>
+    
+      <a href="/GoLangFastPaced/content/01-esaslar/basicinput/" class="flex align-center">
+        <img src="/GoLangFastPaced/icons/backward.svg" class="book-icon" alt="Backward" />
+        <span>Basic Input</span>
+      </a>
+    
+    </span>
+    <span>
+    
+      <a href="/GoLangFastPaced/content/01-esaslar/basicoperators/" class="flex align-center">
+        <span>Basic Operators</span>
+        <img src="/GoLangFastPaced/icons/forward.svg" class="book-icon" alt="Forward" />
+      </a>
+    
+    </span>
+  </div>
+  
+
+
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
